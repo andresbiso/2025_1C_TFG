@@ -9,7 +9,6 @@
 
 - [Acerca De](#about)
 - [Aplicaciones Utilizadas](#applications)
-- [Visual Studio Code](#vscode)
 - [Levantar el proyecto ](#run_project)
 - [Autor](#author)
 - [Reconocimientos](#acknowledgement)
@@ -22,6 +21,7 @@
 
 > [!NOTE]  
 > La implementación fue desarrollada en macOS Sequoia 15 con arquitectura intel (x64).
+> Tecnologías utilizadas: .NET 9 y React.
 
 ## macOS
 
@@ -68,13 +68,15 @@ Recomiendo utilizar la versión de npm que viene incluído en la versión de nod
 npm install
 ```
 
-# :hammer: Visual Studio Code <a name = "vscode"></a>
-
 ## Visual Studio Code Extensions
 
 - [dsznajder.es7-react-js-snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)
 - [dbaeumer.vscode-eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [esbenp.prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+
+## Google Chrome Extensions
+
+- https://react.dev/learn/react-developer-tools
 
 # :hammer: Levantar el proyecto <a name = "run_project"></a>
 
