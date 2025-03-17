@@ -60,6 +60,18 @@ brew install --cask google-chrome
 brew install --cask rider
 ```
 
+## Sobre cada app
+
+- Client: App React + Typescript creada con https://vite.dev/guide/
+- Server: App .NET WebAPI creada con Jetbrains Rider.
+
+### Recursos
+
+- https://learn.microsoft.com/en-us/training/paths/aspnet-core-minimal-api/
+- https://learn.microsoft.com/en-us/aspnet/core/fundamentals/openapi/overview?view=aspnetcore-9.0&preserve-view=true
+- https://medium.com/@vosarat1995/making-your-openapi-swagger-docs-ui-awesome-in-net-9-67fbde6b71b5
+- https://dev.to/extinctsion/no-swagger-in-net-9-heres-what-you-need-to-know-2103
+
 ## Paquetes npm
 
 Recomiendo utilizar la versión de npm que viene incluído en la versión de nodejs LTS para instalar los paquetes que se encuentran en el archivo package.json y que pueden ser instalados localmente al proyecto con el comando:
