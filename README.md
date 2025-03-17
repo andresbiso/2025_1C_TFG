@@ -65,7 +65,7 @@ brew install --cask rider
 - Client: App React + Typescript creada con https://vite.dev/guide/
 - Server: App .NET WebAPI creada con Jetbrains Rider.
 
-### Recursos
+## Recursos
 
 - https://learn.microsoft.com/en-us/training/paths/aspnet-core-minimal-api/
 - https://learn.microsoft.com/en-us/aspnet/core/fundamentals/openapi/overview?view=aspnetcore-9.0&preserve-view=true
