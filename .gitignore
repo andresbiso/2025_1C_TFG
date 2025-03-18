@@ -58,7 +58,7 @@ nunit-*.xml
 /shelf/
 /workspace.xml
 # Rider ignored files
-/.idea.EnfoqueBox.iml
+/.idea.EnfoqueMicrolearning.iml
 /modules.xml
 /contentModel.xml
 /projectSettingsUpdater.xml

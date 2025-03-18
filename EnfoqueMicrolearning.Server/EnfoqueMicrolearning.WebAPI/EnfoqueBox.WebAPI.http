@@ -1,0 +1,6 @@
+@EnfoqueMicrolearning.WebAPI_HostAddress = http://localhost:5192
+
+GET {{EnfoqueMicrolearning.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

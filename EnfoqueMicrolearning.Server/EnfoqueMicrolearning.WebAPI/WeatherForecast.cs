@@ -1,4 +1,4 @@
-namespace EnfoqueBox.WebAPI;
+namespace EnfoqueMicrolearning.WebAPI;
 
 public class WeatherForecast
 {

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace EnfoqueBox.WebAPI.Controllers;
+namespace EnfoqueMicrolearning.WebAPI.Controllers;
 
 [ApiController]
 [Route("[controller]")]
