@@ -32,33 +32,35 @@ Recomiendo utilizar [homebrew](https://brew.sh/) para instalar estos paquetes:
 
 - [node](https://formulae.brew.sh/formula/node@22)
 
-```
+```bash
 brew install node@22
-```
-
-- [dotnet](https://formulae.brew.sh/formula/dotnet)
-
-```
-brew install dotnet
 ```
 
 - [visual-studio-code](https://formulae.brew.sh/cask/visual-studio-code#default)
 
-```
+```bash
 brew install --cask visual-studio-code
 ```
 
 - [google-chrome](https://formulae.brew.sh/cask/google-chrome#default)
 
-```
+```bash
 brew install --cask google-chrome
 ```
 
-- [rider](https://formulae.brew.sh/formula/rider)
+## Base de Datos
 
+1. https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/#installing-mongodb-8.0-edition-edition
+
+2. [mongodb-compass](https://formulae.brew.sh/cask/mongodb-compass#default)
+
+```bash
+brew install --cask mongodb-compass
 ```
-brew install --cask rider
-```
+
+3. `brew unlink node`
+
+4. `brew link --overwrite node@22`
 
 ## Sobre cada app
 
