@@ -48,45 +48,35 @@ brew install --cask visual-studio-code
 brew install --cask google-chrome
 ```
 
-## Base de Datos
+- [docker](https://formulae.brew.sh/cask/docker#default)
 
-1. https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/#installing-mongodb-8.0-edition-edition
+```bash
+brew install --cask docker
+```
 
-2. [mongodb-compass](https://formulae.brew.sh/cask/mongodb-compass#default)
+## Administrador - Base de Datos
+
+1. [mongodb-compass](https://formulae.brew.sh/cask/mongodb-compass#default)
 
 ```bash
 brew install --cask mongodb-compass
 ```
 
-3. `brew unlink node`
+2. `brew unlink node`
 
-4. `brew link --overwrite node@22`
+3. `brew link --overwrite node@22`
 
 ## Sobre cada app
 
 - Client: App React + Typescript creada con https://vite.dev/guide/
-- Server: App .NET WebAPI creada con Jetbrains Rider.
-
-## Recursos
-
-- https://learn.microsoft.com/en-us/training/paths/aspnet-core-minimal-api/
-- https://learn.microsoft.com/en-us/aspnet/core/fundamentals/openapi/overview?view=aspnetcore-9.0&preserve-view=true
-- https://medium.com/@vosarat1995/making-your-openapi-swagger-docs-ui-awesome-in-net-9-67fbde6b71b5
-- https://dev.to/extinctsion/no-swagger-in-net-9-heres-what-you-need-to-know-2103
-
-## Paquetes npm
-
-Recomiendo utilizar la versión de npm que viene incluído en la versión de nodejs LTS para instalar los paquetes que se encuentran en el archivo package.json y que pueden ser instalados localmente al proyecto con el comando:
-
-```
-npm install
-```
+- Server: App Nodejs + Express
 
 ## Visual Studio Code Extensions
 
 - [dsznajder.es7-react-js-snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)
 - [dbaeumer.vscode-eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [esbenp.prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [ms-azuretools.vscode-docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
 
 ## Google Chrome Extensions
 
@@ -95,6 +85,95 @@ npm install
 # :hammer: Levantar el proyecto <a name = "run_project"></a>
 
 ## ¿Cómo levantar el proyecto?
+
+1. Instalar paquetes npm en el directorio Client y Server:
+
+```bash
+npm install
+```
+
+> ![NOTE]
+> Recomiendo utilizar la versión de npm que viene incluído en la versión de nodejs LTS para instalar los paquetes que se encuentran en el archivo package.json.
+
+2. Levantar los servicios con docker compose.
+
+3. Ir a carpeta Client:
+
+```bash
+npm run dev
+```
+
+3. Ir a carpeta Server:
+
+```bash
+npm run start
+```
+
+## ¿Cómo usar docker compose?
+
+> ![NOTE]
+> Ejecutar estos comandos en el directorio que contiene docker-compose.yml.
+
+Levantar todos los servicios (detached mode):
+
+```bash
+docker-compose up -d
+```
+
+Detener todos los servicios (preservando volúmenes):
+
+```bash
+docker-compose down
+```
+
+Listar containers en ejecución:
+
+```bash
+docker ps
+```
+
+Acceder a la shell de un container en ejecución (reemplazar <container_name> con el nombre del container):
+
+```bash
+docker exec -it <container_name> bash
+```
+
+Pruebas:
+
+1.
+
+```bash
+# Acceder a container de mongodb
+docker exec -it mongo bash
+```
+
+2. En un navegador ir a http://localhost:8025 y verificar si está corriendo el mail server.
+
+```javascript
+const nodemailer = require("nodemailer");
+
+const transporter = nodemailer.createTransport({
+  host: "localhost",
+  port: 1025,
+  secure: false,
+  auth: {
+    user: "", // MailHog doesn't require auth
+    pass: "",
+  },
+});
+
+const mailOptions = {
+  from: "test@example.com",
+  to: "user@example.com",
+  subject: "Testing MailHog",
+  text: "Hello! This is a test email.",
+};
+
+transporter.sendMail(mailOptions, (err, info) => {
+  if (err) console.error(err);
+  else console.log("Email sent:", info);
+});
+```
 
 # :speech_balloon: Autor <a name = "author"></a>
 
@@ -105,3 +184,7 @@ npm install
 - https://github.com/jrabuc -> Profesor y Tutor de la materia
 - https://github.com/github/gitignore
 - https://gist.github.com/rxaviers/7360908 -> github emojis
+
+```
+
+```
