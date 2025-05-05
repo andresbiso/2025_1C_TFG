@@ -54,7 +54,7 @@ brew install --cask google-chrome
 brew install --cask docker
 ```
 
-## Administrador - Base de Datos
+## Administrador - MongoDB
 
 1. [mongodb-compass](https://formulae.brew.sh/cask/mongodb-compass#default)
 
@@ -65,6 +65,15 @@ brew install --cask mongodb-compass
 2. `brew unlink node`
 
 3. `brew link --overwrite node@22`
+
+4. `docker inspect mongo | grep "IPAddress"`
+
+5. Abrir MongoDB Compass -> "New Connection"
+
+6. `mongodb://root:example@localhost:27017/`
+
+> ![NOTE]
+> 27017 es el puerto por defecto de mongo
 
 ## Sobre cada app
 
