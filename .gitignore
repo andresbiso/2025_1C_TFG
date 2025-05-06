@@ -93,3 +93,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Custom
+mailpit.*

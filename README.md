@@ -135,6 +135,18 @@ Detener todos los servicios (preservando volúmenes):
 docker-compose down
 ```
 
+Detener todos los servicios (sin preservar volúmenes):
+
+```bash
+docker-compose down -v
+```
+
+Detener todos los servicios (sin preservar imágenes o volúmenes):
+
+```bash
+docker compose down --rmi all -v
+```
+
 Listar containers en ejecución:
 
 ```bash
