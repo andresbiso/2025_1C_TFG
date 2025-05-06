@@ -54,7 +54,7 @@ brew install --cask google-chrome
 brew install --cask docker
 ```
 
-## Administrador - MongoDB
+## MongoDB Compass
 
 1. [mongodb-compass](https://formulae.brew.sh/cask/mongodb-compass#default)
 
@@ -66,7 +66,7 @@ brew install --cask mongodb-compass
 
 3. `brew link --overwrite node@22`
 
-4. `docker inspect mongo | grep "IPAddress"`
+4. Revisar puerto de mongo en docker-compose.yaml
 
 5. Abrir MongoDB Compass -> "New Connection"
 
@@ -178,7 +178,7 @@ const transporter = nodemailer.createTransport({
   port: 1025,
   secure: false,
   auth: {
-    user: "", // MailHog doesn't require auth
+    user: "", // Mailpit doesn't require auth
     pass: "",
   },
 });
