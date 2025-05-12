@@ -123,22 +123,40 @@ npm run start
 > ![NOTE]
 > Ejecutar estos comandos en el directorio que contiene docker-compose.yml.
 
+Levantar todos los servicios:
+
+```bash
+docker compose up
+# Starts the containers in the foreground, meaning you'll see all the logs and output on your terminal.
+# If you close the terminal or interrupt the process (e.g., with Ctrl+C), the containers will stop.
+```
+
 Levantar todos los servicios (detached mode):
 
 ```bash
-docker-compose up -d
+docker compose up -d
+# Starts the containers in detached mode, meaning they run in the background.
+# Your terminal is freed up, and you won't see the logs directly.
+# The containers will keep running even if you close the terminal.
+```
+
+Ver los logs de los containers:
+
+```bash
+docker compose logs
+docker compose log <container-name>
 ```
 
 Detener todos los servicios (preservando volúmenes):
 
 ```bash
-docker-compose down
+docker compose down
 ```
 
 Detener todos los servicios (sin preservar volúmenes):
 
 ```bash
-docker-compose down -v
+docker compose down -v
 ```
 
 Detener todos los servicios (sin preservar imágenes o volúmenes):
@@ -159,7 +177,7 @@ Acceder a la shell de un container en ejecución (reemplazar <container_name> co
 docker exec -it <container_name> bash
 ```
 
-Pruebas:
+### Pruebas
 
 1.
 
