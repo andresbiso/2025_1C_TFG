@@ -9,6 +9,8 @@ services:
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
     volumes:
       - mysql_vol:/var/lib/mysql
+    ports:
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: example
       MYSQL_PASSWORD: example
