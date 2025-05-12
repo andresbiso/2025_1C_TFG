@@ -8,7 +8,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 // connection to DB and nextcloud
-const { connectMongoDB } = require("./config/mongodb");
+const { connectMongoDB, initializeDatabase } = require("./config/mongodb");
 const { nextcloudConnect } = require("./config/nextcloud");
 
 // routes
@@ -42,6 +42,7 @@ app.listen(PORT, () => {
 
 // connections
 connectMongoDB();
+initializeDatabase();
 nextcloudConnect();
 
 // mount route
