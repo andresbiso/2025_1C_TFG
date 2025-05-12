@@ -1,4 +1,3 @@
-import React from "react";
 import { FooterLink2 } from "../../../data/footer-links";
 import { Link } from "react-router-dom";
 import { ImGithub, ImLinkedin2 } from "react-icons/im";
