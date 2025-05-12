@@ -1,14 +1,14 @@
 volumes:
-  nextcloud:
-  db:
+  nextcloud_vol:
+  mysql_vol:
 
 services:
-  db:
-    image: mariadb:10.6
+  mysql:
+    image: mysql:latest
     restart: always
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
     volumes:
-      - db:/var/lib/mysql
+      - mysql_vol:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: example
       MYSQL_PASSWORD: example
@@ -16,7 +16,7 @@ services:
       MYSQL_USER: nextcloud
 
   mongo:
-    image: mongo
+    image: mongo:latest
     restart: always
     ports:
       - 27017:27017
@@ -25,7 +25,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
 
   mongo-express:
-    image: mongo-express
+    image: mongo-express:latest
     restart: always
     ports:
       - 8081:8081
@@ -35,23 +35,23 @@ services:
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
       ME_CONFIG_BASICAUTH: false
 
-  app:
-    image: nextcloud
+  nextcloud:
+    image: nextcloud:latest
     restart: always
     ports:
       - 8080:80
     depends_on:
-      - db
+      - mysql
     volumes:
-      - nextcloud:/var/www/html
+      - nextcloud_vol:/var/www/html
     environment:
       MYSQL_PASSWORD: example
       MYSQL_DATABASE: nextcloud
       MYSQL_USER: nextcloud
-      MYSQL_HOST: db
+      MYSQL_HOST: mysql
 
   mailpit:
-    image: axllent/mailpit
+    image: axllent/mailpit:latest
     container_name: mailpit
     restart: unless-stopped
     command: --enable-chaos
