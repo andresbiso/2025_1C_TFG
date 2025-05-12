@@ -216,7 +216,7 @@ transporter.sendMail(mailOptions, (err, info) => {
 
 ## Servicios
 
-- **Client**: [http://localhost:5173](http://localhost:5173)
+- **Client**: [http://localhost:5173](http://localhost:8083)
 - **Server**: [http://localhost:8082](http://localhost:8082)
 - **MySQL**: `mysql://localhost:3306` (Database connection)
 - **MongoDB**: `mongodb://localhost:27017/` (Database connection)

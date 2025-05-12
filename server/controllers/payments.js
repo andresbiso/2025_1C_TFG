@@ -10,18 +10,45 @@ const CourseProgress = require("../models/courseProgress");
 
 exports.capturePayment = async (req, res) => {
   const { coursesId } = req.body;
+  const userId = req.user.id;
 
   if (coursesId.length === 0) {
     return res.json({ success: false, message: "Please provide Course Id" });
   }
 
+  for (const course_id of coursesId) {
+    let course;
+    try {
+      // valid course Details
+      course = await Course.findById(course_id);
+      if (!course) {
+        return res
+          .status(404)
+          .json({ success: false, message: "Could not find the course" });
+      }
+
+      // check user already enrolled the course
+      const uid = new mongoose.Types.ObjectId(userId);
+      if (course.studentsEnrolled.includes(uid)) {
+        return res
+          .status(400)
+          .json({ success: false, message: "Student is already Enrolled" });
+      }
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ success: false, message: error.message });
+    }
+  }
+
   res.status(200).json({
     success: true,
-    message: paymentResponse,
+    message: "Successful Payment",
   });
 };
 
 exports.verifyPayment = async (req, res) => {
+  const courses = req.body?.coursesId;
+  const userId = req.user.id;
   //enroll student
   await enrollStudents(courses, userId, res);
   //return res
