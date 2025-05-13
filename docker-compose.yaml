@@ -2,6 +2,7 @@ services:
   minio:
     image: minio/minio
     container_name: minio
+    restart: on-failure
     environment:
       - MINIO_ROOT_USER=admin
       - MINIO_ROOT_PASSWORD=password
@@ -10,12 +11,11 @@ services:
     ports:
       - "9000:9000"
       - "9001:9001"
-    entrypoint: ["/bin/sh", "-c", "/minio-entrypoint.sh"]
-    restart: always
+    command: minio server /data --console-address ":9001"
 
   mongo:
     image: mongo:latest
-    restart: always
+    restart: on-failure
     ports:
       - "27017:27017"
     environment:
@@ -24,7 +24,7 @@ services:
 
   mongo-express:
     image: mongo-express:latest
-    restart: always
+    restart: on-failure
     ports:
       - "8081:8081"
     environment:
@@ -36,7 +36,7 @@ services:
   mailpit:
     image: axllent/mailpit:latest
     container_name: mailpit
-    restart: unless-stopped
+    restart: on-failure
     command: --enable-chaos
     volumes:
       - ./data:/data

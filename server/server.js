@@ -9,7 +9,7 @@ require("dotenv").config();
 
 // connection to DB and minio
 const { connectMongoDB, initializeDatabase } = require("./config/mongodb");
-const { minioConnect } = require("./config/minio");
+const { createBucket, minioConnect } = require("./config/minio");
 
 // routes
 const userRoutes = require("./routes/user");
@@ -44,6 +44,7 @@ app.listen(PORT, () => {
 connectMongoDB();
 initializeDatabase();
 minioConnect();
+createBucket(process.env.MINIO_DEFAULT_BUCKET);
 
 // mount route
 app.use("/api/v1/auth", userRoutes);

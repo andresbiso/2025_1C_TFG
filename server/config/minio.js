@@ -18,3 +18,20 @@ exports.minioConnect = () => {
     console.error("MinIO connection error:", error);
   }
 };
+
+// Function to create a bucket if it doesn't exist
+exports.createBucket = async (bucketName) => {
+  const minioClient = exports.minioConnect();
+
+  try {
+    const exists = await minioClient.bucketExists(bucketName);
+    if (!exists) {
+      await minioClient.makeBucket(bucketName);
+      console.log(`Bucket "${bucketName}" created successfully`);
+    } else {
+      console.log(`Bucket "${bucketName}" already exists`);
+    }
+  } catch (error) {
+    console.error(`Error checking/creating bucket: ${error.message}`);
+  }
+};
