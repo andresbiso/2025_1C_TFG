@@ -5,12 +5,13 @@ services:
     environment:
       - MINIO_ROOT_USER=admin
       - MINIO_ROOT_PASSWORD=password
-      - MINIO_DEFAULT_BUCKETS=bucket_one
     volumes:
       - minio_data:/data
     ports:
       - "9000:9000"
       - "9001:9001"
+    entrypoint: ["/bin/sh", "-c", "/minio-entrypoint.sh"]
+    restart: always
 
   mongo:
     image: mongo:latest
@@ -20,8 +21,6 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=example
-    networks:
-      - mynet
 
   mongo-express:
     image: mongo-express:latest
@@ -33,8 +32,6 @@ services:
       - ME_CONFIG_MONGODB_ADMINPASSWORD=example
       - ME_CONFIG_MONGODB_URL=mongodb://root:example@mongo:27017/
       - ME_CONFIG_BASICAUTH=false
-    networks:
-      - mynet
 
   mailpit:
     image: axllent/mailpit:latest
@@ -52,8 +49,6 @@ services:
       - MP_SMTP_AUTH_ACCEPT_ANY=1
       - MP_SMTP_AUTH_ALLOW_INSECURE=1
       - MP_ENABLE_CHAOS=true
-    networks:
-      - mynet
 
 volumes:
   minio_data:
