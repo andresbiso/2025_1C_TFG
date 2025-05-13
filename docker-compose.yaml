@@ -1,58 +1,40 @@
-volumes:
-  nextcloud_vol:
-  mysql_vol:
-
 services:
-  mysql:
-    image: mysql:latest
-    restart: always
-    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
-    volumes:
-      - mysql_vol:/var/lib/mysql
-    ports:
-      - 3306:3306
+  minio:
+    image: minio/minio
+    container_name: minio
     environment:
-      MYSQL_ROOT_PASSWORD: example
-      MYSQL_PASSWORD: example
-      MYSQL_DATABASE: nextcloud
-      MYSQL_USER: nextcloud
+      - MINIO_ROOT_USER=admin
+      - MINIO_ROOT_PASSWORD=password
+      - MINIO_DEFAULT_BUCKETS=bucket_one
+    volumes:
+      - minio_data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
 
   mongo:
     image: mongo:latest
     restart: always
     ports:
-      - 27017:27017
+      - "27017:27017"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
+    networks:
+      - mynet
 
   mongo-express:
     image: mongo-express:latest
     restart: always
     ports:
-      - 8081:8081
+      - "8081:8081"
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: example
-      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
-      ME_CONFIG_BASICAUTH: false
-
-  nextcloud:
-    image: nextcloud:latest
-    restart: always
-    ports:
-      - 8080:80
-    depends_on:
-      - mysql
-    volumes:
-      - nextcloud_vol:/var/www/html
-    environment:
-      MYSQL_PASSWORD: example
-      MYSQL_DATABASE: nextcloud
-      MYSQL_USER: nextcloud
-      MYSQL_HOST: mysql
-      NEXTCLOUD_ADMIN_USER: admin
-      NEXTCLOUD_ADMIN_PASSWORD: password
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=example
+      - ME_CONFIG_MONGODB_URL=mongodb://root:example@mongo:27017/
+      - ME_CONFIG_BASICAUTH=false
+    networks:
+      - mynet
 
   mailpit:
     image: axllent/mailpit:latest
@@ -62,11 +44,17 @@ services:
     volumes:
       - ./data:/data
     ports:
-      - 8025:8025
-      - 1025:1025
+      - "8025:8025"
+      - "1025:1025"
     environment:
-      MP_MAX_MESSAGES: 5000
-      MP_DATABASE: /data/mailpit.db
-      MP_SMTP_AUTH_ACCEPT_ANY: 1
-      MP_SMTP_AUTH_ALLOW_INSECURE: 1
-      MP_ENABLE_CHAOS: "true"
+      - MP_MAX_MESSAGES=5000
+      - MP_DATABASE=/data/mailpit.db
+      - MP_SMTP_AUTH_ACCEPT_ANY=1
+      - MP_SMTP_AUTH_ALLOW_INSECURE=1
+      - MP_ENABLE_CHAOS=true
+    networks:
+      - mynet
+
+volumes:
+  minio_data:
+    driver: local

@@ -1,35 +1,36 @@
-const { nextcloudConnect } = require("../config/nextcloud"); // Import the connection
+const { minioConnect } = require("../config/minio"); // Import the MinIO connection
 const fs = require("fs");
 
-const client = nextcloudConnect(); // Use the existing client
+const client = minioConnect(); // Use the existing MinIO client
 
-exports.uploadImageToNextCloud = async (filePath, folder) => {
+// Upload image to MinIO
+exports.uploadImageToMinio = async (filePath, bucket) => {
   try {
-    console.log("filePath object:", filePath);
-    console.log("Target folder:", folder);
+    console.log("File object:", filePath);
+    console.log("Target bucket:", bucket);
 
     // Ensure proper local path handling
-    const remotePath = `${folder}/${filePath.name}`;
-    const localPath = filePath.tempFilePath || `./uploads/${filePath.name}`;
+    const remotePath = `${filePath.name}`;
+    const localPath = filePath.tempFilePath;
 
-    // Upload file using stream to prevent issues
-    await client.putFileContents(remotePath, fs.createReadStream(localPath));
+    // Upload file using MinIO's putObject method
+    await client.fPutObject(bucket, remotePath, localPath);
 
-    console.log(`File uploaded successfully to Nextcloud: ${remotePath}`);
+    console.log(`File uploaded successfully to MinIO: ${remotePath}`);
     return remotePath;
   } catch (error) {
-    console.error("Error while uploading image to Nextcloud:", error);
+    console.error("Error uploading file to MinIO:", error);
     throw error;
   }
 };
 
-// Function to delete a resource from Nextcloud
-exports.deleteResourceFromNextCloud = async (filePath) => {
+// Function to delete a resource from MinIO
+exports.deleteResourceFromMinio = async (bucket, filePath) => {
   try {
-    await client.deleteFile(filePath);
-    console.log(`Deleted file from Nextcloud: ${filePath}`);
+    await client.removeObject(bucket, filePath);
+    console.log(`Deleted file from MinIO: ${filePath}`);
   } catch (error) {
-    console.error(`Error deleting file from Nextcloud (${filePath}):`, error);
+    console.error(`Error deleting file from MinIO (${filePath}):`, error);
     throw error;
   }
 };

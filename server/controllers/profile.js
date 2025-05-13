@@ -4,8 +4,8 @@ const CourseProgress = require("../models/courseProgress");
 const Course = require("../models/course");
 
 const {
-  uploadImageToNextCloud,
-  deleteResourceFromNextCloud,
+  uploadImageToMinio,
+  deleteResourceFromMinio,
 } = require("../utils/imageUploader");
 const { convertSecondsToDuration } = require("../utils/secToDuration");
 
@@ -83,8 +83,8 @@ exports.deleteAccount = async (req, res) => {
       });
     }
 
-    // delete user profile picture From nextcloud
-    await deleteResourceFromNextCloud(userDetails.image);
+    // delete user profile picture From minio
+    await deleteResourceFromMinio(userDetails.image);
 
     // if any student delete their account && enrollded in any course then ,
     // student entrolled in particular course sholud be decreae by one
@@ -160,12 +160,10 @@ exports.updateUserProfileImage = async (req, res) => {
     // validation
     // console.log('profileImage = ', profileImage)
 
-    // upload imga eto nextcloud
-    const image = await uploadImageToNextCloud(
+    // upload imga eto minio
+    const image = await uploadImageToMinio(
       profileImage,
-      process.env.FOLDER_NAME,
-      1000,
-      1000
+      process.env.MINIO_DEFAULT_BUCKET
     );
 
     // console.log('image url - ', image);

@@ -6,8 +6,8 @@ const SubSection = require("../models/subSection");
 const CourseProgress = require("../models/courseProgress");
 
 const {
-  uploadImageToNextCloud,
-  deleteResourceFromNextCloud,
+  uploadImageToMinio,
+  deleteResourceFromMinio,
 } = require("../utils/imageUploader");
 const { convertSecondsToDuration } = require("../utils/secToDuration");
 
@@ -70,10 +70,10 @@ exports.createCourse = async (req, res) => {
       });
     }
 
-    // upload thumbnail to nextcloud
-    const thumbnailDetails = await uploadImageToNextCloud(
+    // upload thumbnail to minio
+    const thumbnailDetails = await uploadImageToMinio(
       thumbnail,
-      process.env.FOLDER_NAME
+      process.env.MINIO_DEFAULT_BUCKET
     );
 
     // create new course - entry in DB
@@ -332,9 +332,9 @@ exports.editCourse = async (req, res) => {
     if (req.files) {
       // console.log("thumbnail update")
       const thumbnail = req.files.thumbnailImage;
-      const thumbnailImage = await uploadImageToNextCloud(
+      const thumbnailImage = await uploadImageToMinio(
         thumbnail,
-        process.env.FOLDER_NAME
+        process.env.MINIO_DEFAULT_BUCKET
       );
       course.thumbnail = thumbnailImage.secure_url;
     }
@@ -438,8 +438,8 @@ exports.deleteCourse = async (req, res) => {
       });
     }
 
-    // delete course thumbnail From nextcloud
-    await deleteResourceFromNextCloud(course?.thumbnail);
+    // delete course thumbnail From minio
+    await deleteResourceFromMinio(course?.thumbnail);
 
     // Delete sections and sub-sections
     const courseSections = course.courseContent;
@@ -451,7 +451,7 @@ exports.deleteCourse = async (req, res) => {
         for (const subSectionId of subSections) {
           const subSection = await SubSection.findById(subSectionId);
           if (subSection) {
-            await deleteResourceFromNextCloud(subSection.videoUrl); // delete course videos From nextcloud
+            await deleteResourceFromMinio(subSection.videoUrl); // delete course videos From minio
           }
           await SubSection.findByIdAndDelete(subSectionId);
         }

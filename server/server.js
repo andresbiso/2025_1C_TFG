@@ -7,9 +7,9 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 require("dotenv").config();
 
-// connection to DB and nextcloud
+// connection to DB and minio
 const { connectMongoDB, initializeDatabase } = require("./config/mongodb");
-const { nextcloudConnect } = require("./config/nextcloud");
+const { minioConnect } = require("./config/minio");
 
 // routes
 const userRoutes = require("./routes/user");
@@ -43,7 +43,7 @@ app.listen(PORT, () => {
 // connections
 connectMongoDB();
 initializeDatabase();
-nextcloudConnect();
+minioConnect();
 
 // mount route
 app.use("/api/v1/auth", userRoutes);

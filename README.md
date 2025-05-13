@@ -216,13 +216,13 @@ transporter.sendMail(mailOptions, (err, info) => {
 
 ## Servicios
 
-- **Client**: [http://localhost:5173](http://localhost:8083)
+- **Client**: [http://localhost:8083](http://localhost:8083)
 - **Server**: [http://localhost:8082](http://localhost:8082)
-- **MySQL**: `mysql://localhost:3306` (Database connection)
 - **MongoDB**: `mongodb://localhost:27017/` (Database connection)
 - **Mongo Express**: [http://localhost:8081](http://localhost:8081) (Web UI for MongoDB)
-- **Nextcloud**: [http://localhost:8080](http://localhost:8080) (Cloud storage)
-- **Mailpit Web UI**: [http://localhost:8025](http://localhost:8025) (View received emails)
+- **MinIO API**: [http://localhost:9000](http://localhost:9000)
+- **MinIO Web UI**: [http://localhost:9001](http://localhost:9001)
+- **Mailpit Web UI**: [http://localhost:8025](http://localhost:8025)
 - **Mailpit SMTP**: `smtp://localhost:1025` (For sending emails)
 
 # :speech_balloon: Autor <a name = "author"></a>

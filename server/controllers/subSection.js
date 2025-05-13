@@ -1,6 +1,6 @@
 const Section = require("../models/section");
 const SubSection = require("../models/subSection");
-const { uploadImageToNextCloud } = require("../utils/imageUploader");
+const { uploadImageToMinio } = require("../utils/imageUploader");
 
 // ================ create SubSection ================
 exports.createSubSection = async (req, res) => {
@@ -20,10 +20,10 @@ exports.createSubSection = async (req, res) => {
       });
     }
 
-    // upload video to nextcloud
-    const videoFileDetails = await uploadImageToNextCloud(
+    // upload video to minio
+    const videoFileDetails = await uploadImageToMinio(
       videoFile,
-      process.env.FOLDER_NAME
+      process.env.MINIO_DEFAULT_BUCKET
     );
 
     // create entry in DB
@@ -91,12 +91,12 @@ exports.updateSubSection = async (req, res) => {
       subSection.description = description;
     }
 
-    // upload video to nextcloud
+    // upload video to minio
     if (req.files && req.files.videoFile !== undefined) {
       const video = req.files.videoFile;
-      const uploadDetails = await uploadImageToNextCloud(
+      const uploadDetails = await uploadImageToMinio(
         video,
-        process.env.FOLDER_NAME
+        process.env.MINIO_DEFAULT_BUCKET
       );
       subSection.videoUrl = uploadDetails.secure_url;
       subSection.timeDuration = uploadDetails.duration;
