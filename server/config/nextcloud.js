@@ -3,18 +3,17 @@ require("dotenv").config();
 
 exports.nextcloudConnect = () => {
   try {
-    const nextcloudUrl = process.env.NEXTCLOUD_URL.replace(
-      "${NEXTCLOUD_ADMIN_USER}",
-      process.env.NEXTCLOUD_ADMIN_USER
-    ).replace(
-      "${NEXTCLOUD_ADMIN_PASSWORD}",
-      process.env.NEXTCLOUD_ADMIN_PASSWORD
-    );
+    const nextcloudUrl = process.env.NEXTCLOUD_HOST; // Use localhost
 
-    const client = webdav.createClient(nextcloudUrl, {
-      username: process.env.NEXTCLOUD_ADMIN_USER,
-      password: process.env.NEXTCLOUD_ADMIN_PASSWORD,
-    });
+    // Build authentication options only if credentials exist
+    const authOptions = {};
+    if (process.env.NEXTCLOUD_USER && process.env.NEXTCLOUD_PASSWORD) {
+      authOptions.username = process.env.NEXTCLOUD_USER;
+      authOptions.password = process.env.NEXTCLOUD_PASSWORD;
+    }
+
+    // Create Nextcloud client with optional auth
+    const client = webdav.createClient(nextcloudUrl, authOptions);
 
     console.log("Connected to Nextcloud successfully");
 

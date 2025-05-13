@@ -1,15 +1,19 @@
 const { nextcloudConnect } = require("../config/nextcloud"); // Import the connection
+const fs = require("fs");
 
 const client = nextcloudConnect(); // Use the existing client
 
-// Function to upload an image to Nextcloud
 exports.uploadImageToNextCloud = async (filePath, folder) => {
   try {
-    const remotePath = `${folder}/${filePath.split("/").pop()}`;
-    await client.putFileContents(
-      remotePath,
-      require("fs").readFileSync(filePath)
-    );
+    console.log("filePath object:", filePath);
+    console.log("Target folder:", folder);
+
+    // Ensure proper local path handling
+    const remotePath = `${folder}/${filePath.name}`;
+    const localPath = filePath.tempFilePath || `./uploads/${filePath.name}`;
+
+    // Upload file using stream to prevent issues
+    await client.putFileContents(remotePath, fs.createReadStream(localPath));
 
     console.log(`File uploaded successfully to Nextcloud: ${remotePath}`);
     return remotePath;
