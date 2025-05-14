@@ -10,6 +10,7 @@ const {
   deleteResourceFromMinio,
 } = require("../utils/imageUploader");
 const { convertSecondsToDuration } = require("../utils/secToDuration");
+require("dotenv").config();
 
 // ================ create new course ================
 exports.createCourse = async (req, res) => {
@@ -49,7 +50,7 @@ exports.createCourse = async (req, res) => {
     ) {
       return res.status(400).json({
         success: false,
-        message: "All Fileds are required",
+        message: "All fields are required",
       });
     }
 
@@ -90,6 +91,8 @@ exports.createCourse = async (req, res) => {
       thumbnail: thumbnailDetails.secure_url,
       createdAt: Date.now(),
     });
+
+    console.log(newCourse);
 
     // add course id to instructor courses list, this is bcoz - it will show all created courses by instructor
     await User.findByIdAndUpdate(
@@ -439,7 +442,10 @@ exports.deleteCourse = async (req, res) => {
     }
 
     // delete course thumbnail From minio
-    await deleteResourceFromMinio(course?.thumbnail);
+    await deleteResourceFromMinio(
+      course?.thumbnail,
+      process.env.MINIO_DEFAULT_BUCKET
+    );
 
     // Delete sections and sub-sections
     const courseSections = course.courseContent;
@@ -451,7 +457,10 @@ exports.deleteCourse = async (req, res) => {
         for (const subSectionId of subSections) {
           const subSection = await SubSection.findById(subSectionId);
           if (subSection) {
-            await deleteResourceFromMinio(subSection.videoUrl); // delete course videos From minio
+            await deleteResourceFromMinio(
+              subSection.videoUrl,
+              process.env.MINIO_DEFAULT_BUCKET
+            ); // delete course videos From minio
           }
           await SubSection.findByIdAndDelete(subSectionId);
         }

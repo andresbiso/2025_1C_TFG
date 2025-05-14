@@ -8,7 +8,7 @@ const {
   deleteResourceFromMinio,
 } = require("../utils/imageUploader");
 const { convertSecondsToDuration } = require("../utils/secToDuration");
-
+require("dotenv").config();
 // ================ update Profile ================
 exports.updateProfile = async (req, res) => {
   try {
@@ -84,7 +84,10 @@ exports.deleteAccount = async (req, res) => {
     }
 
     // delete user profile picture From minio
-    await deleteResourceFromMinio(userDetails.image);
+    await deleteResourceFromMinio(
+      userDetails.image,
+      process.env.MINIO_DEFAULT_BUCKET
+    );
 
     // if any student delete their account && enrollded in any course then ,
     // student entrolled in particular course sholud be decreae by one
