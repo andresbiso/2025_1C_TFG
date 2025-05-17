@@ -5,7 +5,7 @@
     <br>
 </p>
 
-# :pencil: Table of Contents
+# :pencil: Tabla de Contenido
 
 - [Acerca De](#about)
 - [Aplicaciones Utilizadas](#applications)

@@ -1,4 +1,4 @@
-# Tabla de contenido
+# :pencil: Tabla de Contenido
 
 - [Introducción](#introduction)
 - [Características](#features)
