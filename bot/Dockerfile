@@ -1,15 +1,17 @@
 FROM python:3.13.3
 
-# set a directory for the app
+# Set the working directory for the app
 WORKDIR /usr/src/app
 
-# copy all the files to the container
-COPY . .
+# Copy necessary files to the container
+COPY requirements.txt .env main.py ./  
+COPY submodules/ ./submodules/  
+COPY ui/ ./ui/  
 RUN mkdir ./images
 
-# install app-specific dependencies
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install python-telegram-bot[job-queue]
 
-# app command
+# Set the application command
 CMD ["python", "-u", "./main.py"]

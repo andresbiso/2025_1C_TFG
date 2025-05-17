@@ -10,7 +10,10 @@ fi
 CONTAINER_NAME=$1
 
 # Define a consistent image name
-IMAGE_NAME="tele-micro-learn-connect"
+IMAGE_NAME="platform-connect-bot"
+
+# move to parent directory
+cd ..
 
 # Ensure the environment file exists
 if [ ! -f ./.env ]; then
@@ -35,8 +38,13 @@ if [ "$(docker ps -a -q -f name=$CONTAINER_NAME)" ]; then
     echo "Container removed."
 fi
 
-# Build the Docker image
-docker build -t $IMAGE_NAME:latest . 
+echo "Building image $IMAGE_NAME:latest"
+# Build/Rebuild the Docker image
+docker build --no-cache -t $IMAGE_NAME:latest . 
 
+echo "Running container $CONTAINER_NAME from image $IMAGE_NAME:latest"
 # Run a new container
 docker run -d --restart always --name $CONTAINER_NAME --env-file ./.env $IMAGE_NAME:latest
+
+# return to the original directory
+cd -
