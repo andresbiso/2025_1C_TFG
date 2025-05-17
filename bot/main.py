@@ -20,7 +20,7 @@ def main():
     Handles the initial launch of the program (entry point).
     """
     token = os.getenv("BOT_TOKEN")
-    application = Application.builder().token(token).concurrent_updates(True).read_timeout(30).write_timeout(30).build() # noqa
+    application = Application.builder().token(token).build()
     application.add_handler(CommandHandler('start', show_help))
     application.add_handler(CommandHandler('help', show_help))
     application.add_handler(MessageHandler(filters.TEXT, get_input))

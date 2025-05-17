@@ -1,13 +1,20 @@
 import qrcode
-
+import os
 
 def generate_qr(chat_id, user_input):
     """
-    The function generates a QR code image and saves it to be returned to the user.
+    Generates a QR code image and saves it for the user.
+    
     Args:
-        chat_id: unique identification for user
-        user_input: user string to generate QR with
+        chat_id (str): Unique identification for user.
+        user_input (str): User-provided string for QR code generation.
     """
     img = qrcode.make(user_input)
-    img.save('./images/{}.png'.format(chat_id))
+
+    # Ensure the images directory exists
+    images_dir = "./images"
+    os.makedirs(images_dir, exist_ok=True)
+
+    img_path = f"{images_dir}/{chat_id}.png"
+    img.save(img_path)
     return None
