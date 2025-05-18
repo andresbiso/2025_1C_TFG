@@ -25,6 +25,8 @@ El bot recibe un mensaje con un link y un destinatario y se encarga de hacerle l
 >
 > - Se necesita una cuenta de telegram antes de poder configurar el bot.
 > - Se recomienda hacer uso de https://web.telegram.org/
+> - Debemos acceder al BotFather para poder realizar cualquier modificación a nuestros bots.
+> - Recordar eliminar un bot si no lo tenemos actualmente en uso.
 
 1. Ingresar a [BotFather](https://t.me/BotFather) y crear una nuevo bot con el comando `/newbot`. Tomar nota del bot token.
 2. Copiar .env.template y renombrarlo ".env". Luego reemplazar la variable BOT_TOKEN por el valor que anotamos en el paso anterior.

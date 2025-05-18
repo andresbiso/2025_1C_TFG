@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "dnut.rewrap-revived",
+    "dsznajder.es7-react-js-snippets",
+    "esbenp.prettier-vscode",
+    "kevinrose.vsc-python-indent",
+    "ms-python.black-formatter",
+    "ms-python.debugpy",
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "redhat.vscode-yaml",
+    "shd101wyy.markdown-preview-enhanced",
+    "vscode-icons-team.vscode-icons"
+  ]
+}

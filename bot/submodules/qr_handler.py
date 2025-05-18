@@ -1,3 +1,4 @@
+import asyncio
 import qrcode
 import os
 
@@ -11,10 +12,15 @@ def generate_qr(chat_id, user_input):
     """
     img = qrcode.make(user_input)
 
-    # Ensure the images directory exists
     images_dir = "./images"
     os.makedirs(images_dir, exist_ok=True)
 
     img_path = f"{images_dir}/{chat_id}.png"
     img.save(img_path)
-    return None
+
+async def generate_qr_async(chat_id, user_input):
+    """
+    Runs QR generation asynchronously to avoid blocking execution.
+    """    
+    # QR generation process asynchronously
+    return await asyncio.to_thread(generate_qr, chat_id, user_input)  # Run in a separate thread

@@ -8,10 +8,10 @@ async def show_animated_loader(message):
         message: message to edit to show loader
     """
     frames = [
-        "<b>Generating QR Code /</b>",
-        "<b>Generating QR Code -</b>",
-        "<b>Generating QR Code \\</b>",
-        "<b>Generating QR Code |</b>"
+        "<b>Procesando solicitud /</b>",
+        "<b>Procesando solicitud -</b>",
+        "<b>Procesando solicitud \\</b>",
+        "<b>Procesando solicitud |</b>"
     ]
 
     try:
@@ -21,6 +21,6 @@ async def show_animated_loader(message):
                 await message.edit_text(text=frame, parse_mode=ParseMode.HTML)
                 await asyncio.sleep(0.5)  # Adding delay for smooth animation
     except Exception as e:
-        print(f"Failed to edit message: {e}")
+        print(f"Error al editar mensaje: {e}")
 
     return None

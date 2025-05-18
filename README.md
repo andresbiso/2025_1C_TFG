@@ -54,6 +54,12 @@ brew install --cask google-chrome
 brew install --cask docker
 ```
 
+- [telegram](https://formulae.brew.sh/cask/telegram#default)
+
+```bash
+brew install --cask telegram
+```
+
 ## MongoDB Compass
 
 1. [mongodb-compass](https://formulae.brew.sh/cask/mongodb-compass#default)
@@ -82,10 +88,7 @@ brew install --cask mongodb-compass
 
 ## Visual Studio Code Extensions
 
-- [dsznajder.es7-react-js-snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)
-- [dbaeumer.vscode-eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-- [esbenp.prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-- [ms-azuretools.vscode-docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
+- Ver "recommendations" en `.vscode/extensions.json`.
 
 ## Google Chrome Extensions
 
@@ -234,7 +237,3 @@ transporter.sendMail(mailOptions, (err, info) => {
 - https://github.com/jrabuc -> Profesor y Tutor de la materia
 - https://github.com/github/gitignore
 - https://gist.github.com/rxaviers/7360908 -> github emojis
-
-```
-
-```
