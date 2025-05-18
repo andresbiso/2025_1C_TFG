@@ -2,7 +2,7 @@
 
 # Check if container name is supplied
 if [ "$#" -eq 0 ]; then
-    echo "Especificar un nombre de container! (Ejemplo: telegram_bot)"
+    echo "Especificar un nombre de container! (Ejemplo: telegram_bot_server)"
     exit 1
 fi
 
@@ -10,7 +10,7 @@ fi
 CONTAINER_NAME=$1
 
 # Define a consistent image name
-IMAGE_NAME="platform-connect-bot"
+IMAGE_NAME="platform-connect-bot-server"
 
 # Ensure the environment file exists
 if [ ! -f ./.env ]; then
@@ -41,4 +41,4 @@ docker build --no-cache -t $IMAGE_NAME:latest .
 
 echo "Ejecutando container $CONTAINER_NAME desde imagen $IMAGE_NAME:latest"
 # Run a new container
-docker run -d --restart always --name $CONTAINER_NAME --env-file ./.env $IMAGE_NAME:latest
+docker run -p 9020:9020 -d --restart always --name $CONTAINER_NAME --env-file ./.env $IMAGE_NAME:latest

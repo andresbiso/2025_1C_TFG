@@ -78,9 +78,9 @@ En una terminal correr:
 
 ```bash
 cd scripts/
-chmod +x ./deploy.sh
+chmod +x ./docker_deploy.sh
 ./docker_deploy.sh [nombre-del-container]
-# Ejemplo: `./deploy.sh telegram_bot`
+# Ejemplo: `./docker_deploy.sh telegram_bot`
 ```
 
 # Referencias <a name = "references"></a>

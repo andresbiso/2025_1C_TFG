@@ -1,5 +1,9 @@
-from flask import Blueprint, jsonify, request, current_app
-from submodules.setup import setup_bot
+import requests
+import os
+from flask import Blueprint, jsonify, request
+
+BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+TELEGRAM_API_URL = f"https://api.telegram.org/bot{BOT_TOKEN}"
 
 # Initialize Blueprint to group API routes
 api_routes = Blueprint("api", __name__)
@@ -22,12 +26,12 @@ async def send_message():
     data = request.json
     chat_id = data.get("chat_id")
     message = data.get("message")
-    application = current_app.config["BOT_APP"]
 
     if not chat_id or not message:
         return jsonify({"error": "Missing chat_id or message"}), 400
 
-    await application.bot.send_message(chat_id=chat_id, text=message)
+    # Send request to Telegram API
+    response = requests.post(TELEGRAM_API_URL + "/sendMessage", json={"chat_id": chat_id, "text": message})
     return jsonify({"status": "Message sent successfully!"}), 200
 
 # Export the Blueprint
