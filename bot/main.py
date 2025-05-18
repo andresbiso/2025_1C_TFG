@@ -12,12 +12,7 @@ load_dotenv(dotenv_path)
 
 # Initialize Flask app
 app = Flask(__name__)
-app.register_blueprint(api_routes)  # ✅ Register the routes from `routes.py`
-
-@app.route("/status")
-def status():
-    """Returns bot status"""
-    return {"status": "Bot is running!", "health": "OK"}
+app.register_blueprint(api_routes)  # Register the routes from `routes.py`
 
 def run_flask():
     """Runs Flask web server."""
@@ -27,6 +22,7 @@ def run_flask():
 def run_telegram_bot():
     """Launches Telegram bot after setup."""
     application = setup_bot()
+    app.config["BOT_APP"] = application  # Store bot instance globally
     print("Instancia de Bot de Telegram iniciada!")
     application.run_polling()  # Runs bot synchronously
 

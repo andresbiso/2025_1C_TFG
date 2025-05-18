@@ -1,10 +1,8 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, current_app
 from submodules.setup import setup_bot
 
 # Initialize Blueprint to group API routes
 api_routes = Blueprint("api", __name__)
-
-application = setup_bot()
 
 @api_routes.route("/", methods=["GET"])
 def root():
@@ -24,6 +22,7 @@ async def send_message():
     data = request.json
     chat_id = data.get("chat_id")
     message = data.get("message")
+    application = current_app.config["BOT_APP"]
 
     if not chat_id or not message:
         return jsonify({"error": "Missing chat_id or message"}), 400
