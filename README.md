@@ -60,6 +60,12 @@ brew install --cask docker
 brew install --cask telegram
 ```
 
+- [postman](https://formulae.brew.sh/cask/postman#default)
+
+```bash
+brew install --cask postman
+```
+
 ## MongoDB Compass
 
 1. [mongodb-compass](https://formulae.brew.sh/cask/mongodb-compass#default)
