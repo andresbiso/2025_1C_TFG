@@ -1,10 +1,14 @@
 import re
+from submodules.database_handler import store_chat_id
 from submodules.input_handler import process_input
+import sqlite3
 from telegram import Update
 from telegram.constants import ParseMode
 from telegram.ext import CallbackContext
 
-async def start_command(update: Update, _: CallbackContext):
+async def start_command(update: Update, context: CallbackContext):
+    await store_chat_id(update, context)
+    
     """
     Introduces the bot and lists available actions clearly.
     """

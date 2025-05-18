@@ -54,6 +54,21 @@ python3 -m pip install --no-cache-dir -r requirements.txt
 python3 main.py
 ```
 
+## Revisar datos en DB Local
+
+- El bot utiliza sqlite3 para registrar a los usuarios.
+
+```bash
+docker exec -it $CONTAINER_NAME bash
+# docker exec -it telegram_bot bash
+sqlite3 bot.db
+```
+
+```sql
+SELECT * FROM users;
+.exit
+```
+
 # Despliegue - Docker <a name = "docker_deployment"></a>
 
 > [!NOTE]

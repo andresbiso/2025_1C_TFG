@@ -1,5 +1,6 @@
 import asyncio
 import os
+from submodules.database_handler import get_chat_id, verify_chat_id
 from submodules.qr_handler import generate_qr_async
 from telegram.constants import ParseMode
 from ui.builder import show_animated_loader
@@ -40,24 +41,30 @@ async def process_input(update, context):
             recipient = user_input[1]  # Username or chat ID
 
             try:
-                # get and verify chat ID before sending
-                contact_chat_id = recipient
+                contact_chat_id = recipient  # Use numeric chat ID directly
                 if not recipient.isdigit():
-                    print(f"recipient: {recipient}")
-                    chat = await context.bot.get_chat(recipient) 
-                    print(f"chat: {chat}")
-                    contact_chat_id = chat.id
+                    # Lookup chat ID if recipient is not a number
+                    contact_chat_id = get_chat_id(recipient)  # Retrieve chat ID from DB
+                    
+                    if not contact_chat_id:  # If user is not stored, return error
+                        await update.message.reply_text("❌ Usuario no encontrado. Pide al usuario que envíe /start al bot primero.")
+                        return        
+
+                # ✅ Send QR Code
                 with open(qr_path, "rb") as qr_code:
                     await context.bot.send_document(
                         chat_id=contact_chat_id,
                         document=qr_code,
                         caption="Código QR generado!"
                     )
+
                 os.remove(qr_path)
                 await update.message.reply_text("✅ QR generado y enviado exitosamente al contacto.")
+
             except Exception as e:
                 await update.message.reply_text("❌ No se pudo enviar el QR. El contacto no existe o el bot no tiene acceso.")
                 print(f"Error: {e}")
+
 
     except Exception as e:
         print(f"Error en process_input: {e}")
