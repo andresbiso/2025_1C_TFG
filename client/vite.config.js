@@ -9,6 +9,7 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     server: {
+      host: "0.0.0.0", // Enables access via localhost and 127.0.0.1
       port: Number(env.VITE_PORT) || 8083,
     },
   };
