@@ -1,6 +1,7 @@
 import os
 import requests
 import sqlite3
+import telegramify_markdown
 from api.database import check_and_update_status
 from datetime import datetime
 from flask import Blueprint, jsonify, request
@@ -68,12 +69,22 @@ async def send_message():
     data = request.json
     chat_id = data.get("chat_id")
     message = data.get("message")
+    parse_mode = data.get("parse_mode")
 
-    if not chat_id or not message:
-        return jsonify({"error": "Missing chat_id or message"}), 400
+    if not chat_id or not message or not parse_mode:
+        return jsonify({"error": "Missing chat_id or message or parse_mode"}), 400
+    
+    if parse_mode.lower() == "markdownv2":
+        message = telegramify_markdown.markdownify(
+            message,
+            max_line_length=None,
+            normalize_whitespace=False
+        )
 
     # Send request to Telegram API
-    response = requests.post(TELEGRAM_API_URL + "/sendMessage", json={"chat_id": chat_id, "text": message})
+    # More info: https://core.telegram.org/bots/api#sendmessage
+    # Formatting options: https://core.telegram.org/bots/api#formatting-options
+    response = requests.post(TELEGRAM_API_URL + "/sendMessage", json={"chat_id": chat_id, "text": message, "parse_mode": parse_mode})
     return jsonify({"status": "Message sent successfully!"}), 200
 
 # Export the Blueprint

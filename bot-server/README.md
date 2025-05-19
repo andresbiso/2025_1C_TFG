@@ -70,5 +70,5 @@ En una terminal ejecutar:
 ```bash
 curl -X POST http://localhost:9020/send-message \
  -H "Content-Type: application/json" \
- -d '{"chat_id": "<telegram_chat_id>", "message": "Hola, esto es un mensaje de prueba desde cURL!"}'
+ -d '{"chat_id": "<telegram_chat_id>", "message": "Hay un curso nuevo! [Más información](http://127.0.0.1:<client-port>/courses/<course-id>/)", "parse_mode": "<HTML|MarkdownV2"}'
 ```
