@@ -1,12 +1,26 @@
+import os
 import sqlite3
 from telegram import Update
 from telegram.ext import CallbackContext
 
-DB_NAME="bot.db"
+DATABASE = os.getenv("DB_PATH")
+if not DATABASE:
+    raise ValueError("❌ No se ha encontrado DB_PATH! Recordá configurarlo en .env.")
 
-import sqlite3
-
-DB_NAME = "bot.db"
+def init_db():
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+    
+    # Ensure table supports storing username + chat ID
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+            chat_id INTEGER PRIMARY KEY,
+            username TEXT UNIQUE
+        )
+    """)
+    
+    conn.commit()
+    conn.close()
 
 async def store_chat_id(update: Update, _: CallbackContext):
     """
@@ -18,7 +32,7 @@ async def store_chat_id(update: Update, _: CallbackContext):
     if not username:  # Handle cases where the user has no username
         username = f"user_{chat_id}"  # Assign a fallback name
 
-    conn = sqlite3.connect(DB_NAME)
+    conn = sqlite3.connect(DATABASE)
     cursor = conn.cursor()
     
     # Ensure table supports storing username + chat ID
@@ -42,7 +56,7 @@ def get_chat_id(username):
     """
     Retrieves the chat ID from the database using the username or user ID.
     """
-    conn = sqlite3.connect(DB_NAME)
+    conn = sqlite3.connect(DATABASE)
     cursor = conn.cursor()
     
     cursor.execute("SELECT chat_id FROM users WHERE username = ?", (username,))
@@ -55,7 +69,7 @@ def verify_chat_id(chat_id):
     """
     Verifies the chat id is known to the bot.
     """
-    conn = sqlite3.connect(DB_NAME)
+    conn = sqlite3.connect(DATABASE)
     cursor = conn.cursor()
     
     cursor.execute("SELECT * FROM users WHERE chat_id = ?", (chat_id,))

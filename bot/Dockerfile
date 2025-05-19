@@ -8,6 +8,7 @@ COPY requirements.txt .env main.py ./
 COPY submodules/ ./submodules/  
 COPY ui/ ./ui/  
 RUN mkdir ./images
+RUN mkdir ./data
 
 # Install SQLite3
 RUN apt-get update && apt-get install -y sqlite3

@@ -1,0 +1,11 @@
+services:
+  app:
+    container_name: telegram-bot
+    build: .
+    restart: always
+    env_file: .env
+    volumes:
+      - sqlite_data:/data
+
+volumes:
+  sqlite_data:

@@ -1,0 +1,13 @@
+services:
+  app:
+    container_name: telegram-bot-server
+    build: .
+    restart: always
+    env_file: .env
+    volumes:
+      - sqlite_data:/data
+    ports:
+      - "9020:9020"
+
+volumes:
+  sqlite_data:

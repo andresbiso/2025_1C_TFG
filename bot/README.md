@@ -61,7 +61,7 @@ python3 main.py
 ```bash
 docker exec -it $CONTAINER_NAME bash
 # docker exec -it telegram_bot bash
-sqlite3 bot.db
+sqlite3 data/bot.db
 ```
 
 ```sql
@@ -77,10 +77,13 @@ SELECT * FROM users;
 En una terminal correr:
 
 ```bash
-cd scripts/
-chmod +x ./docker_deploy.sh
-./docker_deploy.sh [nombre-del-container]
-# Ejemplo: `./docker_deploy.sh telegram_bot`
+docker compose up -d --build
+```
+
+Para detener el container:
+
+```bash
+docker compose down
 ```
 
 # Referencias <a name = "references"></a>

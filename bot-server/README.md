@@ -5,7 +5,6 @@
 - [Configuración](#setup)
 - [Ejecutar Bot Localmente](#execute_bot)
 - [Despliegue - Docker](#docker_deployment)
-- [Referencias](#references)
 
 # Introducción <a name = "introduction"></a>
 
@@ -32,6 +31,21 @@ python3 -m pip install --no-cache-dir -r requirements.txt
 python3 main.py
 ```
 
+## Revisar datos en DB Local
+
+- El bot utiliza sqlite3 para registrar a los usuarios.
+
+```bash
+docker exec -it $CONTAINER_NAME bash
+# docker exec -it telegram_bot bash
+sqlite3 data/bot-server.db
+```
+
+```sql
+SELECT * FROM bots;
+.exit
+```
+
 # Despliegue - Docker <a name = "docker_deployment"></a>
 
 > [!NOTE]
@@ -40,8 +54,11 @@ python3 main.py
 En una terminal correr:
 
 ```bash
-cd scripts/
-chmod +x ./docker_deploy.sh
-./docker_deploy.sh [nombre-del-container]
-# Ejemplo: `./docker_deploy.sh telegram_bot_server`
+docker compose up -d --build
+```
+
+Para detener el container:
+
+```bash
+docker compose down
 ```

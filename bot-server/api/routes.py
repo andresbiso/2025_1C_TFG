@@ -1,9 +1,23 @@
-import requests
 import os
+import requests
+import sqlite3
+from database import check_and_update_status
+from datetime import datetime
 from flask import Blueprint, jsonify, request
 
-BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-TELEGRAM_API_URL = f"https://api.telegram.org/bot{BOT_TOKEN}"
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+if not BOT_TOKEN:
+    raise ValueError("❌ No se ha encontrado BOT_TOKEN! Recordá configurarlo en .env.")
+
+TELEGRAM_API_URL = os.getenv("TELEGRAM_API_URL")
+if not TELEGRAM_API_URL:
+    raise ValueError("❌ No se ha encontrado TELEGRAM_API_URL! Recordá configurarlo en .env.")
+
+TELEGRAM_API_URL = TELEGRAM_API_URL.replace("{BOT_TOKEN}", BOT_TOKEN)
+
+DATABASE = os.getenv("DB_PATH")
+if not DATABASE:
+    raise ValueError("❌ No se ha encontrado DB_PATH! Recordá configurarlo en .env.")
 
 # Initialize Blueprint to group API routes
 api_routes = Blueprint("api", __name__)
@@ -11,12 +25,40 @@ api_routes = Blueprint("api", __name__)
 @api_routes.route("/", methods=["GET"])
 def root():
     """Redirects root `/` to status."""
-    return status()
+    return get_status()
 
-@api_routes.route("/status", methods=["GET"])
-def status():
-    """Returns bot status"""
-    return jsonify({"status": "Bot is running!", "health": "OK"}), 200
+@api_routes.route('/status', methods=['GET'])
+def get_status():
+    check_and_update_status()
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+    cursor.execute('SELECT bot_name, status, last_modified FROM bot_status')
+    bots = cursor.fetchall()
+    conn.close()
+
+    return jsonify([{"bot_name": bot[0], "status": bot[1], "last_modified": bot[2]} for bot in bots])
+
+@api_routes.route('/status', methods=['POST'])
+def update_status():
+    data = request.json
+    bot_name = data.get("bot_name")
+    status = "OK"
+    last_modified = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    if not bot_name:
+        return jsonify({"error": "bot_name required"}), 400
+
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+    cursor.execute('''INSERT INTO bot_status (bot_name, status, last_modified)
+                      VALUES (?, ?, ?)
+                      ON CONFLICT(bot_name) DO UPDATE 
+                      SET status=?, last_modified=?''',
+                      (bot_name, status, last_modified, status, last_modified))
+    conn.commit()
+    conn.close()
+
+    return jsonify({"message": f"Bot {bot_name} status updated!"})
 
 @api_routes.route("/send-message", methods=["POST"])
 async def send_message():
