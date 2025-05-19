@@ -21,12 +21,22 @@ def send_status_update():
     """Sends bot status update to Flask API."""
     try:
         response = requests.post(BOT_SERVER + "/status", json={"bot_name": BOT_NAME})
-        print(f"✅ Status sent: {response.json()}")
+        print(f"Status sent: {response.json()}")
     except Exception as e:
-        print(f"❌ Error sending status: {e}")
+        print(f"Error sending status: {e}")
+
+def run_scheduler():
+    """Runs scheduled tasks continuously in the background."""
+    while True:
+        schedule.run_pending()
+        time.sleep(5)  # Prevents excessive CPU usage
 
 def init_jobs():
     """Starts the scheduled job in a separate background thread."""
-    # Schedule the task every 45 seconds
     schedule.every(45).seconds.do(send_status_update)
-    print("🛠️ Background job scheduler started!")
+    print("🛠️ Background job scheduler iniciado!")
+
+    # Start scheduler in a background thread
+    thread = threading.Thread(target=run_scheduler, daemon=True)
+    thread.start()
+

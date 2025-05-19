@@ -24,7 +24,8 @@ def init_db():
 
 async def store_chat_id(update: Update, _: CallbackContext):
     """
-    Stores the user's chat ID and username when they interact with the bot.
+    Stores the user's chat ID and username when they interact with the bot,
+    ensuring they are not already stored.
     """
     chat_id = update.message.chat_id
     username = update.message.from_user.username  # Get username
@@ -32,24 +33,19 @@ async def store_chat_id(update: Update, _: CallbackContext):
     if not username:  # Handle cases where the user has no username
         username = f"user_{chat_id}"  # Assign a fallback name
 
+    # Check if chat ID or username already exists
+    if verify_chat_id(chat_id) or get_chat_id(username):
+        return  # Exit function to prevent duplicate insert
+
+    # Store username + chat ID if not already in the database
     conn = sqlite3.connect(DATABASE)
     cursor = conn.cursor()
-    
-    # Ensure table supports storing username + chat ID
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS users (
-            chat_id INTEGER PRIMARY KEY,
-            username TEXT UNIQUE
-        )
-    """)
-
-    # Store username + chat ID, avoiding duplicates
-    cursor.execute("INSERT OR IGNORE INTO users (chat_id, username) VALUES (?, ?)", (chat_id, username))
-    
+    cursor.execute("INSERT INTO users (chat_id, username) VALUES (?, ?)", (chat_id, username))
     conn.commit()
     conn.close()
 
-    await update.message.reply_text(f"¡Has sido registrado! Ahora el bot puede enviarte mensajes.\n username: {username} chat_id: {chat_id}")
+    await update.message.reply_text(f"¡Has sido registrado! Ahora el bot puede enviarte mensajes.\n 👤 Username: {username}\n🆔 Chat ID: {chat_id}")
+
 
 
 def get_chat_id(username):

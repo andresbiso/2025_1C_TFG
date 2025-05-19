@@ -1,7 +1,7 @@
 import os
 import requests
 import sqlite3
-from database import check_and_update_status
+from api.database import check_and_update_status
 from datetime import datetime
 from flask import Blueprint, jsonify, request
 

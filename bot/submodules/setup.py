@@ -2,7 +2,7 @@ import asyncio
 import os
 from telegram import BotCommand
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
-from submodules.commands import cancel_command, create_command, help_command, start_command
+from submodules.commands import cancel_command, create_command, help_command, start_command, get_register_info_command
 from submodules.message_handler import handle_unknown
 
 async def set_bot_commands(application):
@@ -33,6 +33,7 @@ def setup_bot():
     application.add_handler(CommandHandler("help", help_command))
     application.add_handler(CommandHandler("cancel", cancel_command))
     application.add_handler(CommandHandler("create", create_command))
+    application.add_handler(CommandHandler("getregisterinfo", get_register_info_command))
     
     # Handle unknown messages
     application.add_handler(MessageHandler(filters.ALL, handle_unknown))

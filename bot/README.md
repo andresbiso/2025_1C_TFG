@@ -74,7 +74,7 @@ SELECT * FROM users;
 > [!NOTE]
 > Se debe haber configurado el entorno antes de realizar el despliegue.
 
-En una terminal correr:
+En una terminal ejecutar:
 
 ```bash
 docker compose up -d --build

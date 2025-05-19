@@ -51,7 +51,7 @@ SELECT * FROM bots;
 > [!NOTE]
 > Se debe haber configurado el entorno antes de realizar el despliegue.
 
-En una terminal correr:
+En una terminal ejecutar:
 
 ```bash
 docker compose up -d --build
@@ -61,4 +61,14 @@ Para detener el container:
 
 ```bash
 docker compose down
+```
+
+## Prueba
+
+En una terminal ejecutar:
+
+```bash
+curl -X POST http://localhost:9020/send-message \
+ -H "Content-Type: application/json" \
+ -d '{"chat_id": "<telegram_chat_id>", "message": "Hola, esto es un mensaje de prueba desde cURL!"}'
 ```
