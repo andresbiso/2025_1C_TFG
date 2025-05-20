@@ -6,7 +6,11 @@ import { ImGithub, ImLinkedin2 } from 'react-icons/im';
 import Logo from '../../assets/Logo/Logo-Full-Light.png';
 
 // footer data
-const BottomFooter = ['Privacy Policy', 'Cookie Policy', 'Terms'];
+const BottomFooter = [
+  'Política de PRivacidad',
+  'Política de Cookies',
+  'Términos',
+];
 const Resources = [
   'Artículos',
   'Blogs',
@@ -37,7 +41,7 @@ const Footer = () => {
                 Empresa
               </h1>
               <div className="flex flex-col gap-2">
-                {['About', 'Careers', 'Affiliates'].map((ele, i) => {
+                {['Acerca de', 'Carreras', 'Afiliados'].map((ele, i) => {
                   return (
                     <div
                       key={i}
@@ -140,16 +144,16 @@ const Footer = () => {
               </div>
 
               <h1 className="text-richblack-50 font-semibold text-[16px] mt-7">
-                Support
+                Soporte
               </h1>
               <div className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200 mt-2">
-                <Link to={'/help-center'}>Help Center</Link>
+                <Link to={'/help-center'}>Centro de ayuda</Link>
               </div>
             </div>
 
             <div className="w-[48%] lg:w-[30%] mb-7 lg:pl-0">
               <h1 className="text-richblack-50 font-semibold text-[16px]">
-                Plans
+                Planes
               </h1>
 
               <div className="flex flex-col gap-2 mt-2">

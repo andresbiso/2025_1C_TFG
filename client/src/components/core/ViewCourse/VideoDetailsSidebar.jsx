@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
@@ -107,7 +108,7 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="text-[12px] font-medium">
-                    Lession {section?.subSection.length}
+                    Lecciones {section?.subSection.length}
                   </span>
                   <span
                     className={`${
@@ -159,3 +160,7 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
     </>
   );
 }
+
+VideoDetailsSidebar.propTypes = {
+  setReviewModal: PropTypes.any,
+};

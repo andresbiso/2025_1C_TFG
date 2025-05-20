@@ -50,7 +50,6 @@ export const FooterLink2 = [
         title: 'Certificaciones Profesionales',
         link: '/professional-certification',
       },
-      { title: '-', link: '/hi' },
       { title: 'Catálogo Completo', link: '/full-catalog' },
       { title: 'Contenido Beta', link: '/beta-content' },
     ],
