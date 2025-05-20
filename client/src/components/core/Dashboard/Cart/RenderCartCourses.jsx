@@ -1,23 +1,23 @@
-import { FaStar } from "react-icons/fa"
-import { RiDeleteBin6Line } from "react-icons/ri"
-import ReactStars from "react-rating-stars-component"
-import { useDispatch, useSelector } from "react-redux"
+import { FaStar } from 'react-icons/fa';
+import { RiDeleteBin6Line } from 'react-icons/ri';
+import ReactStars from 'react-rating-stars-component';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { removeFromCart } from "../../../../slices/cartSlice"
+import { removeFromCart } from '../../../../slices/cartSlice';
 import Img from './../../../common/Img';
 
 export default function RenderCartCourses() {
-  const { cart } = useSelector((state) => state.cart)
-  const dispatch = useDispatch()
-
+  const { cart } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
   return (
     <div className="flex flex-1 flex-col">
       {cart.map((course, indx) => (
         <div
           key={course._id}
-          className={`flex w-full flex-wrap items-start justify-between gap-6 ${indx !== cart.length - 1 && "border-b border-b-richblack-400 pb-6"
-            } ${indx !== 0 && "mt-6"} `}
+          className={`flex w-full flex-wrap items-start justify-between gap-6 ${
+            indx !== cart.length - 1 && 'border-b border-b-richblack-400 pb-6'
+          } ${indx !== 0 && 'mt-6'} `}
         >
           <div className="flex flex-1 flex-col gap-4 xl:flex-row">
             {/* course thumbnail */}
@@ -46,7 +46,7 @@ export default function RenderCartCourses() {
                   fullIcon={<FaStar />}
                 />
                 <span className="text-richblack-400">
-                  {course?.ratingAndReviews?.length} Ratings
+                  {course?.ratingAndReviews?.length} Calificaciones
                 </span>
               </div>
             </div>
@@ -58,14 +58,14 @@ export default function RenderCartCourses() {
               className="flex items-center gap-x-1 rounded-md border border-richblack-600 bg-richblack-700 py-3 px-[12px] text-pink-200"
             >
               <RiDeleteBin6Line />
-              <span>Remove</span>
+              <span>Eliminar</span>
             </button>
             <p className="mb-6 text-3xl font-medium text-yellow-100">
-              ₹ {course?.price}
+              ARS {course?.price}
             </p>
           </div>
         </div>
       ))}
     </div>
-  )
+  );
 }

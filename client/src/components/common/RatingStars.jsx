@@ -1,26 +1,26 @@
-import React, { useEffect, useState } from "react"
+import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import {
   TiStarFullOutline,
   TiStarHalfOutline,
   TiStarOutline,
-} from "react-icons/ti"
+} from 'react-icons/ti';
 
 function RatingStars({ Review_Count, Star_Size }) {
   const [starCount, SetStarCount] = useState({
     full: 0,
     half: 0,
     empty: 0,
-  })
+  });
 
   useEffect(() => {
-    const wholeStars = Math.floor(Review_Count) || 0
+    const wholeStars = Math.floor(Review_Count) || 0;
     SetStarCount({
       full: wholeStars,
       half: Number.isInteger(Review_Count) ? 0 : 1,
       empty: Number.isInteger(Review_Count) ? 5 - wholeStars : 4 - wholeStars,
-    })
-  }, [Review_Count])
-
+    });
+  }, [Review_Count]);
 
   // return (
   //   <div className="flex gap-1 text-yellow-100">
@@ -52,7 +52,11 @@ function RatingStars({ Review_Count, Star_Size }) {
         ))}
     </div>
   );
-
 }
 
-export default RatingStars
+RatingStars.propTypes = {
+  Review_Count: PropTypes.node.isRequired,
+  Star_Size: PropTypes.node.isRequired,
+};
+
+export default RatingStars;

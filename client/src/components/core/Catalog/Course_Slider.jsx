@@ -1,22 +1,19 @@
-import React, { useEffect, useState } from "react"
-
+import PropTypes from 'prop-types';
 
 // Import Swiper styles
-import "swiper/css"
-import "swiper/css/free-mode"
-import "swiper/css/pagination"
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/pagination';
 // Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react"
+import { Swiper, SwiperSlide } from 'swiper/react';
 // import {  Pagination } from "swiper"
 
-import Course_Card from "./Course_Card"
+import Course_Card from './Course_Card';
 
-
-
-function Course_Slider({ Courses }) {
+function Course_Slider({ courses }) {
   return (
     <>
-      {Courses?.length ? (
+      {courses?.length ? (
         <Swiper
           slidesPerView={1}
           spaceBetween={25}
@@ -30,9 +27,9 @@ function Course_Slider({ Courses }) {
           }}
           className="max-h-[30rem] pt-8 px-2"
         >
-          {Courses?.map((course, i) => (
+          {courses?.map((course, i) => (
             <SwiperSlide key={i}>
-              <Course_Card course={course} Height={"h-[250px]"} />
+              <Course_Card course={course} height={'h-[250px]'} />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -44,7 +41,11 @@ function Course_Slider({ Courses }) {
         </div>
       )}
     </>
-  )
+  );
 }
 
-export default Course_Slider
+Course_Slider.propTypes = {
+  courses: PropTypes.node.isRequired,
+};
+
+export default Course_Slider;

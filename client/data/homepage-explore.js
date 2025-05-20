@@ -1,117 +1,132 @@
 export const HomePageExplore = [
-    {
-        tag: 'Free',
-        courses : [
-            {
-                heading : "Learn HTML",
-                description : "This course covers the basic concepts of HTML including creating and structuring web pages, adding text, links, images, and more.",
-                level : 'Beginner',
-                lessionNumber : 6
-            },
-            {
-                heading : "Learn CSS",
-                description : "This course explores advanced topics in HTML5 and CSS3, including animations, transitions, and layout techniques",
-                level : 'Beginner',
-                lessionNumber : 6
-            },
-            {
-                heading : "Responsive Web design",
-                description : "This course teaches responsive web design techniques, allowing web pages to adapt to different devices and screen sizes",
-                level : 'Beginner',
-                lessionNumber : 6
-            },
-        ]
-    },
-    {
-        tag: 'New to coding',
-        courses : [
-            {
-                heading : "HTML",
-                description : "This course covers the basic concepts of HTML including creating and structuring web pages, adding text, links, images, and more.",
-                level : 'Beginner',
-                lessionNumber : 6
-            },
-            {
-                heading : "CSS",
-                description : "This course explores advanced topics in HTML5 and CSS3, including animations, transitions, and layout techniques",
-                level : 'Beginner',
-                lessionNumber : 6
-            },
-            {
-                heading : "Responsive ",
-                description : "This course teaches responsive web design techniques, allowing web pages to adapt to different devices and screen sizes",
-                level : 'Beginner',
-                lessionNumber : 6
-            },
-        ]
-    },
-    {
-        tag: 'Most popular',
-        courses : [
-            {
-                heading : "Java",
-                description : "This course covers the basic concepts of HTML including creating and structuring web pages, adding text, links, images, and more.",
-                level : 'Beginner',
-                lessionNumber : 6
-            },
-            {
-                heading : "Python",
-                description : "This course explores advanced topics in HTML5 and CSS3, including animations, transitions, and layout techniques",
-                level : 'Beginner',
-                lessionNumber : 6
-            },
-            {
-                heading : "SCSS",
-                description : "This course teaches responsive web design techniques, allowing web pages to adapt to different devices and screen sizes",
-                level : 'Beginner',
-                lessionNumber : 6
-            },
-        ]
-    },
-    {
-        tag: 'Skills paths',
-        courses : [
-            {
-                heading : "Flask",
-                description : "This course covers the basic concepts of HTML including creating and structuring web pages, adding text, links, images, and more.",
-                level : 'Beginner',
-                lessionNumber : 6
-            },
-            {
-                heading : "Django",
-                description : "This course explores advanced topics in HTML5 and CSS3, including animations, transitions, and layout techniques",
-                level : 'Beginner',
-                lessionNumber : 6
-            },
-            {
-                heading : "Fast API",
-                description : "This course teaches responsive web design techniques, allowing web pages to adapt to different devices and screen sizes",
-                level : 'Beginner',
-                lessionNumber : 6
-            },
-        ]
-    },
-    {
-        tag: 'Career paths',
-        courses : [
-            {
-                heading : "Next.js",
-                description : "This course covers the basic concepts of HTML including creating and structuring web pages, adding text, links, images, and more.",
-                level : 'Beginner',
-                lessionNumber : 6
-            },
-            {
-                heading : "Nuxt.js",
-                description : "This course explores advanced topics in HTML5 and CSS3, including animations, transitions, and layout techniques",
-                level : 'Beginner',
-                lessionNumber : 6
-            },
-            {
-                heading : "Sanity",
-                description : "This course teaches responsive web design techniques, allowing web pages to adapt to different devices and screen sizes",
-                level : 'Beginner',
-                lessionNumber : 6
-            },
-        ]
-    },
-]
+  {
+    tag: 'Gratis',
+    courses: [
+      {
+        heading: 'Aprender HTML',
+        description:
+          'Este curso cubre los conceptos básicos de HTML, incluyendo la creación y estructuración de páginas web, la adición de texto, enlaces, imágenes y más.',
+        level: 'Principiante',
+        lessionNumber: 6,
+      },
+      {
+        heading: 'Aprender CSS',
+        description:
+          'Este curso explora temas avanzados en HTML5 y CSS3, incluyendo animaciones, transiciones y técnicas de diseño.',
+        level: 'Principiante',
+        lessionNumber: 6,
+      },
+      {
+        heading: 'Diseño web adaptable',
+        description:
+          'Este curso enseña técnicas de diseño web adaptable, permitiendo que las páginas web se ajusten a diferentes dispositivos y tamaños de pantalla.',
+        level: 'Principiante',
+        lessionNumber: 6,
+      },
+    ],
+  },
+  {
+    tag: 'Nuevo en programación',
+    courses: [
+      {
+        heading: 'HTML',
+        description:
+          'Este curso cubre los conceptos básicos de HTML, incluyendo la creación y estructuración de páginas web, la adición de texto, enlaces, imágenes y más.',
+        level: 'Principiante',
+        lessionNumber: 6,
+      },
+      {
+        heading: 'CSS',
+        description:
+          'Este curso explora temas avanzados en HTML5 y CSS3, incluyendo animaciones, transiciones y técnicas de diseño.',
+        level: 'Principiante',
+        lessionNumber: 6,
+      },
+      {
+        heading: 'Adaptabilidad ',
+        description:
+          'Este curso enseña técnicas de diseño web adaptable, permitiendo que las páginas web se ajusten a diferentes dispositivos y tamaños de pantalla.',
+        level: 'Principiante',
+        lessionNumber: 6,
+      },
+    ],
+  },
+  {
+    tag: 'Más popular',
+    courses: [
+      {
+        heading: 'Java',
+        description:
+          'Este curso cubre los conceptos básicos de HTML, incluyendo la creación y estructuración de páginas web, la adición de texto, enlaces, imágenes y más.',
+        level: 'Principiante',
+        lessionNumber: 6,
+      },
+      {
+        heading: 'Python',
+        description:
+          'Este curso explora temas avanzados en HTML5 y CSS3, incluyendo animaciones, transiciones y técnicas de diseño.',
+        level: 'Principiante',
+        lessionNumber: 6,
+      },
+      {
+        heading: 'SCSS',
+        description:
+          'Este curso enseña técnicas de diseño web adaptable, permitiendo que las páginas web se ajusten a diferentes dispositivos y tamaños de pantalla.',
+        level: 'Principiante',
+        lessionNumber: 6,
+      },
+    ],
+  },
+  {
+    tag: 'Rutas de habilidades',
+    courses: [
+      {
+        heading: 'Flask',
+        description:
+          'Este curso cubre los conceptos básicos de HTML, incluyendo la creación y estructuración de páginas web, la adición de texto, enlaces, imágenes y más.',
+        level: 'Principiante',
+        lessionNumber: 6,
+      },
+      {
+        heading: 'Django',
+        description:
+          'Este curso explora temas avanzados en HTML5 y CSS3, incluyendo animaciones, transiciones y técnicas de diseño.',
+        level: 'Principiante',
+        lessionNumber: 6,
+      },
+      {
+        heading: 'Fast API',
+        description:
+          'Este curso enseña técnicas de diseño web adaptable, permitiendo que las páginas web se ajusten a diferentes dispositivos y tamaños de pantalla.',
+        level: 'Principiante',
+        lessionNumber: 6,
+      },
+    ],
+  },
+  {
+    tag: 'Rutas profesionales',
+    courses: [
+      {
+        heading: 'Next.js',
+        description:
+          'Este curso cubre los conceptos básicos de HTML, incluyendo la creación y estructuración de páginas web, la adición de texto, enlaces, imágenes y más.',
+        level: 'Principiante',
+        lessionNumber: 6,
+      },
+      {
+        heading: 'Nuxt.js',
+        description:
+          'Este curso explora temas avanzados en HTML5 y CSS3, incluyendo animaciones, transiciones y técnicas de diseño.',
+        level: 'Principiante',
+        lessionNumber: 6,
+      },
+      {
+        heading: 'Sanity',
+        description:
+          'Este curso enseña técnicas de diseño web adaptable, permitiendo que las páginas web se ajusten a diferentes dispositivos y tamaños de pantalla.',
+        level: 'Principiante',
+        lessionNumber: 6,
+      },
+    ],
+  },
+];
