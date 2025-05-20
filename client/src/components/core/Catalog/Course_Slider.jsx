@@ -45,7 +45,7 @@ function Course_Slider({ courses }) {
 }
 
 Course_Slider.propTypes = {
-  courses: PropTypes.node.isRequired,
+  courses: PropTypes.any,
 };
 
 export default Course_Slider;

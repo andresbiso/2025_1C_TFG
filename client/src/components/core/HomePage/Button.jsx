@@ -17,9 +17,9 @@ const Button = ({ children, active, linkto }) => {
 };
 
 Button.propTypes = {
-  children: PropTypes.node.isRequired,
-  active: PropTypes.node.isRequired,
-  linkto: PropTypes.node.isRequired,
+  children: PropTypes.node,
+  active: PropTypes.any,
+  linkto: PropTypes.any,
 };
 
 export default Button;

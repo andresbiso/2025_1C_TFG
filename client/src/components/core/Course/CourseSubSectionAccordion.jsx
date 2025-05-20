@@ -17,7 +17,7 @@ function CourseSubSectionAccordion({ subSec }) {
 }
 
 CourseSubSectionAccordion.propTypes = {
-  subSec: PropTypes.node.isRequired,
+  subSec: PropTypes.any,
 };
 
 export default CourseSubSectionAccordion;

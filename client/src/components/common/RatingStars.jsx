@@ -55,8 +55,8 @@ function RatingStars({ Review_Count, Star_Size }) {
 }
 
 RatingStars.propTypes = {
-  Review_Count: PropTypes.node.isRequired,
-  Star_Size: PropTypes.node.isRequired,
+  Review_Count: PropTypes.number,
+  Star_Size: PropTypes.number,
 };
 
 export default RatingStars;

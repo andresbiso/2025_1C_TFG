@@ -7,7 +7,7 @@ const HighlightText = ({ text }) => {
 };
 
 HighlightText.propTypes = {
-  text: PropTypes.node.isRequired,
+  text: PropTypes.string,
 };
 
 export default HighlightText;

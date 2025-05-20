@@ -124,5 +124,5 @@ export default function CourseReviewModal({ setReviewModal }) {
 }
 
 CourseReviewModal.propTypes = {
-  setReviewModal: PropTypes.node.isRequired,
+  setReviewModal: PropTypes.any,
 };

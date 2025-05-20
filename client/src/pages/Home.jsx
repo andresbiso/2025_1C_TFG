@@ -120,7 +120,7 @@ const Home = () => {
             className="text-center text-3xl lg:text-4xl font-semibold mt-7  "
           >
             Empodera to futuro con
-            <HighlightText text={'Habilidades de desarrollo de software'} />
+            <HighlightText text={'habilidades de desarrollo de software'} />
           </motion.div>
 
           <motion.div

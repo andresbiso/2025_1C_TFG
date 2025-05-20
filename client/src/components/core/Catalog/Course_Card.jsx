@@ -60,8 +60,8 @@ function Course_Card({ course, height }) {
 }
 
 Course_Card.propTypes = {
-  course: PropTypes.node.isRequired,
-  height: PropTypes.node.isRequired,
+  course: PropTypes.any,
+  height: PropTypes.string,
 };
 
 export default Course_Card;

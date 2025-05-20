@@ -1,35 +1,33 @@
-import * as Icon1 from "react-icons/bi"
-import * as Icon3 from "react-icons/hi2"
-import * as Icon2 from "react-icons/io5"
+import * as Icon1 from 'react-icons/bi';
+import * as Icon3 from 'react-icons/hi2';
+import * as Icon2 from 'react-icons/io5';
 
 const contactDetails = [
   {
-    icon: "HiChatBubbleLeftRight",
-    heading: "Chat on us",
-    description: "Our friendly team is here to help.",
-    details: "info@mailpit.com",
+    icon: 'HiChatBubbleLeftRight',
+    heading: 'Chatea con nosotros',
+    description: 'Nuestro amigable equipo está aqui para ayudarte.',
+    details: 'info@mailpit.com',
   },
   {
-    icon: "BiWorld",
-    heading: "Visit us",
-    description: "Come and say hello at our office HQ.",
-    details:
-      "Mario Bravo 1050, Buenos Aires, Argentina",
+    icon: 'BiWorld',
+    heading: 'Visitanos',
+    description: 'Vení a saludarnos a nuestras oficinas.',
+    details: 'Mario Bravo 1050, Buenos Aires, Argentina',
   },
   {
-    icon: "IoCall",
-    heading: "Call us",
-    description: "Mon - Fri From 8am to 5pm",
-    details: "+123 456 7869",
+    icon: 'IoCall',
+    heading: 'Llamanos',
+    description: 'Lunes a Viernes de 8 a 17hs',
+    details: '+54 11 456 7869',
   },
-]
-
+];
 
 const ContactDetails = () => {
   return (
     <div className="flex flex-col gap-6 rounded-xl bg-richblack-800 p-4 lg:p-6">
       {contactDetails.map((ele, i) => {
-        let Icon = Icon1[ele.icon] || Icon2[ele.icon] || Icon3[ele.icon]
+        let Icon = Icon1[ele.icon] || Icon2[ele.icon] || Icon3[ele.icon];
         return (
           <div
             className="flex flex-col gap-[2px] p-3 text-sm text-richblack-200"
@@ -46,10 +44,10 @@ const ContactDetails = () => {
             <p className="font-medium">{ele?.description}</p>
             <p className="font-semibold">{ele?.details}</p>
           </div>
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
-export default ContactDetails
+export default ContactDetails;

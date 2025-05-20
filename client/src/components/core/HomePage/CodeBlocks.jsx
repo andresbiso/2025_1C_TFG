@@ -92,14 +92,14 @@ const CodeBlocks = ({
 };
 
 CodeBlocks.propTypes = {
-  position: PropTypes.node.isRequired,
-  heading: PropTypes.node.isRequired,
-  subheading: PropTypes.node.isRequired,
-  ctabtn1: PropTypes.node.isRequired,
-  ctabtn2: PropTypes.node.isRequired,
-  codeblock: PropTypes.node.isRequired,
-  backgroundGradient: PropTypes.node.isRequired,
-  codeColor: PropTypes.node.isRequired,
+  position: PropTypes.any,
+  heading: PropTypes.any,
+  subheading: PropTypes.any,
+  ctabtn1: PropTypes.any,
+  ctabtn2: PropTypes.any,
+  codeblock: PropTypes.any,
+  backgroundGradient: PropTypes.any,
+  codeColor: PropTypes.any,
 };
 
 export default CodeBlocks;
