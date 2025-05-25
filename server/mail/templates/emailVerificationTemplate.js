@@ -68,8 +68,7 @@ const otpTemplate = (otp, name) => {
     
     <body>
         <div class="container">
-            <a href=""><img class="logo"
-                    src="" alt="Logo"></a>
+            <a href="http://localhost:8083/"><img src="http://localhost:8083/logo.svg" width="120" height="60" alt="Logo" /></a>
             <div class="message">Correo de Verificación OTP</div>
             <div class="body">
                 <p>Estimado/a ${name},</p>

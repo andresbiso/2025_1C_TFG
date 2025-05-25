@@ -55,8 +55,7 @@ exports.passwordUpdated = (email, name) => {
     
     <body>
         <div class="container">
-            <a href=""><img class="logo"
-                    src="" alt="Logo"></a>
+            <a href="http://localhost:8083/"><img src="http://localhost:8083/logo.svg" width="120" height="60" alt="Logo" /></a>
             <div class="message">Confirmación de Actualización de Contraseña</div>
             <div class="body">
                 <p>Hola ${name},</p>
