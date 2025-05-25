@@ -202,12 +202,12 @@ function CourseDetails() {
               <div className="text-md flex flex-wrap items-center gap-2">
                 <span className="text-yellow-25">{avgReviewCount}</span>
                 <RatingStars Review_Count={avgReviewCount} Star_Size={24} />
-                <span>{`(${ratingAndReviews.length} reviews)`}</span>
-                <span>{`${studentsEnrolled.length} students enrolled`}</span>
+                <span>{`(${ratingAndReviews.length} reseñas)`}</span>
+                <span>{`${studentsEnrolled.length} estudiantes registrados`}</span>
               </div>
               <p className="capitalize ">
                 {' '}
-                Created By{' '}
+                Creado por{' '}
                 <span className="font-semibold underline">
                   {instructor.firstName} {instructor.lastName}
                 </span>

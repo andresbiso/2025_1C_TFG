@@ -1,8 +1,8 @@
-import { toast } from "react-hot-toast";
-import { studentEndpoints } from "../apis";
-import { apiConnector } from "../apiConnector";
-import { setPaymentLoading } from "../../slices/courseSlice";
-import { resetCart } from "../../slices/cartSlice";
+import { toast } from 'react-hot-toast';
+import { studentEndpoints } from '../apis';
+import { apiConnector } from '../apiConnector';
+import { setPaymentLoading } from '../../slices/courseSlice';
+import { resetCart } from '../../slices/cartSlice';
 
 const {
   COURSE_PAYMENT_API,
@@ -18,12 +18,12 @@ export async function buyCourse(
   navigate,
   dispatch
 ) {
-  const toastId = toast.loading("Loading...");
+  const toastId = toast.loading('Cargando...');
 
   try {
     // initiate the order
     const orderResponse = await apiConnector(
-      "POST",
+      'POST',
       COURSE_PAYMENT_API,
       { coursesId },
       {
@@ -38,7 +38,7 @@ export async function buyCourse(
     sendPaymentSuccessEmail({}, 0, token);
     verifyPayment({ coursesId }, token, navigate, dispatch);
   } catch (error) {
-    console.log("PAYMENT API ERROR.....", error);
+    console.log('PAYMENT API ERROR.....', error);
     toast.error(error.response?.data?.message);
     // toast.error("Could not make Payment");
   }
@@ -49,7 +49,7 @@ export async function buyCourse(
 async function sendPaymentSuccessEmail(response, amount, token) {
   try {
     await apiConnector(
-      "POST",
+      'POST',
       SEND_PAYMENT_SUCCESS_EMAIL_API,
       {
         orderId: 0,
@@ -61,29 +61,29 @@ async function sendPaymentSuccessEmail(response, amount, token) {
       }
     );
   } catch (error) {
-    console.log("PAYMENT SUCCESS EMAIL ERROR....", error);
+    console.log('PAYMENT SUCCESS EMAIL ERROR....', error);
   }
 }
 
 // ================ verify payment ================
 async function verifyPayment(bodyData, token, navigate, dispatch) {
-  const toastId = toast.loading("Verifying Payment....");
+  const toastId = toast.loading('Aguarde...');
   dispatch(setPaymentLoading(true));
 
   try {
-    const response = await apiConnector("POST", COURSE_VERIFY_API, bodyData, {
+    const response = await apiConnector('POST', COURSE_VERIFY_API, bodyData, {
       Authorization: `Bearer ${token}`,
     });
 
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
-    toast.success("payment Successful, you are addded to the course");
-    navigate("/dashboard/enrolled-courses");
+    toast.success('Fuiste registrado exitosamente en el curso');
+    navigate('/dashboard/enrolled-courses');
     dispatch(resetCart());
   } catch (error) {
-    console.log("PAYMENT VERIFY ERROR....", error);
-    toast.error("Could not verify Payment");
+    console.log('PAYMENT VERIFY ERROR....', error);
+    toast.error('Hubo un error al querer regisrarse en el curso');
   }
   toast.dismiss(toastId);
   dispatch(setPaymentLoading(false));

@@ -1,8 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
-    loading: false,
+  user: localStorage.getItem('user')
+    ? JSON.parse(localStorage.getItem('user'))
+    : null,
+  loading: false,
 };
 
 // Problem occured and solved
@@ -11,18 +13,17 @@ const initialState = {
 // case - User logged but as i refresh , dashboard dropdown becomes invisible
 // solution - try getting value from localStorage otherwise mark it as null
 
-
 const profileSlice = createSlice({
-    name: "profile",
-    initialState: initialState,
-    reducers: {
-        setUser(state, value) {
-            state.user = value.payload;
-        },
-        setLoading(state, value) {
-            state.loading = value.payload
-        }
+  name: 'profile',
+  initialState: initialState,
+  reducers: {
+    setUser(state, value) {
+      state.user = value.payload;
     },
+    setLoading(state, value) {
+      state.loading = value.payload;
+    },
+  },
 });
 
 export const { setUser, setLoading } = profileSlice.actions;

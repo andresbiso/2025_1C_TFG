@@ -253,7 +253,7 @@ const VideoDetails = () => {
                     onClick={goToPrevVideo}
                     className="blackButton"
                   >
-                    Prev
+                    Anterior
                   </button>
                 )}
                 {!isLastVideo() && (
@@ -262,7 +262,7 @@ const VideoDetails = () => {
                     onClick={goToNextVideo}
                     className="blackButton"
                   >
-                    Next
+                    Siguiente
                   </button>
                 )}
               </div>

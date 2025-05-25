@@ -28,8 +28,8 @@ const About = () => {
               viewport={{ once: false, amount: 0.1 }}
             >
               {' '}
-              Driving Innovation in Online Education for a
-              <HighlightText text={'Brighter Future'} />
+              Impulsando la innovación en educación en línea para un
+              <HighlightText text={'Futuro Brillante'} />
             </motion.p>
 
             <motion.p
@@ -39,19 +39,19 @@ const About = () => {
               viewport={{ once: false, amount: 0.1 }}
               className="mx-auto mt-3 text-center text-base font-medium text-richblack-300 lg:w-[95%]"
             >
-              The platform is at the forefront of driving innovation in online
-              education. We&apos;re passionate about creating a brighter future
-              by offering cutting-edge courses, leveraging emerging
-              technologies, and nurturing a vibrant learning community.
+              Nuestra plataforma está a la vanguardia de la educación en línea.
+              Nos apasiona crear un futuro más brillante ofreciendo cursos
+              innovadores, aprovechando tecnologías emergentes y fomentando una
+              comunidad de aprendizaje dinámica.
             </motion.p>
           </motion.header>
 
           <div className="sm:h-[70px] lg:h-[150px]"></div>
 
-          <div className=" absolute bottom-0 left-[50%] grid w-[100%] translate-x-[-50%] translate-y-[30%] grid-cols-3 gap-3 lg:gap-5">
-            <Img src={BannerImage1} alt="" />
-            <Img src={BannerImage2} alt="" />
-            <Img src={BannerImage3} alt="" />
+          <div className="absolute bottom-0 left-[50%] grid w-[100%] translate-x-[-50%] translate-y-[30%] grid-cols-3 gap-3 lg:gap-5">
+            <Img src={BannerImage1} alt="Imagen 1" />
+            <Img src={BannerImage2} alt="Imagen 2" />
+            <Img src={BannerImage3} alt="Imagen 3" />
           </div>
         </div>
       </section>
@@ -74,23 +74,23 @@ const About = () => {
               className="my-24 flex lg:w-[50%] flex-col gap-10"
             >
               <h1 className="bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#FCB045] bg-clip-text text-4xl font-semibold text-transparent lg:w-[70%] ">
-                Our Founding Story
+                Nuestra Historia Fundacional
               </h1>
               <p className="text-base font-medium text-richblack-300 lg:w-[95%]">
-                Our e-learning platform was born out of a shared vision and
-                passion for transforming education. It all began with a group of
-                educators, technologists, and lifelong learners who recognized
-                the need for accessible, flexible, and high-quality learning
-                opportunities in a rapidly evolving digital world.
+                Nuestra plataforma de aprendizaje en línea nació de una visión
+                compartida y una pasión por transformar la educación. Todo
+                comenzó con un grupo de educadores, tecnólogos y estudiantes de
+                por vida que reconocieron la necesidad de oportunidades de
+                aprendizaje accesibles, flexibles y de alta calidad en un mundo
+                digital en constante evolución.
               </p>
               <p className="text-base font-medium text-richblack-300 lg:w-[95%]">
-                As experienced educators ourselves, we witnessed firsthand the
-                limitations and challenges of traditional education systems. We
-                believed that education should not be confined to the walls of a
-                classroom or restricted by geographical boundaries. We
-                envisioned a platform that could bridge these gaps and empower
-                individuals from all walks of life to unlock their full
-                potential.
+                Como educadores experimentados, fuimos testigos de primera mano
+                de las limitaciones de los sistemas educativos tradicionales.
+                Creemos que la educación no debe estar confinada a las paredes
+                de un aula ni restringida por fronteras geográficas. Queríamos
+                construir una plataforma que permitiera a personas de todo el
+                mundo alcanzar su máximo potencial.
               </p>
             </motion.div>
 
@@ -102,7 +102,7 @@ const About = () => {
             >
               <Img
                 src={FoundingStory}
-                alt="FoundingStory"
+                alt="Historia Fundacional"
                 className="shadow-[0_0_20px_0] shadow-[#FC6767]"
               />
             </motion.div>
@@ -111,29 +111,30 @@ const About = () => {
           <div className="flex flex-col items-center lg:gap-10 lg:flex-row justify-between">
             <div className="my-24 flex lg:w-[40%] flex-col gap-10">
               <h1 className="bg-gradient-to-b from-[#FF512F] to-[#F09819] bg-clip-text text-4xl font-semibold text-transparent lg:w-[70%] ">
-                Our Vision
+                Nuestra Visión
               </h1>
               <p className="text-base font-medium text-richblack-300 lg:w-[95%]">
-                With this vision in mind, we set out on a journey to create an
-                e-learning platform that would revolutionize the way people
-                learn. Our team of dedicated experts worked tirelessly to
-                develop a robust and intuitive platform that combines
-                cutting-edge technology with engaging content, fostering a
-                dynamic and interactive learning experience.
+                Con esta visión en mente, emprendimos un viaje para crear una
+                plataforma de aprendizaje en línea que revolucionara la manera
+                en que las personas aprenden. Nuestro equipo de expertos trabajó
+                arduamente para desarrollar una plataforma robusta e intuitiva
+                que combina tecnología avanzada con contenido atractivo,
+                fomentando una experiencia de aprendizaje dinámica e
+                interactiva.
               </p>
             </div>
 
             <div className="my-24 flex lg:w-[40%] flex-col gap-10">
               <h1 className="bg-gradient-to-b from-[#1FA2FF] via-[#12D8FA] to-[#A6FFCB] text-transparent bg-clip-text text-4xl font-semibold lg:w-[70%] ">
-                Our Mission
+                Nuestra Misión
               </h1>
               <p className="text-base font-medium text-richblack-300 lg:w-[95%]">
-                Our mission goes beyond just delivering courses online. We
-                wanted to create a vibrant community of learners, where
-                individuals can connect, collaborate, and learn from one
-                another. We believe that knowledge thrives in an environment of
-                sharing and dialogue, and we foster this spirit of collaboration
-                through forums, live sessions, and networking opportunities.
+                Nuestra misión va más allá de simplemente ofrecer cursos en
+                línea. Queremos crear una comunidad vibrante de estudiantes
+                donde las personas puedan conectarse, colaborar y aprender unos
+                de otros. Creemos que el conocimiento florece en un entorno de
+                intercambio y diálogo, y promovemos este espíritu a través de
+                foros, sesiones en vivo y oportunidades de networking.
               </p>
             </div>
           </div>
@@ -147,15 +148,13 @@ const About = () => {
         <ContactFormSection />
       </section>
 
-      {/* Reviws from Other Learner */}
-      <div className=" my-20 px-5 text-white ">
+      <div className="my-20 px-5 text-white">
         <h1 className="text-center text-4xl font-semibold mt-8">
           Reseñas de otros estudiantes
         </h1>
         <ReviewSlider />
       </div>
 
-      {/* footer */}
       <Footer />
     </div>
   );

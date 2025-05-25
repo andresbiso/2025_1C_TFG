@@ -4,7 +4,7 @@ import { catalogData } from '../apis';
 
 // ================ get Catalog Page Data  ================
 export const getCatalogPageData = async (categoryId) => {
-  // const toastId = toast.loading("Loading...");
+  // const toastId = toast.loading('Cargando...');
   let result = [];
   try {
     const response = await apiConnector(
@@ -14,7 +14,7 @@ export const getCatalogPageData = async (categoryId) => {
     );
 
     if (!response?.data?.success)
-      throw new Error('Could not Fetch Category page data');
+      throw new Error('No se pudo obtener el catálogo');
 
     console.log('CATALOG PAGE DATA API RESPONSE............', response);
     result = response?.data?.data;

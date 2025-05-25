@@ -46,7 +46,13 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
       setActiveStatus(courseSectionData?.[currentSectionIndx]?._id);
       setVideoBarActive(activeSubSectionId);
     })();
-  }, [courseSectionData, courseEntireData, location.pathname]);
+  }, [
+    courseSectionData,
+    courseEntireData,
+    location.pathname,
+    sectionId,
+    subSectionId,
+  ]);
 
   return (
     <>

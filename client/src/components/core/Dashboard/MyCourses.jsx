@@ -24,7 +24,7 @@ export default function MyCourses() {
       }
     };
     fetchCourses();
-  }, []);
+  }, [token]);
 
   // Scroll to the top of the page when the component mounts
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function MyCourses() {
       <div className="mb-14 flex justify-between">
         {/* <div className="mb-14 flex items-center justify-between"> */}
         <h1 className="text-4xl font-medium text-richblack-5 font-boogaloo text-center lg:text-left">
-          My Courses
+          Mis cursos
         </h1>
         <IconBtn
           text="Agregar curso"

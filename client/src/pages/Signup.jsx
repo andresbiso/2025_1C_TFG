@@ -1,16 +1,16 @@
-import signupImg from "../assets/Images/signup.png"
-import Template from "../components/core/Auth/Template"
+import signupImg from '../assets/Images/signup.png';
+import Template from '../components/core/Auth/Template';
 
 function Signup() {
   return (
     <Template
-      title="Join the millions learning to code with the platform for free"
-      description1="Build skills for today, tomorrow, and beyond."
-      description2="Education to future-proof your career."
+      title="Únete a los millones que aprenden a programar con la plataforma de forma gratuita"
+      description1="Desarrolla habilidades para hoy, mañana y más allá."
+      description2="Prepará tu carrera para el futuro."
       image={signupImg}
       formType="signup"
     />
-  )
+  );
 }
 
-export default Signup
+export default Signup;

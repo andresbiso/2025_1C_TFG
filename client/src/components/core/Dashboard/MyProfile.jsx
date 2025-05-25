@@ -20,7 +20,7 @@ export default function MyProfile() {
     <>
       <h1 className="mb-14 text-4xl font-medium text-richblack-5 font-boogaloo text-center sm:text-left">
         {' '}
-        My Profile
+        Mi perfil
       </h1>
 
       <div className="flex items-center justify-between rounded-2xl border-[1px] border-richblack-700 bg-richblack-800 p-8 px-3 sm:px-12">
@@ -50,7 +50,7 @@ export default function MyProfile() {
 
       <div className="my-10 flex flex-col gap-y-10 rounded-2xl border-[1px] border-richblack-700 bg-richblack-800 p-8 px-7 sm:px-12">
         <div className="flex w-full items-center justify-between">
-          <p className="text-lg font-semibold text-richblack-5">About</p>
+          <p className="text-lg font-semibold text-richblack-5">Acerca de</p>
           <IconBtn
             text="Editar"
             onclick={() => {
@@ -68,14 +68,14 @@ export default function MyProfile() {
               : 'text-richblack-400'
           } text-sm font-medium`}
         >
-          {user?.additionalDetails?.about ?? 'Write Something About Yourself'}
+          {user?.additionalDetails?.about ?? 'Escribí algo sobre ti mismo'}
         </p>
       </div>
 
       <div className="my-10 flex flex-col gap-y-10 rounded-2xl border-[1px] border-richblack-700 bg-richblack-800 p-8 px-7 sm:px-12">
         <div className="flex w-full items-center justify-between">
           <p className="text-lg font-semibold text-richblack-5">
-            Personal Details
+            Detalles personales
           </p>
           <IconBtn
             text="Editar"
@@ -90,49 +90,56 @@ export default function MyProfile() {
         <div className="flex max-w-[500px] justify-between ">
           <div className="flex flex-col gap-y-5">
             <div>
-              <p className="mb-2 text-sm text-richblack-600">First Name</p>
+              <p className="mb-2 text-sm text-richblack-600">Nombre</p>
               <p className="text-sm font-semibold text-richblack-5 capitalize">
                 {user?.firstName}
               </p>
             </div>
             <div>
-              <p className="mb-2 text-sm text-richblack-600">Account Type</p>
+              <p className="mb-2 text-sm text-richblack-600">Tipo de cuenta</p>
               <p className="text-sm font-semibold text-richblack-5 capitalize">
                 {user?.accountType}
               </p>
             </div>
             <div>
-              <p className="mb-2 text-sm text-richblack-600">Email</p>
+              <p className="mb-2 text-sm text-richblack-600">
+                Correo Electrónico
+              </p>
               <p className="text-sm font-semibold text-richblack-5">
                 {user?.email}
               </p>
             </div>
             <div>
-              <p className="mb-2 text-sm text-richblack-600">Gender</p>
+              <p className="mb-2 text-sm text-richblack-600">Género</p>
               <p className="text-sm font-semibold text-richblack-5">
-                {user?.additionalDetails?.gender ?? 'Add Gender'}
+                {user?.additionalDetails?.gender ?? 'Agregar género'}
               </p>
             </div>
           </div>
 
           <div className="flex flex-col gap-y-5">
             <div>
-              <p className="mb-2 text-sm text-richblack-600">Last Name</p>
+              <p className="mb-2 text-sm text-richblack-600">Apellido</p>
               <p className="text-sm font-semibold text-richblack-5 capitalize">
                 {user?.lastName}
               </p>
             </div>
             <div>
-              <p className="mb-2 text-sm text-richblack-600">Phone Number</p>
+              <p className="mb-2 text-sm text-richblack-600">
+                Número de teléfono
+              </p>
               <p className="text-sm font-semibold text-richblack-5">
-                {user?.additionalDetails?.contactNumber ?? 'Add Contact Number'}
+                {user?.additionalDetails?.contactNumber ??
+                  'Agregar número de contacto'}
               </p>
             </div>
             <div>
-              <p className="mb-2 text-sm text-richblack-600">Date Of Birth</p>
+              <p className="mb-2 text-sm text-richblack-600">
+                Fecha de nacimiento
+              </p>
               <p className="text-sm font-semibold text-richblack-5">
                 {formattedDate(user?.additionalDetails?.dateOfBirth) ??
-                  'Add Date Of Birth'}
+                  'Agregar fecha de nacimiento'}
               </p>
             </div>
           </div>

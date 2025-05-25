@@ -147,10 +147,10 @@ export default function Instructor() {
           {/* Render 3 courses */}
           <div className="rounded-md bg-richblack-800 p-6">
             <div className="flex items-center justify-between">
-              <p className="text-lg font-bold text-richblack-5">Your Courses</p>
+              <p className="text-lg font-bold text-richblack-5">Tus cursos</p>
               <Link to="/dashboard/my-courses">
                 <p className="text-xs font-semibold text-yellow-50 hover:underline">
-                  View All
+                  Ver todos
                 </p>
               </Link>
             </div>
@@ -173,14 +173,14 @@ export default function Instructor() {
                     </p>
                     <div className="mt-1 flex items-center space-x-2">
                       <p className="text-xs font-medium text-richblack-300">
-                        {course.studentsEnrolled.length} students
+                        {course.studentsEnrolled.length} estudiantes
                       </p>
                       <p className="text-xs font-medium text-richblack-300">
                         |
                       </p>
-                      <p className="text-xs font-medium text-richblack-300">
-                        Rs. {course.price}
-                      </p>
+                      {/* <p className="text-xs font-medium text-richblack-300">
+                        ARS {course.price}
+                      </p> */}
                     </div>
                   </div>
                 </div>
@@ -191,12 +191,12 @@ export default function Instructor() {
       ) : (
         <div className="mt-20 rounded-md bg-richblack-800 p-6 py-20">
           <p className="text-center text-2xl font-bold text-richblack-5">
-            You have not created any courses yet
+            No has creado cursos todavía
           </p>
 
           <Link to="/dashboard/add-course">
             <p className="mt-1 text-center text-lg font-semibold text-yellow-50">
-              Create a course
+              Crear un curso
             </p>
           </Link>
         </div>
