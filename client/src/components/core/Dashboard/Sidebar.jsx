@@ -93,9 +93,9 @@ export default function Sidebar() {
             <button
               onClick={() =>
                 setConfirmationModal({
-                  text1: '¿Estas seguro?',
-                  text2: 'Estas por cerrar la sesión de tu cuenta.',
-                  btn1Text: 'erra sesión',
+                  text1: '¿Estás seguro?',
+                  text2: 'Estás por cerrar la sesión de tu cuenta.',
+                  btn1Text: 'Cerra sesión',
                   btn2Text: 'Cancelar',
                   btn1Handler: () => dispatch(logout(navigate)),
                   btn2Handler: () => setConfirmationModal(null),

@@ -16,7 +16,7 @@ const PageNotFound = () => {
               <div className="-mt-12 ">
                 <h3 className="text-4xl mb-1 ">Parece que te has perdido</h3>
 
-                <p>¡La página que estas buscando no está disponible!</p>
+                <p>¡La página que estás buscando no está disponible!</p>
 
                 <Link
                   to="/"
