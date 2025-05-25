@@ -1,15 +1,13 @@
-import { useState } from "react"
-import { toast } from "react-hot-toast"
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
-import { useDispatch } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-import { sendOtp } from "../../../services/operations/authAPI"
-import { setSignupData } from "../../../slices/authSlice"
-import { ACCOUNT_TYPE } from "../../../utils/constants"
-import Tab from "../../common/Tab"
-
-
+import { sendOtp } from '../../../services/operations/authAPI';
+import { setSignupData } from '../../../slices/authSlice';
+import { ACCOUNT_TYPE } from '../../../utils/constants';
+import Tab from '../../common/Tab';
 
 function SignupForm() {
   const navigate = useNavigate();
@@ -19,11 +17,11 @@ function SignupForm() {
   const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT);
 
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -46,7 +44,7 @@ function SignupForm() {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      toast.error("Passwords Do Not Match")
+      toast.error('Passwords Do Not Match');
       return;
     }
     const signupData = {
@@ -62,12 +60,12 @@ function SignupForm() {
 
     // Reset form data
     setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    })
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    });
     setAccountType(ACCOUNT_TYPE.STUDENT);
   };
 
@@ -75,12 +73,12 @@ function SignupForm() {
   const tabData = [
     {
       id: 1,
-      tabName: "Student",
+      tabName: 'Student',
       type: ACCOUNT_TYPE.STUDENT,
     },
     {
       id: 2,
-      tabName: "Instructor",
+      tabName: 'Instructor',
       type: ACCOUNT_TYPE.INSTRUCTOR,
     },
   ];
@@ -106,7 +104,7 @@ function SignupForm() {
               onChange={handleOnChange}
               placeholder="Enter first name"
               style={{
-                boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                boxShadow: 'inset 0px -1px 0px rgba(255, 255, 255, 0.18)',
               }}
               className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5 outline-none"
             />
@@ -125,7 +123,7 @@ function SignupForm() {
               onChange={handleOnChange}
               placeholder="Enter last name"
               style={{
-                boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                boxShadow: 'inset 0px -1px 0px rgba(255, 255, 255, 0.18)',
               }}
               className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5 outline-none"
             />
@@ -145,12 +143,11 @@ function SignupForm() {
             onChange={handleOnChange}
             placeholder="Enter email address"
             style={{
-              boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+              boxShadow: 'inset 0px -1px 0px rgba(255, 255, 255, 0.18)',
             }}
             className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5 outline-none"
           />
         </label>
-
 
         <div className="flex gap-x-4">
           {/* Create Password */}
@@ -160,13 +157,13 @@ function SignupForm() {
             </p>
             <input
               required
-              type={showPassword ? "text" : "password"}
+              type={showPassword ? 'text' : 'password'}
               name="password"
               value={password}
               onChange={handleOnChange}
               placeholder="Enter Password"
               style={{
-                boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                boxShadow: 'inset 0px -1px 0px rgba(255, 255, 255, 0.18)',
               }}
               className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] pr-10 text-richblack-5 outline-none"
             />
@@ -189,13 +186,13 @@ function SignupForm() {
             </p>
             <input
               required
-              type={showConfirmPassword ? "text" : "password"}
+              type={showConfirmPassword ? 'text' : 'password'}
               name="confirmPassword"
               value={confirmPassword}
               onChange={handleOnChange}
               placeholder="Confirm Password"
               style={{
-                boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                boxShadow: 'inset 0px -1px 0px rgba(255, 255, 255, 0.18)',
               }}
               className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] pr-10 text-richblack-5 outline-none"
             />
@@ -212,7 +209,6 @@ function SignupForm() {
           </label>
         </div>
 
-
         <button
           type="submit"
           className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900"
@@ -221,7 +217,7 @@ function SignupForm() {
         </button>
       </form>
     </div>
-  )
+  );
 }
 
-export default SignupForm
+export default SignupForm;

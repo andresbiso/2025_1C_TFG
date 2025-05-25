@@ -1,8 +1,8 @@
-const nodemailer = require("nodemailer");
+const nodemailer = require('nodemailer');
 
 const mailSender = async (email, title, body) => {
   const transporterOptions = {
-    host: process.env.SMTP_HOST || "localhost", // Local Mailpit host
+    host: process.env.SMTP_HOST || 'localhost', // Local Mailpit host
     port: process.env.SMTP_PORT || 1025, // Default Mailpit SMTP port
     secure: false, // Mailpit does not use TLS by default
   };
@@ -29,10 +29,10 @@ const mailSender = async (email, title, body) => {
       html: `<p><strong>This email was sent from a local Mailpit instance.</strong></p><hr>${body}`,
     });
 
-    console.log("Mail sent via local Mailpit instance: ", info);
+    console.log('Mail sent via local Mailpit instance: ', info);
     return info;
   } catch (error) {
-    console.error("Error while sending mail through Mailpit:", error);
+    console.error('Error while sending mail through Mailpit:', error);
   }
 };
 

@@ -1,23 +1,23 @@
-const Profile = require("../models/profile");
-const User = require("../models/user");
-const CourseProgress = require("../models/courseProgress");
-const Course = require("../models/course");
+const Profile = require('../models/profile');
+const User = require('../models/user');
+const CourseProgress = require('../models/courseProgress');
+const Course = require('../models/course');
 
 const {
   uploadImageToMinio,
   deleteResourceFromMinio,
-} = require("../utils/imageUploader");
-const { convertSecondsToDuration } = require("../utils/secToDuration");
-require("dotenv").config();
+} = require('../utils/imageUploader');
+const { convertSecondsToDuration } = require('../utils/secToDuration');
+require('dotenv').config();
 // ================ update Profile ================
 exports.updateProfile = async (req, res) => {
   try {
     // extract data
     const {
-      gender = "",
-      dateOfBirth = "",
-      about = "",
-      contactNumber = "",
+      gender = '',
+      dateOfBirth = '',
+      about = '',
+      contactNumber = '',
       firstName,
       lastName,
     } = req.body;
@@ -46,7 +46,7 @@ exports.updateProfile = async (req, res) => {
     await profileDetails.save();
 
     const updatedUserDetails = await User.findById(userId).populate({
-      path: "additionalDetails",
+      path: 'additionalDetails',
     });
     // console.log('updatedUserDetails -> ', updatedUserDetails);
 
@@ -54,15 +54,15 @@ exports.updateProfile = async (req, res) => {
     res.status(200).json({
       success: true,
       updatedUserDetails,
-      message: "Profile updated successfully",
+      message: 'Profile updated successfully',
     });
   } catch (error) {
-    console.log("Error while updating profile");
+    console.log('Error while updating profile');
     console.log(error);
     res.status(500).json({
       success: false,
       error: error.message,
-      message: "Error while updating profile",
+      message: 'Error while updating profile',
     });
   }
 };
@@ -79,7 +79,7 @@ exports.deleteAccount = async (req, res) => {
     if (!userDetails) {
       return res.status(404).json({
         success: false,
-        message: "User not found",
+        message: 'User not found',
       });
     }
 
@@ -93,7 +93,7 @@ exports.deleteAccount = async (req, res) => {
     // student entrolled in particular course sholud be decreae by one
     // user - courses - studentsEnrolled
     const userEnrolledCoursesId = userDetails.courses;
-    console.log("userEnrolledCourses ids = ", userEnrolledCoursesId);
+    console.log('userEnrolledCourses ids = ', userEnrolledCoursesId);
 
     for (const courseId of userEnrolledCoursesId) {
       await Course.findByIdAndUpdate(courseId, {
@@ -112,15 +112,15 @@ exports.deleteAccount = async (req, res) => {
     // return response
     res.status(200).json({
       success: true,
-      message: "Account deleted successfully",
+      message: 'Account deleted successfully',
     });
   } catch (error) {
-    console.log("Error while updating profile");
+    console.log('Error while updating profile');
     console.log(error);
     res.status(500).json({
       success: false,
       error: error.message,
-      message: "Error while deleting profile",
+      message: 'Error while deleting profile',
     });
   }
 };
@@ -130,26 +130,26 @@ exports.getUserDetails = async (req, res) => {
   try {
     // extract userId
     const userId = req.user.id;
-    console.log("id - ", userId);
+    console.log('id - ', userId);
 
     // get user details
     const userDetails = await User.findById(userId)
-      .populate("additionalDetails")
+      .populate('additionalDetails')
       .exec();
 
     // return response
     res.status(200).json({
       success: true,
       data: userDetails,
-      message: "User data fetched successfully",
+      message: 'User data fetched successfully',
     });
   } catch (error) {
-    console.log("Error while fetching user details");
+    console.log('Error while fetching user details');
     console.log(error);
     res.status(500).json({
       success: false,
       error: error.message,
-      message: "Error while fetching user details",
+      message: 'Error while fetching user details',
     });
   }
 };
@@ -177,7 +177,7 @@ exports.updateUserProfileImage = async (req, res) => {
       { image: image.secure_url },
       { new: true }
     ).populate({
-      path: "additionalDetails",
+      path: 'additionalDetails',
     });
 
     // success response
@@ -187,12 +187,12 @@ exports.updateUserProfileImage = async (req, res) => {
       data: updatedUserDetails,
     });
   } catch (error) {
-    console.log("Error while updating user profile image");
+    console.log('Error while updating user profile image');
     console.log(error);
     return res.status(500).json({
       success: false,
       error: error.message,
-      message: "Error while updating user profile image",
+      message: 'Error while updating user profile image',
     });
   }
 };
@@ -203,11 +203,11 @@ exports.getEnrolledCourses = async (req, res) => {
     const userId = req.user.id;
     let userDetails = await User.findOne({ _id: userId })
       .populate({
-        path: "courses",
+        path: 'courses',
         populate: {
-          path: "courseContent",
+          path: 'courseContent',
           populate: {
-            path: "subSection",
+            path: 'subSection',
           },
         },
       })
@@ -296,10 +296,10 @@ exports.instructorDashboard = async (req, res) => {
 
     res.status(200).json({
       courses: courseData,
-      message: "Instructor Dashboard Data fetched successfully",
+      message: 'Instructor Dashboard Data fetched successfully',
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server Error" });
+    res.status(500).json({ message: 'Server Error' });
   }
 };

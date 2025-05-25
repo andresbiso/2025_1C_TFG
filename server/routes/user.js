@@ -3,22 +3,20 @@ const router = express.Router();
 
 // Controllers
 const {
-    signup,
-    login,
-    sendOTP,
-    changePassword
+  signup,
+  login,
+  sendOTP,
+  changePassword,
 } = require('../controllers/auth');
 
 // Resetpassword controllers
 const {
-    resetPasswordToken,
-    resetPassword,
+  resetPasswordToken,
+  resetPassword,
 } = require('../controllers/resetPassword');
-
 
 // Middleware
 const { auth } = require('../middleware/auth');
-
 
 // Routes for Login, Signup, and Authentication
 
@@ -38,8 +36,6 @@ router.post('/sendotp', sendOTP);
 // Route for Changing the password
 router.post('/changepassword', auth, changePassword);
 
-
-
 // ********************************************************************************************************
 //                                      Reset Password
 // ********************************************************************************************************
@@ -48,7 +44,6 @@ router.post('/changepassword', auth, changePassword);
 router.post('/reset-password-token', resetPasswordToken);
 
 // Route for resetting user's password after verification
-router.post("/reset-password", resetPassword)
+router.post('/reset-password', resetPassword);
 
-
-module.exports = router
+module.exports = router;

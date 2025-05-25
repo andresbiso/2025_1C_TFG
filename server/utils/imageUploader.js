@@ -1,5 +1,5 @@
-const { minioConnect } = require("../config/minio"); // Import the MinIO connection
-const fs = require("fs");
+const { minioConnect } = require('../config/minio'); // Import the MinIO connection
+const fs = require('fs');
 
 const client = minioConnect(); // Use the existing MinIO client
 
@@ -7,13 +7,13 @@ const client = minioConnect(); // Use the existing MinIO client
 exports.uploadImageToMinio = async (filePath, bucket) => {
   if (!filePath || !bucket) {
     console.error(
-      "Error uploading file to MinIO. Either filePath or bucket is null or undefined"
+      'Error uploading file to MinIO. Either filePath or bucket is null or undefined'
     );
     return;
   }
   try {
-    console.log("File object:", filePath);
-    console.log("Target bucket:", bucket);
+    console.log('File object:', filePath);
+    console.log('Target bucket:', bucket);
 
     const remotePath = `${filePath.name}`;
     const localPath = filePath.tempFilePath;
@@ -25,7 +25,7 @@ exports.uploadImageToMinio = async (filePath, bucket) => {
     // Generate a presigned URL valid for 10 years
     const sevenDaysInSeconds = 7 * 24 * 60 * 60;
     const url = await client.presignedUrl(
-      "GET",
+      'GET',
       bucket,
       remotePath,
       sevenDaysInSeconds
@@ -34,7 +34,7 @@ exports.uploadImageToMinio = async (filePath, bucket) => {
     console.log(`Generated long-term URL: ${url}`);
     return { secure_url: url };
   } catch (error) {
-    console.error("Error uploading file to MinIO:", error);
+    console.error('Error uploading file to MinIO:', error);
     throw error;
   }
 };
@@ -43,7 +43,7 @@ exports.uploadImageToMinio = async (filePath, bucket) => {
 exports.deleteResourceFromMinio = async (filePath, bucket) => {
   if (!filePath || !bucket) {
     console.error(
-      "Error uploading file to MinIO. Either filePath or bucket is null or undefined"
+      'Error uploading file to MinIO. Either filePath or bucket is null or undefined'
     );
     return;
   }
@@ -55,7 +55,7 @@ exports.deleteResourceFromMinio = async (filePath, bucket) => {
     await client.removeObject(bucket, filePath);
     console.log(`Deleted file from MinIO: ${filePath}`);
   } catch (error) {
-    if (error.code === "NoSuchKey") {
+    if (error.code === 'NoSuchKey') {
       console.error(`File not found in MinIO (${filePath})`);
     } else {
       console.error(`Error deleting file from MinIO (${filePath}):`, error);

@@ -1,62 +1,62 @@
-import HighlightText from "../../../components/core/HomePage/HighlightText";
-import CTAButton from "../../../components/core/HomePage/Button";
+import HighlightText from '../../../components/core/HomePage/HighlightText';
+import CTAButton from '../../../components/core/HomePage/Button';
 
 const LearningGridArray = [
   {
     order: -1,
-    heading: "World-Class Learning for",
-    highlightText: "Anyone, Anywhere",
+    heading: 'Aprendizaje de Clase Mundial para',
+    highlightText: 'Cualquiera, en Cualquier Lugar',
     description:
-      "The platform partners with more than 275+ leading universities and companies to bring flexible, affordable, job-relevant online learning to individuals and organizations worldwide.",
-    BtnText: "Learn More",
-    BtnLink: "/",
+      'La plataforma se asocia con universidades y empresas líderes para ofrecer un aprendizaje en línea flexible y relevante para el trabajo, dirigido a individuos y organizaciones de todo el mundo.',
+    BtnText: 'Más Información',
+    BtnLink: '/',
   },
   {
     order: 1,
-    heading: "Curriculum Based on Industry Needs",
+    heading: 'Plan de Estudios Basado en Necesidades de la Industria',
     description:
-      "Save time and money! The Belajar curriculum is made to be easier to understand and in line with industry needs.",
+      '¡Ahorra tiempo! El plan de estudios está diseñado para ser más fácil de entender y alineado con las necesidades de la industria.',
   },
   {
     order: 2,
-    heading: "Our Learning Methods",
+    heading: 'Nuestros Métodos de Aprendizaje',
     description:
-      "The platform partners with more than 275+ leading universities and companies to bring",
+      'La plataforma se asocia con universidades y empresas líderes para ofrecer sus servicios',
   },
   {
     order: 3,
-    heading: "Certification",
+    heading: 'Certificación',
     description:
-      "The platform partners with more than 275+ leading universities and companies to bring",
+      'La plataforma se asocia con universidades y empresas líderes para ofrecer sus servicios',
   },
   {
     order: 4,
-    heading: `Rating "Auto-grading"`,
+    heading: 'Calificación "Auto-grading"',
     description:
-      "The platform partners with more than 275+ leading universities and companies to bring",
+      'La plataforma se asocia con universidades y empresas líderes para ofrecer sus servicios',
   },
   {
     order: 5,
-    heading: "Ready to Work",
+    heading: 'Listo para Trabajar',
     description:
-      "The platform partners with more than 275+ leading universities and companies to bring",
+      'La plataforma se asocia con universidades y empresas líderes para ofrecer sus servicios',
   },
 ];
 
 const LearningGrid = () => {
-
   return (
     <div className="grid mx-auto w-[350px] lg:w-fit grid-cols-1 lg:grid-cols-4 mb-12">
       {LearningGridArray.map((card, i) => {
         return (
           <div
             key={i}
-            className={`${i === 0 && "lg:col-span-2 lg:h-[294px]"}  ${card.order % 2 === 1
-                ? "bg-richblack-700 h-[294px]"
+            className={`${i === 0 && 'lg:col-span-2 lg:h-[294px]'}  ${
+              card.order % 2 === 1
+                ? 'bg-richblack-700 h-[294px]'
                 : card.order % 2 === 0
-                  ? "bg-richblack-800 h-[294px]"
-                  : "bg-transparent"
-              } ${card.order === 3 && "lg:col-start-2"}  `}
+                ? 'bg-richblack-800 h-[294px]'
+                : 'bg-transparent'
+            } ${card.order === 3 && 'lg:col-start-2'}  `}
           >
             {card.order < 0 ? (
               <div className="lg:w-[90%] flex flex-col gap-3 pb-10 lg:pb-0">

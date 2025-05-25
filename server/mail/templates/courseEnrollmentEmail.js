@@ -4,7 +4,7 @@ exports.courseEnrollmentEmail = (courseName, name) => {
     
     <head>
         <meta charset="UTF-8">
-        <title>Course Registration Confirmation</title>
+        <title>Confirmación de Registro en el Curso</title>
         <style>
             body {
                 background-color: #ffffff;
@@ -15,7 +15,6 @@ exports.courseEnrollmentEmail = (courseName, name) => {
                 margin: 0;
                 padding: 0;
             }
-    
     
             .container {
                 max-width: 600px;
@@ -69,17 +68,15 @@ exports.courseEnrollmentEmail = (courseName, name) => {
         <div class="container">
             <a href=""><img class="logo" src=""
                     alt="Logo"></a>
-            <div class="message">Course Registration Confirmation</div>
+            <div class="message">Confirmación de Registro en el Curso</div>
             <div class="body">
-                <p>Dear ${name},</p>
-                <p>You have successfully registered for the course <span class="highlight">"${courseName}"</span>. We
-                    are excited to have you as a participant!</p>
-                <p>Please log in to your learning dashboard to access the course materials and start your learning journey.
-                </p>
-                <a class="cta" href="http://localhost:8083/dashboard/enrolled-courses">Go to Dashboard</a>
+                <p>Estimado/a ${name},</p>
+                <p>Te has registrado exitosamente en el curso <span class="highlight">"${courseName}"</span>. ¡Estamos emocionados de tenerte como participante!</p>
+                <p>Por favor, inicia sesión en tu panel de aprendizaje para acceder al material del curso y comenzar tu viaje de aprendizaje.</p>
+                <a class="cta" href="http://localhost:8083/dashboard/enrolled-courses">Ir al Panel de Control</a>
             </div>
-            <div class="support">If you have any questions or need assistance, please feel free to reach out to us at 
-            <a href="mailto:info@mailpit.com">mailto:info@mailpit.com</a>. We are here to help!</div>
+            <div class="support">Si tienes alguna pregunta o necesitas asistencia, no dudes en contactarnos en 
+            <a href="mailto:info@mailpit.com">mailto:info@mailpit.com</a>. ¡Estamos aquí para ayudarte!</div>
         </div>
     </body>
     

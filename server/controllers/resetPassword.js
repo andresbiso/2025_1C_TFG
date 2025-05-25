@@ -1,7 +1,7 @@
-const User = require("../models/user");
-const mailSender = require("../utils/mailSender");
-const crypto = require("crypto");
-const bcrypt = require("bcrypt");
+const User = require('../models/user');
+const mailSender = require('../utils/mailSender');
+const crypto = require('crypto');
+const bcrypt = require('bcrypt');
 
 // ================ resetPasswordToken ================
 exports.resetPasswordToken = async (req, res) => {
@@ -15,12 +15,12 @@ exports.resetPasswordToken = async (req, res) => {
     if (!user) {
       return res.status(401).json({
         success: false,
-        message: "Your Email is not registered with us",
+        message: 'Your Email is not registered with us',
       });
     }
 
     // generate token
-    const token = crypto.randomBytes(20).toString("hex");
+    const token = crypto.randomBytes(20).toString('hex');
 
     // update user by adding token & token expire date
     const updatedUser = await User.findOneAndUpdate(
@@ -35,23 +35,23 @@ exports.resetPasswordToken = async (req, res) => {
     // send email containing url
     await mailSender(
       email,
-      "Password Reset Link",
-      `Password Reset Link : ${url}`
+      'Restablecimiento de contraseña',
+      `Restablecimiento de contraseña: ${url}`
     );
 
     // return succes response
     res.status(200).json({
       success: true,
       message:
-        "Email sent successfully , Please check your mail box and change password",
+        'Email sent successfully. Check your mail box and change your password.',
     });
   } catch (error) {
-    console.log("Error while creating token for reset password");
+    console.log('Error while creating token for reset password');
     console.log(error);
     res.status(500).json({
       success: false,
       error: error.message,
-      message: "Error while creating token for reset password",
+      message: 'Error while creating token for reset password',
     });
   }
 };
@@ -64,7 +64,7 @@ exports.resetPassword = async (req, res) => {
     const token =
       req.body?.token ||
       req.cookies?.token ||
-      req.header("Authorization")?.replace("Bearer ", "");
+      req.header('Authorization')?.replace('Bearer ', '');
 
     const { password, confirmPassword } = req.body;
 
@@ -72,7 +72,7 @@ exports.resetPassword = async (req, res) => {
     if (!token || !password || !confirmPassword) {
       return res.status(401).json({
         success: false,
-        message: "All fiels are required...!",
+        message: 'All fiels are required...!',
       });
     }
 
@@ -80,7 +80,7 @@ exports.resetPassword = async (req, res) => {
     if (password !== confirmPassword) {
       return res.status(401).json({
         success: false,
-        message: "Passowrds are not matched",
+        message: 'Passowrds are not matched',
       });
     }
 
@@ -91,7 +91,7 @@ exports.resetPassword = async (req, res) => {
     if (token !== userDetails.token) {
       return res.status(401).json({
         success: false,
-        message: "Password Reset token is not matched",
+        message: 'Password Reset token is not matched',
       });
     }
 
@@ -101,7 +101,7 @@ exports.resetPassword = async (req, res) => {
     if (!(userDetails.resetPasswordTokenExpires > Date.now())) {
       return res.status(401).json({
         success: false,
-        message: "Token is expired, please regenerate token",
+        message: 'Token is expired, please regenerate token',
       });
     }
 
@@ -117,15 +117,15 @@ exports.resetPassword = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Password reset successfully",
+      message: 'Password reset successfully',
     });
   } catch (error) {
-    console.log("Error while reseting password");
+    console.log('Error while reseting password');
     console.log(error);
     res.status(500).json({
       success: false,
       error: error.message,
-      message: "Error while reseting password12",
+      message: 'Error while reseting password12',
     });
   }
 };

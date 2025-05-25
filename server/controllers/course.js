@@ -1,16 +1,16 @@
-const Course = require("../models/course");
-const User = require("../models/user");
-const Category = require("../models/category");
-const Section = require("../models/section");
-const SubSection = require("../models/subSection");
-const CourseProgress = require("../models/courseProgress");
+const Course = require('../models/course');
+const User = require('../models/user');
+const Category = require('../models/category');
+const Section = require('../models/section');
+const SubSection = require('../models/subSection');
+const CourseProgress = require('../models/courseProgress');
 
 const {
   uploadImageToMinio,
   deleteResourceFromMinio,
-} = require("../utils/imageUploader");
-const { convertSecondsToDuration } = require("../utils/secToDuration");
-require("dotenv").config();
+} = require('../utils/imageUploader');
+const { convertSecondsToDuration } = require('../utils/secToDuration');
+require('dotenv').config();
 
 // ================ create new course ================
 exports.createCourse = async (req, res) => {
@@ -50,12 +50,12 @@ exports.createCourse = async (req, res) => {
     ) {
       return res.status(400).json({
         success: false,
-        message: "All fields are required",
+        message: 'All fields are required',
       });
     }
 
     if (!status || status === undefined) {
-      status = "Draft";
+      status = 'Draft';
     }
 
     // check current user is instructor or not , bcoz only instructor can create
@@ -67,7 +67,7 @@ exports.createCourse = async (req, res) => {
     if (!categoryDetails) {
       return res.status(401).json({
         success: false,
-        message: "Category Details not found",
+        message: 'Category Details not found',
       });
     }
 
@@ -120,15 +120,15 @@ exports.createCourse = async (req, res) => {
     res.status(200).json({
       success: true,
       data: newCourse,
-      message: "New Course created successfully",
+      message: 'New Course created successfully',
     });
   } catch (error) {
-    console.log("Error while creating new course");
+    console.log('Error while creating new course');
     console.log(error);
     res.status(500).json({
       success: false,
       error: error.message,
-      message: "Error while creating new course",
+      message: 'Error while creating new course',
     });
   }
 };
@@ -149,23 +149,23 @@ exports.getAllCourses = async (req, res) => {
       }
     )
       .populate({
-        path: "instructor",
-        select: "firstName lastName email image",
+        path: 'instructor',
+        select: 'firstName lastName email image',
       })
       .exec();
 
     return res.status(200).json({
       success: true,
       data: allCourses,
-      message: "Data for all courses fetched successfully",
+      message: 'Data for all courses fetched successfully',
     });
   } catch (error) {
-    console.log("Error while fetching data of all courses");
+    console.log('Error while fetching data of all courses');
     console.log(error);
     res.status(500).json({
       success: false,
       error: error.message,
-      message: "Error while fetching data of all courses",
+      message: 'Error while fetching data of all courses',
     });
   }
 };
@@ -181,19 +181,19 @@ exports.getCourseDetails = async (req, res) => {
       _id: courseId,
     })
       .populate({
-        path: "instructor",
+        path: 'instructor',
         populate: {
-          path: "additionalDetails",
+          path: 'additionalDetails',
         },
       })
-      .populate("category")
-      .populate("ratingAndReviews")
+      .populate('category')
+      .populate('ratingAndReviews')
 
       .populate({
-        path: "courseContent",
+        path: 'courseContent',
         populate: {
-          path: "subSection",
-          select: "-videoUrl",
+          path: 'subSection',
+          select: '-videoUrl',
         },
       })
       .exec();
@@ -231,15 +231,15 @@ exports.getCourseDetails = async (req, res) => {
         courseDetails,
         totalDuration,
       },
-      message: "Fetched course data successfully",
+      message: 'Fetched course data successfully',
     });
   } catch (error) {
-    console.log("Error while fetching course details");
+    console.log('Error while fetching course details');
     console.log(error);
     return res.status(500).json({
       success: false,
       error: error.message,
-      message: "Error while fetching course details",
+      message: 'Error while fetching course details',
     });
   }
 };
@@ -255,17 +255,17 @@ exports.getFullCourseDetails = async (req, res) => {
       _id: courseId,
     })
       .populate({
-        path: "instructor",
+        path: 'instructor',
         populate: {
-          path: "additionalDetails",
+          path: 'additionalDetails',
         },
       })
-      .populate("category")
-      .populate("ratingAndReviews")
+      .populate('category')
+      .populate('ratingAndReviews')
       .populate({
-        path: "courseContent",
+        path: 'courseContent',
         populate: {
-          path: "subSection",
+          path: 'subSection',
         },
       })
       .exec();
@@ -328,7 +328,7 @@ exports.editCourse = async (req, res) => {
     const course = await Course.findById(courseId);
 
     if (!course) {
-      return res.status(404).json({ error: "Course not found" });
+      return res.status(404).json({ error: 'Course not found' });
     }
 
     // If Thumbnail Image is found, update it
@@ -345,7 +345,7 @@ exports.editCourse = async (req, res) => {
     // Update only the fields that are present in the request body
     for (const key in updates) {
       if (updates && Object.prototype.hasOwnProperty.call(updates, key)) {
-        if (key === "tag" || key === "instructions") {
+        if (key === 'tag' || key === 'instructions') {
           course[key] = JSON.parse(updates[key]);
         } else {
           course[key] = updates[key];
@@ -363,17 +363,17 @@ exports.editCourse = async (req, res) => {
       _id: courseId,
     })
       .populate({
-        path: "instructor",
+        path: 'instructor',
         populate: {
-          path: "additionalDetails",
+          path: 'additionalDetails',
         },
       })
-      .populate("category")
-      .populate("ratingAndReviews")
+      .populate('category')
+      .populate('ratingAndReviews')
       .populate({
-        path: "courseContent",
+        path: 'courseContent',
         populate: {
-          path: "subSection",
+          path: 'subSection',
         },
       })
       .exec();
@@ -381,14 +381,14 @@ exports.editCourse = async (req, res) => {
     // success response
     res.status(200).json({
       success: true,
-      message: "Course updated successfully",
+      message: 'Course updated successfully',
       data: updatedCourse,
     });
   } catch (error) {
     console.error(error);
     res.status(500).json({
       success: false,
-      message: "Error while updating course",
+      message: 'Error while updating course',
       error: error.message,
     });
   }
@@ -410,13 +410,13 @@ exports.getInstructorCourses = async (req, res) => {
       success: true,
       data: instructorCourses,
       // totalDurationInSeconds:totalDurationInSeconds,
-      message: "Courses made by Instructor fetched successfully",
+      message: 'Courses made by Instructor fetched successfully',
     });
   } catch (error) {
     console.error(error);
     res.status(500).json({
       success: false,
-      message: "Failed to retrieve instructor courses",
+      message: 'Failed to retrieve instructor courses',
       error: error.message,
     });
   }
@@ -430,7 +430,7 @@ exports.deleteCourse = async (req, res) => {
     // Find the course
     const course = await Course.findById(courseId);
     if (!course) {
-      return res.status(404).json({ message: "Course not found" });
+      return res.status(404).json({ message: 'Course not found' });
     }
 
     // Unenroll students from the course
@@ -475,13 +475,13 @@ exports.deleteCourse = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: "Course deleted successfully",
+      message: 'Course deleted successfully',
     });
   } catch (error) {
     console.error(error);
     return res.status(500).json({
       success: false,
-      message: "Error while Deleting course",
+      message: 'Error while Deleting course',
       error: error.message,
     });
   }

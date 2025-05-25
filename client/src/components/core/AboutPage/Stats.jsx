@@ -1,8 +1,8 @@
 const Stats = [
-  { count: "5K", label: "Active Students" },
-  { count: "10+", label: "Mentors" },
-  { count: "200+", label: "Courses" },
-  { count: "50+", label: "Awards" },
+  { count: '5K', label: 'Estudiantes Activos' },
+  { count: '10+', label: 'Mentores' },
+  { count: '200+', label: 'Cursos' },
+  { count: '50+', label: 'Premios' },
 ];
 
 const StatsComponenet = () => {

@@ -4,7 +4,7 @@ exports.passwordUpdated = (email, name) => {
     
     <head>
         <meta charset="UTF-8">
-        <title>Password Update Confirmation</title>
+        <title>Confirmación de Actualización de Contraseña</title>
         <style>
             body {
                 background-color: #ffffff;
@@ -55,18 +55,17 @@ exports.passwordUpdated = (email, name) => {
     
     <body>
         <div class="container">
-            <a href="><img class="logo"
+            <a href=""><img class="logo"
                     src="" alt="Logo"></a>
-            <div class="message">Password Update Confirmation</div>
+            <div class="message">Confirmación de Actualización de Contraseña</div>
             <div class="body">
-                <p>Hey ${name},</p>
-                <p>Your password has been successfully updated for the email <span class="highlight">${email}</span>.
+                <p>Hola ${name},</p>
+                <p>Tu contraseña se ha actualizado exitosamente para el correo electrónico <span class="highlight">${email}</span>.
                 </p>
-                <p>If you did not request this password change, please contact us immediately to secure your account.</p>
+                <p>Si no solicitaste este cambio de contraseña, por favor contáctanos de inmediato para asegurar tu cuenta.</p>
             </div>
-            <div class="support">If you have any questions or need further assistance, please feel free to reach out to us
-                at
-                <a href="mailto:mailto:info@mailpit.com">mailto:info@mailpit.com</a>. We are here to help!
+            <div class="support">Si tienes alguna pregunta o necesitas asistencia, no dudes en comunicarte con nosotros 
+                en <a href="mailto:info@mailpit.com">info@mailpit.com</a>. ¡Estamos aquí para ayudarte!
             </div>
         </div>
     </body>

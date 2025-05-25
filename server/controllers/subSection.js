@@ -1,6 +1,6 @@
-const Section = require("../models/section");
-const SubSection = require("../models/subSection");
-const { uploadImageToMinio } = require("../utils/imageUploader");
+const Section = require('../models/section');
+const SubSection = require('../models/subSection');
+const { uploadImageToMinio } = require('../utils/imageUploader');
 
 // ================ create SubSection ================
 exports.createSubSection = async (req, res) => {
@@ -16,7 +16,7 @@ exports.createSubSection = async (req, res) => {
     if (!title || !description || !videoFile || !sectionId) {
       return res.status(400).json({
         success: false,
-        message: "All fields are required",
+        message: 'All fields are required',
       });
     }
 
@@ -40,21 +40,21 @@ exports.createSubSection = async (req, res) => {
       { _id: sectionId },
       { $push: { subSection: SubSectionDetails._id } },
       { new: true }
-    ).populate("subSection");
+    ).populate('subSection');
 
     // return response
     res.status(200).json({
       success: true,
       data: updatedSection,
-      message: "SubSection created successfully",
+      message: 'SubSection created successfully',
     });
   } catch (error) {
-    console.log("Error while creating SubSection");
+    console.log('Error while creating SubSection');
     console.log(error);
     res.status(500).json({
       success: false,
       error: error.message,
-      message: "Error while creating SubSection",
+      message: 'Error while creating SubSection',
     });
   }
 };
@@ -68,7 +68,7 @@ exports.updateSubSection = async (req, res) => {
     if (!subSectionId) {
       return res.status(400).json({
         success: false,
-        message: "subSection ID is required to update",
+        message: 'subSection ID is required to update',
       });
     }
 
@@ -78,7 +78,7 @@ exports.updateSubSection = async (req, res) => {
     if (!subSection) {
       return res.status(404).json({
         success: false,
-        message: "SubSection not found",
+        message: 'SubSection not found',
       });
     }
 
@@ -106,21 +106,21 @@ exports.updateSubSection = async (req, res) => {
     await subSection.save();
 
     const updatedSection = await Section.findById(sectionId).populate(
-      "subSection"
+      'subSection'
     );
 
     return res.json({
       success: true,
       data: updatedSection,
-      message: "Section updated successfully",
+      message: 'Section updated successfully',
     });
   } catch (error) {
-    console.error("Error while updating the section");
+    console.error('Error while updating the section');
     console.error(error);
     return res.status(500).json({
       success: false,
       error: error.message,
-      message: "Error while updating the section",
+      message: 'Error while updating the section',
     });
   }
 };
@@ -146,11 +146,11 @@ exports.deleteSubSection = async (req, res) => {
     if (!subSection) {
       return res
         .status(404)
-        .json({ success: false, message: "SubSection not found" });
+        .json({ success: false, message: 'SubSection not found' });
     }
 
     const updatedSection = await Section.findById(sectionId).populate(
-      "subSection"
+      'subSection'
     );
 
     // In frontned we have to take care - when subsection is deleted we are sending ,
@@ -160,7 +160,7 @@ exports.deleteSubSection = async (req, res) => {
     return res.json({
       success: true,
       data: updatedSection,
-      message: "SubSection deleted successfully",
+      message: 'SubSection deleted successfully',
     });
   } catch (error) {
     console.error(error);
@@ -168,7 +168,7 @@ exports.deleteSubSection = async (req, res) => {
       success: false,
 
       error: error.message,
-      message: "An error occurred while deleting the SubSection",
+      message: 'An error occurred while deleting the SubSection',
     });
   }
 };

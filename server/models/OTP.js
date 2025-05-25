@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const mailSender = require("../utils/mailSender");
+const mongoose = require('mongoose');
+const mailSender = require('../utils/mailSender');
 
 const OTPSchema = new mongoose.Schema({
   email: {
@@ -20,16 +20,16 @@ const OTPSchema = new mongoose.Schema({
 //  function to send email
 async function sendVerificationEmail(email, otp) {
   try {
-    const mailResponse = mailSender(email, "Verification Email", otp);
-    console.log("Email sent successfully to - ", email);
+    const mailResponse = mailSender(email, 'Verificación', otp);
+    console.log('Email sent successfully to - ', email);
   } catch (error) {
-    console.log("Error while sending an email to ", email);
+    console.log('Error while sending an email to ', email);
     throw new error();
   }
 }
 
 // pre middleware
-OTPSchema.pre("save", async (next) => {
+OTPSchema.pre('save', async (next) => {
   // console.log("New document saved to mongo database");
 
   // Only send an email when a new document is created
@@ -39,4 +39,4 @@ OTPSchema.pre("save", async (next) => {
   next();
 });
 
-module.exports = mongoose.model("OTP", OTPSchema);
+module.exports = mongoose.model('OTP', OTPSchema);
