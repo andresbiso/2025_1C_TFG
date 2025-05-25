@@ -1,4 +1,4 @@
-import Instructor from '../../../assets/Images/teacher3.png';
+import Instructor from '../../../assets/images/teacher3.png';
 import HighlightText from './HighlightText';
 import CTAButton from '../HomePage/Button';
 import { FaArrowRight } from 'react-icons/fa';

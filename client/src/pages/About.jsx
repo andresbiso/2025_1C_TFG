@@ -1,7 +1,7 @@
-import FoundingStory from '../assets/Images/FoundingStory.png';
-import BannerImage1 from '../assets/Images/aboutus1.webp';
-import BannerImage2 from '../assets/Images/aboutus2.webp';
-import BannerImage3 from '../assets/Images/aboutus3.webp';
+import FoundingStory from '../assets/images/FoundingStory.png';
+import BannerImage1 from '../assets/images/aboutus1.webp';
+import BannerImage2 from '../assets/images/aboutus2.webp';
+import BannerImage3 from '../assets/images/aboutus3.webp';
 
 import Footer from '../components/common/Footer';
 import ContactFormSection from '../components/core/AboutPage/ContactFormSection';

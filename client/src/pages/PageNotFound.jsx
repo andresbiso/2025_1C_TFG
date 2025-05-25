@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import NotFound from '../assets/gifs/not_found.gif'; // Adjust path as needed
 
 const PageNotFound = () => {
   return (
@@ -7,13 +8,14 @@ const PageNotFound = () => {
         <div>
           <div>
             <div className="text-center">
-              <div className="h-[400px] bg-center bg-[url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif)] ">
-                <h1 className="text-center text-6xl font-extrabold text-black ">
+              <div
+                className="h-[400px] bg-center bg-contain bg-no-repeat"
+                style={{ backgroundImage: `url(${NotFound})` }}
+              ></div>
+              <div>
+                <h1 className="text-center text-6xl font-extrabold text-black">
                   404
                 </h1>
-              </div>
-
-              <div className="-mt-12 ">
                 <h3 className="text-4xl mb-1 ">Parece que te has perdido</h3>
 
                 <p>¡La página que estás buscando no está disponible!</p>

@@ -3,7 +3,7 @@ import { SlBadge } from 'react-icons/sl';
 import { FaGraduationCap } from 'react-icons/fa';
 import { FaCode } from 'react-icons/fa6';
 
-import timelineImage from '../../../assets/Images/TimelineImage.png';
+import timelineImage from '../../../assets/images/TimelineImage.png';
 
 import Img from './../../common/Img';
 
