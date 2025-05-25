@@ -1,0 +1,8 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with rounded edges and transparency -->
+  <rect width="100%" height="100%" rx="8" ry="8" fill="rgba(32, 32, 32, 0.6)"/>
+  
+  <!-- Centered "P" with a subtle blue tint -->
+  <text x="50%" y="55%" font-size="18" font-family="Arial" fill="#E0F2FF" letter-spacing="2"
+        text-anchor="middle" dominant-baseline="middle">P</text>
+</svg>

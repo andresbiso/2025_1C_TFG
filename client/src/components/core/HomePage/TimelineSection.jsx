@@ -1,7 +1,8 @@
-import Logo1 from '../../../assets/TimeLineLogo/Logo1.svg';
-import Logo2 from '../../../assets/TimeLineLogo/Logo2.svg';
-import Logo3 from '../../../assets/TimeLineLogo/Logo3.svg';
-import Logo4 from '../../../assets/TimeLineLogo/Logo4.svg';
+import { MdDiamond } from 'react-icons/md';
+import { SlBadge } from 'react-icons/sl';
+import { FaGraduationCap } from 'react-icons/fa';
+import { FaCode } from 'react-icons/fa6';
+
 import timelineImage from '../../../assets/Images/TimelineImage.png';
 
 import Img from './../../common/Img';
@@ -11,22 +12,22 @@ import { fadeIn } from '../../common/motionFrameVarients';
 
 const timeline = [
   {
-    Logo: Logo1,
+    Logo: SlBadge,
     heading: 'Liderazgo',
     Description: 'Totalmente comprometidos con el éxito de la empresa',
   },
   {
-    Logo: Logo2,
+    Logo: FaGraduationCap,
     heading: 'Responsabilidad',
     Description: 'Los estudiantes siempre serán nuestra máxima prioridad',
   },
   {
-    Logo: Logo3,
+    Logo: MdDiamond,
     heading: 'Flexibilidad',
     Description: 'La capacidad de adaptación es una habilidad importante',
   },
   {
-    Logo: Logo4,
+    Logo: FaCode,
     heading: 'Resolver problemas',
     Description: 'Codifica tu camino hacia una solución',
   },
@@ -47,7 +48,7 @@ const TimelineSection = () => {
             return (
               <div className="flex flex-row gap-6" key={index}>
                 <div className="w-[50px] h-[50px] rounded-full bg-richblue-500 flex justify-center items-center">
-                  <img src={element.Logo} />
+                  <element.Logo color="white" size={30} />
                 </div>
 
                 <div>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ImGithub, ImLinkedin2 } from 'react-icons/im';
 
 // Images
-import Logo from '../../assets/Logo/Logo-Full-Light.png';
+import Logo from '../../assets/logo.svg';
 
 // footer data
 const BottomFooter = [
