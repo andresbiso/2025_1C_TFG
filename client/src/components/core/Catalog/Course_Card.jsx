@@ -48,10 +48,10 @@ function Course_Card({ course, height }) {
               /> */}
               <RatingStars Review_Count={avgReviewCount} />
               <span className="text-richblack-400">
-                {course?.ratingAndReviews?.length} Ratings
+                {course?.ratingAndReviews?.length} Calificaciones
               </span>
             </div>
-            <p className="text-xl text-richblack-5">ARS {course?.price}</p>
+            {/* <p className="text-xl text-richblack-5">ARS {course?.price}</p> */}
           </div>
         </div>
       </Link>

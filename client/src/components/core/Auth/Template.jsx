@@ -1,8 +1,7 @@
-
-import LoginForm from "./LoginForm"
-import SignupForm from "./SignupForm"
+import PropTypes from 'prop-types';
+import LoginForm from './LoginForm';
+import SignupForm from './SignupForm';
 import Img from './../../common/Img';
-
 
 function Template({ title, description1, description2, image, formType }) {
   // const { loading } = useSelector((state) => state.auth);
@@ -15,15 +14,14 @@ function Template({ title, description1, description2, image, formType }) {
             {title}
           </h1>
           <p className="mt-4 text-[1.125rem] leading-[1.625rem]">
-            <span className="text-richblack-100">{description1}</span>{" "}
+            <span className="text-richblack-100">{description1}</span>{' '}
             <span className="font-edu-sa font-bold italic text-blue-100">
               {description2}
             </span>
           </p>
 
-          {formType === "signup" ? <SignupForm /> : <LoginForm />}
+          {formType === 'signup' ? <SignupForm /> : <LoginForm />}
         </div>
-
 
         <div className="relative max-w-[550px] md:mx-0 my-0">
           <Img
@@ -34,7 +32,15 @@ function Template({ title, description1, description2, image, formType }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Template
+Template.propTypes = {
+  title: PropTypes.string,
+  description1: PropTypes.string,
+  description2: PropTypes.string,
+  image: PropTypes.string,
+  formType: PropTypes.string,
+};
+
+export default Template;

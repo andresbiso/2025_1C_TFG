@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
@@ -43,7 +44,14 @@ export default function SubSectionModal({
       setValue('lectureDesc', modalData.description);
       setValue('lectureVideo', modalData.videoUrl);
     }
-  }, []);
+  }, [
+    edit,
+    modalData.description,
+    modalData.title,
+    modalData.videoUrl,
+    setValue,
+    view,
+  ]);
 
   // detect whether form is updated or not
   const isFormUpdated = () => {
@@ -97,7 +105,7 @@ export default function SubSectionModal({
 
     if (edit) {
       if (!isFormUpdated()) {
-        toast.error('No changes made to the form');
+        toast.error('No se realizaron cambios en el formulario');
       } else {
         handleEditSubsection();
       }
@@ -129,7 +137,7 @@ export default function SubSectionModal({
         {/* Modal Header */}
         <div className="flex items-center justify-between rounded-t-lg bg-richblack-700 p-5">
           <p className="text-xl font-semibold text-richblack-5">
-            {view && 'Viewing'} {add && 'Adding'} {edit && 'Editing'} Lecture
+            {view && 'Viendo'} {add && 'Agregando'} {edit && 'Editando'} Lección
           </p>
           <button onClick={() => (!loading ? setModalData(null) : {})}>
             <RxCross2 className="text-2xl text-richblack-5" />
@@ -154,18 +162,18 @@ export default function SubSectionModal({
           {/* Lecture Title */}
           <div className="flex flex-col space-y-2">
             <label className="text-sm text-richblack-5" htmlFor="lectureTitle">
-              Lecture Title {!view && <sup className="text-pink-200">*</sup>}
+              Título Lección {!view && <sup className="text-pink-200">*</sup>}
             </label>
             <input
               disabled={view || loading}
               id="lectureTitle"
-              placeholder="Enter Lecture Title"
+              placeholder="Ingresar título de lección"
               {...register('lectureTitle', { required: true })}
               className="form-style w-full"
             />
             {errors.lectureTitle && (
               <span className="ml-2 text-xs tracking-wide text-pink-200">
-                Lecture title is required
+                El título de la lección es requerido
               </span>
             )}
           </div>
@@ -173,19 +181,19 @@ export default function SubSectionModal({
           {/* Lecture Description */}
           <div className="flex flex-col space-y-2">
             <label className="text-sm text-richblack-5" htmlFor="lectureDesc">
-              Lecture Description{' '}
+              Descripción de la lección{' '}
               {!view && <sup className="text-pink-200">*</sup>}
             </label>
             <textarea
               disabled={view || loading}
               id="lectureDesc"
-              placeholder="Enter Lecture Description"
+              placeholder="Ingresar descripción de la lección"
               {...register('lectureDesc', { required: true })}
               className="form-style resize-x-none min-h-[130px] w-full"
             />
             {errors.lectureDesc && (
               <span className="ml-2 text-xs tracking-wide text-pink-200">
-                Lecture Description is required
+                La descripción de la lección es requerida
               </span>
             )}
           </div>
@@ -194,7 +202,7 @@ export default function SubSectionModal({
               <IconBtn
                 disabled={loading}
                 text={
-                  loading ? 'Cargando..' : edit ? 'Guardar Cambios' : 'Guardar'
+                  loading ? 'Cargando...' : edit ? 'Guardar Cambios' : 'Guardar'
                 }
               />
             </div>
@@ -204,3 +212,11 @@ export default function SubSectionModal({
     </div>
   );
 }
+
+SubSectionModal.propTypes = {
+  modalData: PropTypes.object,
+  setModalData: PropTypes.func,
+  add: PropTypes.bool,
+  view: PropTypes.bool,
+  edit: PropTypes.bool,
+};

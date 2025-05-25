@@ -1,15 +1,20 @@
-// This will prevent authenticated users from accessing this route
-import { useSelector } from "react-redux"
-import { Navigate } from "react-router-dom"
+// This will prevent authenticated users from accessing this route.
+import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
 function OpenRoute({ children }) {
-  const { token } = useSelector((state) => state.auth)
+  const { token } = useSelector((state) => state.auth);
 
   if (token === null) {
-    return children
+    return children;
   } else {
-    return <Navigate to="/dashboard/my-profile" />
+    return <Navigate to="/dashboard/my-profile" />;
   }
 }
 
-export default OpenRoute
+OpenRoute.propTypes = {
+  children: PropTypes.node,
+};
+
+export default OpenRoute;

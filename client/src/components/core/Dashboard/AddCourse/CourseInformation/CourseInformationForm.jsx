@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { HiOutlineCurrencyRupee } from 'react-icons/hi';
+// import { HiOutlineCurrencyRupee } from 'react-icons/hi';
 import { MdNavigateNext } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -48,7 +48,7 @@ export default function CourseInformationForm() {
       // console.log("editCourse ", editCourse)
       setValue('courseTitle', course.courseName);
       setValue('courseShortDesc', course.courseDescription);
-      setValue('coursePrice', course.price);
+      setValue('coursePrice', 0);
       setValue('courseTags', course.tag);
       setValue('courseBenefits', course.whatYouWillLearn);
       setValue('courseCategory', course.category);
@@ -133,7 +133,7 @@ export default function CourseInformationForm() {
           dispatch(setCourse(result));
         }
       } else {
-        toast.error('No changes made to the form');
+        toast.error('No se han realizado cambios al formulario');
       }
       return;
     }
@@ -166,17 +166,17 @@ export default function CourseInformationForm() {
       {/* Course Title */}
       <div className="flex flex-col space-y-2">
         <label className="text-sm text-richblack-5" htmlFor="courseTitle">
-          Course Title <sup className="text-pink-200">*</sup>
+          Título del curso <sup className="text-pink-200">*</sup>
         </label>
         <input
           id="courseTitle"
-          placeholder="Enter Course Title"
+          placeholder="Ingresar nombre del curso"
           {...register('courseTitle', { required: true })}
           className="form-style w-full"
         />
         {errors.courseTitle && (
           <span className="ml-2 text-xs tracking-wide text-pink-200">
-            Course title is required
+            El nombre del título es requerido
           </span>
         )}
       </div>
@@ -184,30 +184,30 @@ export default function CourseInformationForm() {
       {/* Course Short Description */}
       <div className="flex flex-col space-y-2">
         <label className="text-sm text-richblack-5" htmlFor="courseShortDesc">
-          Course Short Description <sup className="text-pink-200">*</sup>
+          Descripción breve del curso <sup className="text-pink-200">*</sup>
         </label>
         <textarea
           id="courseShortDesc"
-          placeholder="Enter Description"
+          placeholder="Ingresar descripción breve del curso"
           {...register('courseShortDesc', { required: true })}
           className="form-style resize-x-none min-h-[130px] w-full ] "
         />
         {errors.courseShortDesc && (
           <span className="ml-2 text-xs tracking-wide text-pink-200">
-            Course Description is required
+            La descripción breve del curso es requerida.
           </span>
         )}
       </div>
 
       {/* Course Price */}
-      <div className="flex flex-col space-y-2">
+      {/* <div className="flex flex-col space-y-2">
         <label className="text-sm text-richblack-5" htmlFor="coursePrice">
-          Course Price <sup className="text-pink-200">*</sup>
+          Precio del curso <sup className="text-pink-200">*</sup>
         </label>
         <div className="relative">
           <input
             id="coursePrice"
-            placeholder="Enter Course Price"
+            placeholder="Ingresar precio del curso"
             {...register('coursePrice', {
               required: true,
               valueAsNumber: true,
@@ -221,15 +221,15 @@ export default function CourseInformationForm() {
         </div>
         {errors.coursePrice && (
           <span className="ml-2 text-xs tracking-wide text-pink-200">
-            Course Price is required
+            El precio del curso es requerido.
           </span>
         )}
-      </div>
+      </div> */}
 
       {/* Course Category */}
       <div className="flex flex-col space-y-2 ">
         <label className="text-sm text-richblack-5" htmlFor="courseCategory">
-          Course Category <sup className="text-pink-200">*</sup>
+          Categoría del curso <sup className="text-pink-200">*</sup>
         </label>
         <select
           {...register('courseCategory', { required: true })}
@@ -238,7 +238,7 @@ export default function CourseInformationForm() {
           className="form-style w-full cursor-pointer"
         >
           <option value="" disabled>
-            Choose a Category
+            Elegir una categoría
           </option>
           {!loading &&
             courseCategories?.map((category, indx) => (
@@ -249,7 +249,7 @@ export default function CourseInformationForm() {
         </select>
         {errors.courseCategory && (
           <span className="ml-2 text-xs tracking-wide text-pink-200">
-            Course Category is required
+            La categoría del curso es requerida
           </span>
         )}
       </div>
@@ -258,7 +258,7 @@ export default function CourseInformationForm() {
       <ChipInput
         label="Tags"
         name="courseTags"
-        placeholder="Enter Tags and press Enter or Comma"
+        placeholder="Ingresar etiquetas y presionar Entrar (enter) o Coma (,)"
         register={register}
         errors={errors}
         setValue={setValue}
@@ -267,7 +267,7 @@ export default function CourseInformationForm() {
       {/* Course Thumbnail Image */}
       <Upload
         name="courseImage"
-        label="Course Thumbnail"
+        label="Miniatura del curso"
         register={register}
         setValue={setValue}
         errors={errors}
@@ -277,17 +277,17 @@ export default function CourseInformationForm() {
       {/* Benefits of the course */}
       <div className="flex flex-col space-y-2">
         <label className="text-sm text-richblack-5" htmlFor="courseBenefits">
-          Benefits of the course <sup className="text-pink-200">*</sup>
+          Beneficios del curso <sup className="text-pink-200">*</sup>
         </label>
         <textarea
           id="courseBenefits"
-          placeholder="Enter benefits of the course"
+          placeholder="Ingresar beneficios del curso"
           {...register('courseBenefits', { required: true })}
           className="form-style resize-x-none min-h-[130px] w-full"
         />
         {errors.courseBenefits && (
           <span className="ml-2 text-xs tracking-wide text-pink-200">
-            Benefits of the course is required
+            Los beneficios del curso son requeridos
           </span>
         )}
       </div>
@@ -295,7 +295,7 @@ export default function CourseInformationForm() {
       {/* Requirements/Instructions */}
       <RequirementsField
         name="courseRequirements"
-        label="Requirements/Instructions"
+        label="Requerimientos/Instrucciones"
         register={register}
         setValue={setValue}
         errors={errors}

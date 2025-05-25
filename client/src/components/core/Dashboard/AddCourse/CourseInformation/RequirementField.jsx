@@ -1,41 +1,49 @@
-import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
-import { RiDeleteBin6Line } from 'react-icons/ri'
+import { RiDeleteBin6Line } from 'react-icons/ri';
 
-
-
-
-export default function RequirementsField({ name, label, register, setValue, errors, }) {
-  const { editCourse, course } = useSelector((state) => state.course)
-  const [requirement, setRequirement] = useState("")
-  const [requirementsList, setRequirementsList] = useState([])
+export default function RequirementsField({
+  name,
+  label,
+  register,
+  setValue,
+  errors,
+}) {
+  const { editCourse, course } = useSelector((state) => state.course);
+  const [requirement, setRequirement] = useState('');
+  const [requirementsList, setRequirementsList] = useState([]);
 
   useEffect(() => {
     if (editCourse) {
-      setRequirementsList(course?.instructions)
+      setRequirementsList(course?.instructions);
     }
-    register(name, { required: true, validate: (value) => value.length > 0 }, requirementsList)
-  }, [])
+    register(
+      name,
+      { required: true, validate: (value) => value.length > 0 },
+      requirementsList
+    );
+  }, [course?.instructions, editCourse, name, register, requirementsList]);
 
   useEffect(() => {
-    setValue(name, requirementsList)
-  }, [requirementsList])
+    setValue(name, requirementsList);
+  }, [name, requirementsList, setValue]);
 
   // add instruction
   const handleAddRequirement = () => {
     if (requirement && !requirementsList.includes(requirement)) {
-      setRequirementsList([...requirementsList, requirement])
-      setRequirement("")
+      setRequirementsList([...requirementsList, requirement]);
+      setRequirement('');
     }
-  }
+  };
 
   // delete instruction
   const handleRemoveRequirement = (index) => {
-    const updatedRequirements = [...requirementsList]
-    updatedRequirements.splice(index, 1)
-    setRequirementsList(updatedRequirements)
-  }
+    const updatedRequirements = [...requirementsList];
+    updatedRequirements.splice(index, 1);
+    setRequirementsList(updatedRequirements);
+  };
 
   return (
     <div className="flex flex-col space-y-2">
@@ -56,7 +64,7 @@ export default function RequirementsField({ name, label, register, setValue, err
           onClick={handleAddRequirement}
           className="font-semibold text-yellow-50"
         >
-          Add
+          Agregar
         </button>
       </div>
 
@@ -80,9 +88,17 @@ export default function RequirementsField({ name, label, register, setValue, err
 
       {errors[name] && (
         <span className="ml-2 text-xs tracking-wide text-pink-200">
-          {label} is required
+          {label} es requerido/a
         </span>
       )}
     </div>
-  )
+  );
 }
+
+RequirementsField.propTypes = {
+  name: PropTypes.string,
+  label: PropTypes.string,
+  register: PropTypes.func,
+  setValue: PropTypes.func,
+  errors: PropTypes.any,
+};

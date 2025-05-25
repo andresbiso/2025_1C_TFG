@@ -84,13 +84,13 @@ export default function CourseBuilderForm() {
   // go To Next
   const goToNext = () => {
     if (course.courseContent.length === 0) {
-      toast.error('Please add atleast one section');
+      toast.error('Agregar al menos una sección');
       return;
     }
     if (
       course.courseContent.some((section) => section.subSection.length === 0)
     ) {
-      toast.error('Please add atleast one lecture in each section');
+      toast.error('Agregar al menos una lección a cada sección');
       return;
     }
 
@@ -106,24 +106,26 @@ export default function CourseBuilderForm() {
 
   return (
     <div className="space-y-8 rounded-2xl border-[1px] border-richblack-700 bg-richblack-800 p-6">
-      <p className="text-2xl font-semibold text-richblack-5">Course Builder</p>
+      <p className="text-2xl font-semibold text-richblack-5">
+        Constructor de Curso
+      </p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Section Name */}
         <div className="flex flex-col space-y-2">
           <label className="text-sm text-richblack-5" htmlFor="sectionName">
-            Section Name <sup className="text-pink-200">*</sup>
+            Nombre Sección <sup className="text-pink-200">*</sup>
           </label>
           <input
             id="sectionName"
             disabled={loading}
-            placeholder="Add a section to build your course"
+            placeholder="Agregá una sección para crear tu curso"
             {...register('sectionName', { required: true })}
             className="form-style w-full"
           />
           {errors.sectionName && (
             <span className="ml-2 text-xs tracking-wide text-pink-200">
-              Section name is required
+              El nombre de sección es requerido.
             </span>
           )}
         </div>
@@ -134,7 +136,7 @@ export default function CourseBuilderForm() {
             type="submit"
             disabled={loading}
             text={
-              editSectionName ? 'Editar nombre de sección' : 'Creaar sección'
+              editSectionName ? 'Editar nombre de sección' : 'Crear sección'
             }
             outline={true}
           >
@@ -147,7 +149,7 @@ export default function CourseBuilderForm() {
               onClick={cancelEdit}
               className="text-sm text-richblack-300 underline"
             >
-              Cancel Edit
+              Cancelar Edición
             </button>
           )}
         </div>
@@ -164,7 +166,7 @@ export default function CourseBuilderForm() {
           onClick={goBack}
           className={`rounded-md bg-richblack-300 py-[8px] px-[20px] font-semibold text-richblack-900`}
         >
-          Back
+          Volver
         </button>
 
         {/* Next button */}

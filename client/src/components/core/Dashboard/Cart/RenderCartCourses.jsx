@@ -60,9 +60,9 @@ export default function RenderCartCourses() {
               <RiDeleteBin6Line />
               <span>Eliminar</span>
             </button>
-            <p className="mb-6 text-3xl font-medium text-yellow-100">
+            {/* <p className="mb-6 text-3xl font-medium text-yellow-100">
               ARS {course?.price}
-            </p>
+            </p> */}
           </div>
         </div>
       ))}

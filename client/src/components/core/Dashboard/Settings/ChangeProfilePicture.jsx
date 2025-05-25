@@ -70,7 +70,7 @@ export default function ChangeProfilePicture() {
           />
 
           <div className="space-y-2">
-            <p className="font-medium">Change Profile Picture</p>
+            <p className="font-medium">Cambiar foto de perfil</p>
             <div className="flex flex-col sm:flex-row gap-3">
               <input
                 type="file"
@@ -85,7 +85,7 @@ export default function ChangeProfilePicture() {
                 disabled={loading}
                 className="cursor-pointer rounded-md py-2 px-5 font-semibold bg-richblack-200 text-richblack-900 hover:bg-richblack-900 hover:text-richblack-200 duration-300"
               >
-                Select
+                Seleccionar
               </button>
 
               <IconBtn

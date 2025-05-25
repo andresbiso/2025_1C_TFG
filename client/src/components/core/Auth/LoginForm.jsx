@@ -36,7 +36,7 @@ function LoginForm() {
     >
       <label className="w-full">
         <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-          Email Address <sup className="text-pink-200">*</sup>
+          Corre Electrónico <sup className="text-pink-200">*</sup>
         </p>
         <input
           required
@@ -44,7 +44,7 @@ function LoginForm() {
           name="email"
           value={email}
           onChange={handleOnChange}
-          placeholder="Enter email address"
+          placeholder="Ingresar correo electrónico"
           style={{
             boxShadow: 'inset 0px -1px 0px rgba(255, 255, 255, 0.18)',
           }}
@@ -54,7 +54,7 @@ function LoginForm() {
 
       <label className="relative">
         <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-          Password <sup className="text-pink-200">*</sup>
+          Contraseña <sup className="text-pink-200">*</sup>
         </p>
         <input
           required
@@ -62,7 +62,7 @@ function LoginForm() {
           name="password"
           value={password}
           onChange={handleOnChange}
-          placeholder="Enter Password"
+          placeholder="Ingresar contraseña"
           style={{
             boxShadow: 'inset 0px -1px 0px rgba(255, 255, 255, 0.18)',
           }}
@@ -80,7 +80,7 @@ function LoginForm() {
         </span>
         <Link to="/forgot-password">
           <p className="mt-1 ml-auto max-w-max text-xs text-blue-100">
-            Forgot Password
+            Olvidé mi contraseña
           </p>
         </Link>
       </label>
@@ -89,7 +89,7 @@ function LoginForm() {
         type="submit"
         className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900"
       >
-        Sign In
+        Iniciar Sesión
       </button>
     </form>
   );

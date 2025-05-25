@@ -17,7 +17,7 @@ export default function RenderSteps() {
     },
     {
       id: 2,
-      title: 'Creador de curso',
+      title: 'Contructor de curso',
     },
     {
       id: 3,

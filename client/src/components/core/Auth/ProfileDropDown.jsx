@@ -1,30 +1,26 @@
-import { useRef, useState } from "react"
-import { AiOutlineCaretDown } from "react-icons/ai"
-import { VscDashboard, VscSignOut } from "react-icons/vsc"
-import { useDispatch, useSelector } from "react-redux"
-import { Link, useNavigate } from "react-router-dom"
+import { useRef, useState } from 'react';
+import { AiOutlineCaretDown } from 'react-icons/ai';
+import { VscDashboard, VscSignOut } from 'react-icons/vsc';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
-import useOnClickOutside from "../../../hooks/useOnClickOutside"
-import { logout } from "../../../services/operations/authAPI"
+import useOnClickOutside from '../../../hooks/useOnClickOutside';
+import { logout } from '../../../services/operations/authAPI';
 import Img from './../../common/Img';
 
-
 export default function ProfileDropdown() {
-  const { user } = useSelector((state) => state.profile)
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const [open, setOpen] = useState(false)
-  const ref = useRef(null)
+  const { user } = useSelector((state) => state.profile);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
 
-  useOnClickOutside(ref, () => setOpen(false))
+  useOnClickOutside(ref, () => setOpen(false));
 
-  if (!user) return null
+  if (!user) return null;
   // console.log('user data from store = ', user )
 
-
-
   return (
-
     // only for large devices
 
     <button className="relative hidden sm:flex" onClick={() => setOpen(true)}>
@@ -46,22 +42,22 @@ export default function ProfileDropdown() {
           <Link to="/dashboard/my-profile" onClick={() => setOpen(false)}>
             <div className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-100 hover:bg-richblack-700 hover:text-richblack-25">
               <VscDashboard className="text-lg" />
-              Dashboard
+              Panel de Control
             </div>
           </Link>
 
           <div
             onClick={() => {
-              dispatch(logout(navigate))
-              setOpen(false)
+              dispatch(logout(navigate));
+              setOpen(false);
             }}
             className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-100 hover:bg-richblack-700 hover:text-richblack-25"
           >
             <VscSignOut className="text-lg" />
-            Logout
+            Cerrar Sesión
           </div>
         </div>
       )}
     </button>
-  )
+  );
 }
