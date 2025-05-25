@@ -18,7 +18,7 @@ import GetAvgRating from '../utils/avgRating';
 import { ACCOUNT_TYPE } from './../utils/constants';
 import { addToCart } from '../slices/cartSlice';
 
-import { GiReturnArrow } from 'react-icons/gi';
+import { PiKeyReturnBold } from 'react-icons/pi';
 import { MdOutlineVerified } from 'react-icons/md';
 import Img from './../components/common/Img';
 import toast from 'react-hot-toast';
@@ -120,7 +120,7 @@ function CourseDetails() {
     courseName,
     courseDescription,
     thumbnail,
-    price,
+    // price,
     whatYouWillLearn,
     courseContent,
     ratingAndReviews,
@@ -178,7 +178,7 @@ function CourseDetails() {
               className="mb-5 lg:mt-10 lg:mb-0 z-[100]  "
               onClick={() => navigate(-1)}
             >
-              <GiReturnArrow className="w-10 h-10 text-yellow-100 hover:text-yellow-50 cursor-pointer" />
+              <PiKeyReturnBold className="w-10 h-10 text-yellow-100 hover:text-yellow-50 cursor-pointer" />
             </div>
 
             {/* will appear only for small size */}
@@ -226,9 +226,9 @@ function CourseDetails() {
 
             {/* will appear only for small size */}
             <div className="flex w-full flex-col gap-4 border-y border-y-richblack-500 py-4 lg:hidden">
-              <p className="space-x-3 pb-4 text-3xl font-semibold text-richblack-5">
+              {/* <p className="space-x-3 pb-4 text-3xl font-semibold text-richblack-5">
                 ARS {price}
-              </p>
+              </p> */}
               <button className="yellowButton" onClick={handleBuyCourse}>
                 Adquirir ahora
               </button>

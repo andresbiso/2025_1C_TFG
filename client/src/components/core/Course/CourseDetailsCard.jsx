@@ -19,7 +19,7 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
 
   const {
     thumbnail: ThumbnailImage,
-    price: CurrentPrice,
+    // price: CurrentPrice,
     // _id: courseId,
   } = course;
 
@@ -62,9 +62,9 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
         />
 
         <div className="px-4">
-          <div className="space-x-3 pb-4 text-3xl font-semibold">
+          {/* <div className="space-x-3 pb-4 text-3xl font-semibold">
             Rs. {CurrentPrice}
-          </div>
+          </div> */}
           <div className="flex flex-col gap-4">
             <button
               className="yellowButton outline-none"
@@ -88,13 +88,13 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
             )}
           </div>
 
-          <p className="pb-3 pt-6 text-center text-sm text-richblack-25">
+          {/* <p className="pb-3 pt-6 text-center text-sm text-richblack-25">
             Garantía de devolución de dinero de 30 días
-          </p>
+          </p> */}
 
           <div className={``}>
             <p className={`my-2 text-xl font-semibold `}>
-              REquerimientos del curso :
+              Requerimientos del curso :
             </p>
             <div className="flex flex-col gap-3 text-sm text-caribbeangreen-100">
               {course?.instructions?.map((item, i) => {

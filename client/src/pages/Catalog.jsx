@@ -23,10 +23,12 @@ function Catalog() {
     (async () => {
       try {
         const res = await fetchCourseCategories();
-        const category_id = res.filter(
-          (ct) => ct.name.split(' ').join('-').toLowerCase() === catalogName
-        )[0]._id;
-        setCategoryId(category_id);
+        if (catalogName) {
+          const category_id = res.filter(
+            (ct) => ct.name.split(' ').join('-').toLowerCase() === catalogName
+          )[0]._id;
+          setCategoryId(category_id);
+        }
       } catch (error) {
         console.log('Could not fetch Categories.', error);
       }
@@ -34,19 +36,17 @@ function Catalog() {
   }, [catalogName]);
 
   useEffect(() => {
-    if (categoryId) {
-      (async () => {
-        setLoading(true);
-        try {
-          const res = await getCatalogPageData(categoryId);
-          setCatalogPageData(res);
-        } catch (error) {
-          console.log(error);
-        }
-        setLoading(false);
-      })();
-    }
-  }, [categoryId]);
+    (async () => {
+      setLoading(true);
+      try {
+        const res = await getCatalogPageData(categoryId);
+        setCatalogPageData(res);
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
+    })();
+  }, []);
 
   // console.log('======================================= ', catalogPageData)
   // console.log('categoryId ==================================== ', categoryId)
