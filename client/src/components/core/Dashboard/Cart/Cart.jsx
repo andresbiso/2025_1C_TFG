@@ -12,7 +12,7 @@ export default function Cart() {
         Carrito
       </h1>
       <p className="border-b border-b-richblack-400 pb-2 font-semibold text-richblack-400">
-        {totalItems} Courses en carrito
+        {totalItems} Cursos en carrito
       </p>
       {total > 0 ? (
         <div className="mt-8 flex flex-col-reverse items-start gap-x-10 gap-y-6 lg:flex-row">

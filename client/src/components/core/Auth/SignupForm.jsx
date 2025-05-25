@@ -161,7 +161,7 @@ function SignupForm() {
               name="password"
               value={password}
               onChange={handleOnChange}
-              placeholder="Ingrese contraseña"
+              placeholder="Ingresar contraseña"
               style={{
                 boxShadow: 'inset 0px -1px 0px rgba(255, 255, 255, 0.18)',
               }}
