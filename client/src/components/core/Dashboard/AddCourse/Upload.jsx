@@ -2,8 +2,6 @@ import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { FiUploadCloud } from 'react-icons/fi';
-// import { useSelector } from 'react-redux';
-
 import 'video-react/dist/video-react.css';
 import { Player } from 'video-react';
 
@@ -17,7 +15,6 @@ export default function Upload({
   viewData = null,
   editData = null,
 }) {
-  // const { course } = useSelector((state) => state.course)
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewSource, setPreviewSource] = useState(
     viewData ? viewData : editData ? editData : ''
@@ -40,7 +37,6 @@ export default function Upload({
   });
 
   const previewFile = (file) => {
-    // console.log(file)
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
@@ -65,7 +61,11 @@ export default function Upload({
       <div
         className={`${isDragActive ? 'bg-richblack-600' : 'bg-richblack-700'}
          flex min-h-[250px] cursor-pointer items-center justify-center rounded-md border-2 border-dotted border-richblack-500`}
+        {...getRootProps()}
+        onClick={() => inputRef.current.click()} // Enable click upload
       >
+        <input {...getInputProps()} ref={inputRef} />
+
         {previewSource ? (
           <div className="flex w-full flex-col p-6">
             {!video ? (
@@ -77,43 +77,47 @@ export default function Upload({
             ) : (
               <Player aspectRatio="16:9" playsInline src={previewSource} />
             )}
-
-            {!viewData && (
-              <button
-                type="button"
-                onClick={() => {
-                  setPreviewSource('');
-                  setSelectedFile(null);
-                  setValue(name, null);
-                }}
-                className="mt-3 text-richblack-400 underline"
-              >
-                Cancelar
-              </button>
-            )}
           </div>
         ) : (
-          <div
-            className="flex w-full flex-col items-center p-6"
-            {...getRootProps()}
-          >
-            <input {...getInputProps()} ref={inputRef} />
+          <div className="flex w-full flex-col items-center p-6">
             <div className="grid aspect-square w-14 place-items-center rounded-full bg-pure-greys-800">
               <FiUploadCloud className="text-2xl text-yellow-50" />
             </div>
             <p className="mt-2 max-w-[200px] text-center text-sm text-richblack-200">
               Arrastrar y soltar {!video ? 'la imagen' : 'el video'}, o hacer
               click para{' '}
-              <span className="font-semibold text-yellow-50">navegarr</span> al
+              <span className="font-semibold text-yellow-50">navegar</span> al
               archivo
             </p>
-            <ul className="mt-10 flex list-disc justify-between space-x-12 text-center  text-xs text-richblack-200">
+            <ul className="mt-10 flex list-disc justify-between space-x-12 text-center text-xs text-richblack-200">
               <li>Relación de aspecto 16:9</li>
               <li>Tamaño recomendado 1024x576</li>
             </ul>
           </div>
         )}
       </div>
+
+      {!viewData && previewSource && (
+        <div className="mt-3">
+          <button
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation(); // Prevent unintended file input trigger
+              setPreviewSource('');
+              setSelectedFile(null);
+              setValue(name, null);
+
+              // ✅ Reset file input field for future uploads
+              if (inputRef.current) {
+                inputRef.current.value = '';
+              }
+            }}
+            className="text-richblack-400 underline"
+          >
+            Cancelar
+          </button>
+        </div>
+      )}
 
       {errors[name] && (
         <span className="ml-2 text-xs tracking-wide text-pink-200">
