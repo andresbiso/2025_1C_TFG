@@ -132,6 +132,10 @@ function CourseDetails() {
 
   // Buy Course handler
   const handleBuyCourse = () => {
+    if (user && user?.accountType === ACCOUNT_TYPE.INSTRUCTOR) {
+      toast.error('Sos un instructor. No podés anotarte a un curso.');
+      return;
+    }
     if (token) {
       const coursesId = [courseId];
       buyCourse(token, coursesId, user, navigate, dispatch);
@@ -139,7 +143,7 @@ function CourseDetails() {
     }
     setConfirmationModal({
       text1: 'No has iniciado sesión!',
-      text2: 'Por favor, ingresa para adquirir el curso.',
+      text2: 'Por favor, ingresa para anotarte al curso.',
       btn1Text: 'Ingresar',
       btn2Text: 'Cancelar',
       btn1Handler: () => navigate('/login'),
@@ -150,7 +154,7 @@ function CourseDetails() {
   // Add to cart Course handler
   const handleAddToCart = () => {
     if (user && user?.accountType === ACCOUNT_TYPE.INSTRUCTOR) {
-      toast.error('Sos un instructor. No podés adquirir un curso.');
+      toast.error('Sos un instructor. No podés anotarte a un curso.');
       return;
     }
     if (token) {
@@ -203,9 +207,13 @@ function CourseDetails() {
                 <span className="text-yellow-25">{avgReviewCount}</span>
                 <RatingStars Review_Count={avgReviewCount} Star_Size={24} />
                 <span>{`(${ratingAndReviews.length} reseñas)`}</span>
-                <span>{`${studentsEnrolled.length} estudiantes registrados`}</span>
+                <span>{`${studentsEnrolled.length} ${
+                  studentsEnrolled.length == 1
+                    ? 'estudiante registrado'
+                    : 'estudiantes registrados'
+                }`}</span>
               </div>
-              <p className="capitalize ">
+              <p>
                 {' '}
                 Creado por{' '}
                 <span className="font-semibold underline">
@@ -215,11 +223,11 @@ function CourseDetails() {
               <div className="flex flex-wrap gap-5 text-lg">
                 <p className="flex items-center gap-2">
                   {' '}
-                  <BiInfoCircle /> Creado en {formatDate(createdAt)}
+                  <BiInfoCircle /> Creado el {formatDate(createdAt)}
                 </p>
                 <p className="flex items-center gap-2">
                   {' '}
-                  <HiOutlineGlobeAlt /> Inglés
+                  <HiOutlineGlobeAlt /> Español
                 </p>
               </div>
             </div>
@@ -230,7 +238,7 @@ function CourseDetails() {
                 ARS {price}
               </p> */}
               <button className="yellowButton" onClick={handleBuyCourse}>
-                Adquirir ahora
+                Anotarte ahora
               </button>
               <button onClick={handleAddToCart} className="blackButton">
                 Agregar al carrito

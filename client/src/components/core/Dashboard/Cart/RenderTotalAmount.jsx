@@ -21,7 +21,7 @@ export default function RenderTotalAmount() {
       <p className="mb-1 text-sm font-medium text-richblack-300">Total:</p>
       <p className="mb-6 text-3xl font-medium text-yellow-100">₹ {total}</p>
       <IconBtn
-        text="Adquirir ahora"
+        text="Anotarte ahora"
         onclick={handleBuyCourse}
         customClasses="w-full justify-center"
       />

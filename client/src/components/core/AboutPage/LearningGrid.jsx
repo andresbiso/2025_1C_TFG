@@ -31,7 +31,7 @@ const LearningGridArray = [
   },
   {
     order: 4,
-    heading: 'Calificación "Auto-grading"',
+    heading: 'Calificación',
     description:
       'La plataforma se asocia con universidades y empresas líderes para ofrecer sus servicios',
   },

@@ -21,61 +21,70 @@ import { FaArrowRight } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { fadeIn } from './../components/common/motionFrameVarients';
 
-// background random images
-import backgroundImg1 from '../assets/images/random bg img/coding bg1.jpg';
-import backgroundImg2 from '../assets/images/random bg img/coding bg2.jpg';
-import backgroundImg3 from '../assets/images/random bg img/coding bg3.jpg';
-import backgroundImg4 from '../assets/images/random bg img/coding bg4.jpg';
-import backgroundImg5 from '../assets/images/random bg img/coding bg5.jpg';
-import backgroundImg6 from '../assets/images/random bg img/coding bg6.jpeg';
-import backgroundImg7 from '../assets/images/random bg img/coding bg7.jpg';
-import backgroundImg8 from '../assets/images/random bg img/coding bg8.jpeg';
-import backgroundImg9 from '../assets/images/random bg img/coding bg9.jpg';
-import backgroundImg10 from '../assets/images/random bg img/coding bg10.jpg';
-import backgroundImg111 from '../assets/images/random bg img/coding bg11.jpg';
+import { fetchCourseCategories } from '../services/operations/courseDetailsAPI';
 
-const randomImges = [
-  backgroundImg1,
-  backgroundImg2,
-  backgroundImg3,
-  backgroundImg4,
-  backgroundImg5,
-  backgroundImg6,
-  backgroundImg7,
-  backgroundImg8,
-  backgroundImg9,
-  backgroundImg10,
-  backgroundImg111,
+// cover images
+import coverImg01 from '../assets/images/home/cover/home_cover_01.png';
+import coverImg02 from '../assets/images/home/cover/home_cover_02.png';
+import coverImg03 from '../assets/images/home/cover/home_cover_03.png';
+import coverImg04 from '../assets/images/home/cover/home_cover_04.png';
+import coverImg05 from '../assets/images/home/cover/home_cover_05.jpg';
+import coverImg06 from '../assets/images/home/cover/home_cover_06.jpg';
+import coverImg07 from '../assets/images/home/cover/home_cover_07.jpg';
+import coverImg08 from '../assets/images/home/cover/home_cover_08.jpg';
+import coverImg09 from '../assets/images/home/cover/home_cover_09.jpg';
+
+const imagePaths = [
+  coverImg01,
+  coverImg02,
+  coverImg03,
+  coverImg04,
+  coverImg05,
+  coverImg06,
+  coverImg07,
+  coverImg08,
+  coverImg09,
 ];
 
-// hardcoded
-
 const Home = () => {
-  // get background random images
-  const [backgroundImg, setBackgroundImg] = useState(null);
+  const [backgroundImg, setBackgroundImg] = useState(imagePaths[0]);
 
   useEffect(() => {
-    const bg = randomImges[Math.floor(Math.random() * randomImges.length)];
-    setBackgroundImg(bg);
-  }, []);
+    const changeBackground = () => {
+      const randomBg =
+        imagePaths[Math.floor(Math.random() * imagePaths.length)];
+      setBackgroundImg(randomBg);
+    };
+
+    const interval = setInterval(changeBackground, 10000); // Runs every 10 sec
+
+    return () => clearInterval(interval); // Clears the interval when unmounting
+  }, []); // Runs once when the component mounts
 
   // console.log('bg ==== ', backgroundImg)
 
   // get courses data
   const [CatalogPageData, setCatalogPageData] = useState(null);
-  const categoryID = '6506c9dff191d7ffdb4a3fe2'; // hard coded
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchCatalogPageData = async () => {
-      const result = await getCatalogPageData(categoryID, dispatch);
-      setCatalogPageData(result);
-      // console.log("page data ==== ",CatalogPageData);
+    const fetchData = async () => {
+      try {
+        const categories = await fetchCourseCategories();
+
+        if (categories.length > 0) {
+          const categoryId = categories[0];
+
+          const result = await getCatalogPageData(categoryId, dispatch);
+          setCatalogPageData(result);
+        }
+      } catch (error) {
+        console.error('Error fetching catalog data: ', error);
+      }
     };
-    if (categoryID) {
-      fetchCatalogPageData();
-    }
-  }, [categoryID, dispatch]);
+
+    fetchData();
+  }, [dispatch]);
 
   // console.log('================ CatalogPageData?.selectedCourses ================ ', CatalogPageData)
 
@@ -83,11 +92,12 @@ const Home = () => {
     <React.Fragment>
       {/* background random image */}
       <div>
-        <div className="w-full h-[450px] md:h-[650px] absolute top-0 left-0 opacity-[0.3] overflow-hidden object-cover ">
+        <div className="w-full h-[450px] md:h-[650px] absolute top-0 left-0 opacity-[0.3] overflow-hidden object-cover">
           <img
+            key={backgroundImg}
             src={backgroundImg}
             alt="Background"
-            className="w-full h-full object-cover "
+            className="w-full h-full object-cover fade-transition"
           />
 
           <div className="absolute left-0 bottom-0 w-full h-[250px] opacity_layer_bg "></div>
@@ -119,7 +129,7 @@ const Home = () => {
             viewport={{ once: false, amount: 0.1 }}
             className="text-center text-3xl lg:text-4xl font-semibold mt-7  "
           >
-            Empodera to futuro con
+            Fortalecé to futuro con
             <HighlightText text={'habilidades de desarrollo de software'} />
           </motion.div>
 
@@ -157,7 +167,7 @@ const Home = () => {
                 <div className="text-3xl lg:text-4xl font-semibold">
                   Desbloquea tu{' '}
                   <HighlightText
-                    text={'potencial como desarrollador de software'}
+                    text={'potencial como desarrollador de software '}
                   />
                   con nuestros cursos en línea
                 </div>

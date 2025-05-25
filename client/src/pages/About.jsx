@@ -1,7 +1,7 @@
-import FoundingStory from '../assets/images/FoundingStory.png';
-import BannerImage1 from '../assets/images/aboutus1.webp';
-import BannerImage2 from '../assets/images/aboutus2.webp';
-import BannerImage3 from '../assets/images/aboutus3.webp';
+import FoundingStory from '../assets/images/about/about_01.png';
+import BannerImage1 from '../assets/images/about/about_02.png';
+import BannerImage2 from '../assets/images/about/about_03.png';
+import BannerImage3 from '../assets/images/about/about_04.png';
 
 import Footer from '../components/common/Footer';
 import ContactFormSection from '../components/core/AboutPage/ContactFormSection';
@@ -46,12 +46,25 @@ const About = () => {
             </motion.p>
           </motion.header>
 
-          <div className="sm:h-[70px] lg:h-[150px]"></div>
+          {/* Removed the extra spacer */}
 
-          <div className="absolute bottom-0 left-[50%] grid w-[100%] translate-x-[-50%] translate-y-[30%] grid-cols-3 gap-3 lg:gap-5">
-            <Img src={BannerImage1} alt="Imagen 1" />
-            <Img src={BannerImage2} alt="Imagen 2" />
-            <Img src={BannerImage3} alt="Imagen 3" />
+          {/* Image Grid with Adjusted Spacing */}
+          <div className="grid w-full grid-cols-3 gap-3 lg:gap-5 mt-[-40px] mb-6">
+            <Img
+              src={BannerImage1}
+              alt="Imagen 1"
+              className="w-[90%] h-[250px] max-w-[400px] object-cover"
+            />
+            <Img
+              src={BannerImage2}
+              alt="Imagen 2"
+              className="w-[90%] h-[250px] max-w-[400px] object-cover"
+            />
+            <Img
+              src={BannerImage3}
+              alt="Imagen 3"
+              className="w-[90%] h-[250px] max-w-[400px] object-cover"
+            />
           </div>
         </div>
       </section>
