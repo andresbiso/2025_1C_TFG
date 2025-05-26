@@ -24,6 +24,7 @@ export default function CourseInformationForm() {
     setValue,
     getValues,
     formState: { errors },
+    watch,
   } = useForm();
 
   const dispatch = useDispatch();
@@ -200,7 +201,7 @@ export default function CourseInformationForm() {
       </div>
 
       {/* Course Price */}
-      <div className="flex flex-col space-y-2">
+      <div className="flex flex-col space-y-2 hidden">
         <label className="text-sm text-richblack-5" htmlFor="coursePrice">
           Precio del curso <sup className="text-pink-200">*</sup>
         </label>
@@ -209,10 +210,10 @@ export default function CourseInformationForm() {
         <input
           id="coursePrice"
           type="number"
-          defaultValue={0} // Always stays 0
+          value={watch('coursePrice') || 0} // Always stays 0
           {...register('coursePrice', { valueAsNumber: true })}
           className="hidden" // Makes it invisible
-          disabled // Prevents user modification
+          readOnly // Prevents user modification
         />
 
         {errors.coursePrice && (
