@@ -27,9 +27,10 @@ export default function NestedView({ handleChangeEditSectionName }) {
   const [editSubSection, setEditSubSection] = useState(null);
   // to keep track of confirmation modal
   const [confirmationModal, setConfirmationModal] = useState(null);
+  const [modalMode, setModalMode] = useState(null);
 
   // Delele Section
-  const handleDeleleSection = async (sectionId) => {
+  const handleDeleteSection = async (sectionId) => {
     const result = await deleteSection({
       sectionId,
       courseId: course._id,
@@ -53,6 +54,11 @@ export default function NestedView({ handleChangeEditSectionName }) {
       dispatch(setCourse(updatedCourse));
     }
     setConfirmationModal(null);
+  };
+
+  const openSubSectionModal = (mode, sectionId) => {
+    setModalMode(mode);
+    setAddSubsection(sectionId);
   };
 
   return (
@@ -95,7 +101,7 @@ export default function NestedView({ handleChangeEditSectionName }) {
                         'Todas las lecciones de esta sección serán eliminadas.',
                       btn1Text: 'Eliminar',
                       btn2Text: 'Cancelar',
-                      btn1Handler: () => handleDeleleSection(section._id),
+                      btn1Handler: () => handleDeleteSection(section._id),
                       btn2Handler: () => setConfirmationModal(null),
                     })
                   }
@@ -115,7 +121,7 @@ export default function NestedView({ handleChangeEditSectionName }) {
                   onClick={() => setViewSubSection(data)}
                   className="flex cursor-pointer items-center justify-between gap-x-3 border-b-2 border-b-richblack-600 py-2"
                 >
-                  <div className="flex items-center gap-x-3 py-2 ">
+                  <div className="flex items-center gap-x-3 py-2">
                     <RxDropdownMenu className="text-2xl text-richblack-50" />
                     <p className="font-semibold text-richblack-50">
                       {data.title}
@@ -135,7 +141,7 @@ export default function NestedView({ handleChangeEditSectionName }) {
                     <button
                       onClick={() =>
                         setConfirmationModal({
-                          text1: '¿Querés elminar la subsección?',
+                          text1: '¿Querés eliminar la subsección?',
                           text2: 'Esta lección será eliminada.',
                           btn1Text: 'Eliminar',
                           btn2Text: 'Cancelar',
@@ -150,47 +156,66 @@ export default function NestedView({ handleChangeEditSectionName }) {
                   </div>
                 </div>
               ))}
-              {/* Add New Lecture to Section */}
-              <button
-                onClick={() => setAddSubsection(section._id)}
-                className="mt-3 flex items-center gap-x-1 text-yellow-50"
-              >
-                <FaPlus className="text-lg" />
-                <p>Agregar Lección</p>
-              </button>
+              {/* Buttons to Choose Mode */}
+              <div className="flex gap-3 mt-3 justify-center">
+                <button
+                  onClick={() => openSubSectionModal('video', section._id)}
+                  className="flex items-center justify-center bg-richblack-600 text-white font-semibold w-32 h-32 rounded-lg shadow-md hover:bg-richblack-700"
+                >
+                  <FaPlus className="text-lg" />
+                  <span className="ml-2">Video</span>
+                </button>
+
+                <button
+                  onClick={() => openSubSectionModal('text', section._id)}
+                  className="flex items-center justify-center bg-richblack-600 text-white font-semibold w-32 h-32 rounded-lg shadow-md hover:bg-richblack-700"
+                >
+                  <FaPlus className="text-lg" />
+                  <span className="ml-2">Texto</span>
+                </button>
+
+                <button
+                  onClick={() =>
+                    openSubSectionModal('multipleChoice', section._id)
+                  }
+                  className="flex items-center justify-center bg-richblack-600 text-white font-semibold w-32 h-32 rounded-lg shadow-md hover:bg-richblack-700"
+                >
+                  <FaPlus className="text-lg" />
+                  <span className="ml-2">Pregunta</span>
+                </button>
+              </div>
             </div>
           </details>
         ))}
       </div>
 
-      {/* Modal Display */}
-      {addSubSection ? (
+      {/* SubSection Modal */}
+      {addSubSection && (
         <SubSectionModal
           modalData={addSubSection}
           setModalData={setAddSubsection}
+          mode={modalMode}
           add={true}
         />
-      ) : viewSubSection ? (
+      )}
+      {viewSubSection && (
         <SubSectionModal
           modalData={viewSubSection}
           setModalData={setViewSubSection}
+          mode={modalMode}
           view={true}
         />
-      ) : editSubSection ? (
+      )}
+      {editSubSection && (
         <SubSectionModal
           modalData={editSubSection}
           setModalData={setEditSubSection}
+          mode={modalMode}
           edit={true}
         />
-      ) : (
-        <></>
       )}
       {/* Confirmation Modal */}
-      {confirmationModal ? (
-        <ConfirmationModal modalData={confirmationModal} />
-      ) : (
-        <></>
-      )}
+      {confirmationModal && <ConfirmationModal modalData={confirmationModal} />}
     </>
   );
 }
