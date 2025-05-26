@@ -161,7 +161,7 @@ export default function CoursesTable({
 
                 {/* course duration */}
                 <Td className="text-sm font-medium text-richblack-100">
-                  Duración del curso
+                  Duración del curso: {course?.totalDuration}
                 </Td>
                 {/* <Td className="text-sm font-medium text-richblack-100">
                   ARS{course.price}

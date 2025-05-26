@@ -43,12 +43,14 @@ export default function SubSectionModal({
       setValue('lectureTitle', modalData.title);
       setValue('lectureDesc', modalData.description);
       setValue('lectureVideo', modalData.videoUrl);
+      setValue('lectureDuration', modalData.timeDuration);
     }
   }, [
     edit,
     modalData.description,
     modalData.title,
     modalData.videoUrl,
+    modalData.timeDuration,
     setValue,
     view,
   ]);
@@ -57,14 +59,12 @@ export default function SubSectionModal({
   const isFormUpdated = () => {
     const currentValues = getValues();
     // console.log("changes after editing form values:", currentValues)
-    if (
+    return (
       currentValues.lectureTitle !== modalData.title ||
       currentValues.lectureDesc !== modalData.description ||
-      currentValues.lectureVideo !== modalData.videoUrl
-    ) {
-      return true;
-    }
-    return false;
+      currentValues.lectureVideo !== modalData.videoUrl ||
+      currentValues.lectureDuration !== modalData.timeDuration
+    );
   };
 
   // handle the editing of subsection
@@ -83,6 +83,10 @@ export default function SubSectionModal({
     }
     if (currentValues.lectureVideo !== modalData.videoUrl) {
       formData.append('video', currentValues.lectureVideo);
+    }
+
+    if (currentValues.lectureDuration !== modalData.timeDuration) {
+      formData.append('timeDuration', currentValues.lectureDuration);
     }
     setLoading(true);
     const result = await updateSubSection(formData, token);
@@ -117,6 +121,7 @@ export default function SubSectionModal({
     formData.append('title', data.lectureTitle);
     formData.append('description', data.lectureDesc);
     formData.append('video', data.lectureVideo);
+    formData.append('timeDuration', data.lectureDuration);
     setLoading(true);
     const result = await createSubSection(formData, token);
     if (result) {
@@ -196,6 +201,51 @@ export default function SubSectionModal({
                 La descripción de la lección es requerida
               </span>
             )}
+          </div>
+
+          {/* Lecture Duration */}
+          <div className="flex flex-col space-y-2">
+            <label
+              className="text-sm text-richblack-5"
+              htmlFor="lectureDuration"
+            >
+              Duración de la lección (en minutos){' '}
+              {!view && <sup className="text-pink-200">*</sup>}
+            </label>
+            <input
+              type="number"
+              disabled={view || loading}
+              id="lectureDuration"
+              placeholder="Ingresar duración de la lección"
+              {...register('lectureDuration', {
+                required: true,
+                min: 1,
+                max: 20,
+                valueAsNumber: true,
+              })}
+              className="form-style resize-x-none min-h-[130px] w-full"
+            />
+
+            {errors.lectureDuration &&
+              errors.lectureDuration.type === 'required' && (
+                <span className="ml-2 text-xs tracking-wide text-pink-200">
+                  La duración de la lección es requerida
+                </span>
+              )}
+
+            {errors.lectureDuration &&
+              errors.lectureDuration.type === 'min' && (
+                <span className="ml-2 text-xs tracking-wide text-pink-200">
+                  La duración debe ser al menos 1 minuto
+                </span>
+              )}
+
+            {errors.lectureDuration &&
+              errors.lectureDuration.type === 'max' && (
+                <span className="ml-2 text-xs tracking-wide text-pink-200">
+                  La duración no puede ser mayor a 20 minutos
+                </span>
+              )}
           </div>
           {!view && (
             <div className="flex justify-end">

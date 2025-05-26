@@ -6,14 +6,14 @@ const { uploadImageToMinio } = require('../utils/imageUploader');
 exports.createSubSection = async (req, res) => {
   try {
     // extract data
-    const { title, description, sectionId } = req.body;
+    const { title, description, sectionId, timeDuration } = req.body;
 
     // extract video file
     const videoFile = req.files.video;
     // console.log('videoFile ', videoFile)
 
     // validation
-    if (!title || !description || !videoFile || !sectionId) {
+    if (!title || !description || !videoFile || !sectionId || !timeDuration) {
       return res.status(400).json({
         success: false,
         message: 'All fields are required',
@@ -29,7 +29,7 @@ exports.createSubSection = async (req, res) => {
     // create entry in DB
     const SubSectionDetails = await SubSection.create({
       title,
-      timeDuration: videoFileDetails.duration,
+      timeDuration: timeDuration,
       description,
       videoUrl: videoFileDetails.secure_url,
     });
@@ -62,7 +62,8 @@ exports.createSubSection = async (req, res) => {
 // ================ Update SubSection ================
 exports.updateSubSection = async (req, res) => {
   try {
-    const { sectionId, subSectionId, title, description } = req.body;
+    const { sectionId, subSectionId, title, description, timeDuration } =
+      req.body;
 
     // validation
     if (!subSectionId) {
@@ -91,6 +92,10 @@ exports.updateSubSection = async (req, res) => {
       subSection.description = description;
     }
 
+    if (timeDuration) {
+      subSection.timeDuration = timeDuration;
+    }
+
     // upload video to minio
     if (req.files && req.files.videoFile !== undefined) {
       const video = req.files.videoFile;
@@ -99,7 +104,6 @@ exports.updateSubSection = async (req, res) => {
         process.env.MINIO_DEFAULT_BUCKET
       );
       subSection.videoUrl = uploadDetails.secure_url;
-      subSection.timeDuration = uploadDetails.duration;
     }
 
     // save data to DB

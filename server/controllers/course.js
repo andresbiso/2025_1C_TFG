@@ -9,7 +9,7 @@ const {
   uploadImageToMinio,
   deleteResourceFromMinio,
 } = require('../utils/imageUploader');
-const { convertSecondsToDuration } = require('../utils/secToDuration');
+const { convertMinutesToDuration } = require('../utils/secToDuration');
 require('dotenv').config();
 
 // ================ create new course ================
@@ -222,7 +222,7 @@ exports.getCourseDetails = async (req, res) => {
       });
     });
 
-    const totalDuration = convertSecondsToDuration(totalDurationInSeconds);
+    const totalDuration = convertMinutesToDuration(totalDurationInSeconds);
 
     //return response
     return res.status(200).json({
@@ -300,7 +300,7 @@ exports.getFullCourseDetails = async (req, res) => {
       });
     });
 
-    const totalDuration = convertSecondsToDuration(totalDurationInSeconds);
+    const totalDuration = convertMinutesToDuration(totalDurationInSeconds);
 
     return res.status(200).json({
       success: true,

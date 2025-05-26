@@ -7,7 +7,7 @@ const {
   uploadImageToMinio,
   deleteResourceFromMinio,
 } = require('../utils/imageUploader');
-const { convertSecondsToDuration } = require('../utils/secToDuration');
+const { convertMinutesToDuration } = require('../utils/secToDuration');
 require('dotenv').config();
 // ================ update Profile ================
 exports.updateProfile = async (req, res) => {
@@ -227,7 +227,7 @@ exports.getEnrolledCourses = async (req, res) => {
           0
         );
 
-        userDetails.courses[i].totalDuration = convertSecondsToDuration(
+        userDetails.courses[i].totalDuration = convertMinutesToDuration(
           totalDurationInSeconds
         );
         SubsectionLength +=

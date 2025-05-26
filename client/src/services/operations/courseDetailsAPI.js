@@ -32,13 +32,24 @@ export const getAllCourses = async () => {
   try {
     const response = await apiConnector('GET', GET_ALL_COURSE_API);
     if (!response?.data?.success) {
-      throw new Error('No se pudo obtener categorias del curso');
+      throw new Error('No se pudo obtener categorías del curso');
     }
     result = response?.data?.data;
+
+    // Fetch course details for each course to include the duration
+    const coursesWithDetails = await Promise.all(
+      result.map(async (course) => {
+        const details = await fetchCourseDetails(course._id);
+        return { ...course, totalDuration: details?.data?.totalDuration };
+      })
+    );
+
+    result = coursesWithDetails;
   } catch (error) {
     console.log('GET_ALL_COURSE_API API ERROR............', error);
     toast.error(error.message);
   }
+
   toast.dismiss(toastId);
   return result;
 };
@@ -289,7 +300,7 @@ export const deleteSubSection = async (data, token) => {
 // ================ fetch Instructor Courses ================
 export const fetchInstructorCourses = async (token) => {
   let result = [];
-  // const toastId = toast.loading("Loading...")
+
   try {
     const response = await apiConnector(
       'GET',
@@ -300,14 +311,27 @@ export const fetchInstructorCourses = async (token) => {
       }
     );
     console.log('INSTRUCTOR COURSES API RESPONSE', response);
+
     if (!response?.data?.success) {
       throw new Error('No se pudo obtener cursos del instructor');
     }
+
     result = response?.data?.data;
+
+    // Fetch course details for each course to get duration
+    const coursesWithDetails = await Promise.all(
+      result.map(async (course) => {
+        const details = await fetchCourseDetails(course._id);
+        return { ...course, totalDuration: details?.data?.totalDuration };
+      })
+    );
+
+    result = coursesWithDetails;
   } catch (error) {
     console.log('INSTRUCTOR COURSES API ERROR............', error);
     toast.error(error.message);
   }
+
   return result;
 };
 

@@ -296,10 +296,10 @@ function CourseDetails() {
               <div className="flex flex-wrap justify-between gap-2">
                 <div className="flex gap-2">
                   <span>
-                    {courseContent.length} {`section(s)`}
+                    {courseContent.length} {`sección/secciones`}
                   </span>
                   <span>
-                    {totalNoOfLectures} {`lecture(s)`}
+                    {totalNoOfLectures} {`lección/lecciones`}
                   </span>
                   <span>{response.data?.totalDuration} Tiempo Total</span>
                 </div>
