@@ -5,7 +5,7 @@ import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 
 import { useState } from 'react';
-import { FaCheck } from 'react-icons/fa';
+import { FaCheck, FaRegEye } from 'react-icons/fa';
 import { FiEdit2 } from 'react-icons/fi';
 import { HiClock } from 'react-icons/hi';
 import { RiDeleteBin6Line } from 'react-icons/ri';
@@ -168,6 +168,18 @@ export default function CoursesTable({
                 </Td> */}
 
                 <Td className="text-sm font-medium text-richblack-100 ">
+                  {/* View button */}
+                  <button
+                    disabled={loading}
+                    onClick={() => {
+                      navigate(`/courses/${course._id}`);
+                    }}
+                    title="Edit"
+                    className="px-2 transition-all duration-200 hover:scale-110 hover:text-blue-300"
+                  >
+                    <FaRegEye size={20} />
+                  </button>
+
                   {/* Edit button */}
                   <button
                     disabled={loading}
