@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-import IconBtn from './../../common/IconBtn';
+import IconBtn from '../../common/IconBtn';
 import { setCourseViewSidebar } from '../../../slices/sidebarSlice';
 
 import { BsChevronDown } from 'react-icons/bs';
@@ -12,9 +12,9 @@ import { IoIosArrowBack } from 'react-icons/io';
 import { IoMdClose } from 'react-icons/io';
 import { HiMenuAlt1 } from 'react-icons/hi';
 
-export default function VideoDetailsSidebar({ setReviewModal }) {
+export default function LectureDetailsSidebar({ setReviewModal }) {
   const [activeStatus, setActiveStatus] = useState(''); // store curr section id
-  const [videoBarActive, setVideoBarActive] = useState(''); // store curr SubSection Id
+  const [videoBarActive, setLectureBarActive] = useState(''); // store curr SubSection Id
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
           currentSubSectionIndx
         ]?._id;
       setActiveStatus(courseSectionData?.[currentSectionIndx]?._id);
-      setVideoBarActive(activeSubSectionId);
+      setLectureBarActive(activeSubSectionId);
     })();
   }, [
     courseSectionData,
@@ -143,7 +143,7 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
                         navigate(
                           `/view-course/${courseEntireData?._id}/section/${section?._id}/sub-section/${topic?._id}`
                         );
-                        setVideoBarActive(topic._id);
+                        setLectureBarActive(topic._id);
                         courseViewSidebar && window.innerWidth <= 640
                           ? dispatch(setCourseViewSidebar(false))
                           : null;
@@ -167,6 +167,6 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
   );
 }
 
-VideoDetailsSidebar.propTypes = {
+LectureDetailsSidebar.propTypes = {
   setReviewModal: PropTypes.any,
 };

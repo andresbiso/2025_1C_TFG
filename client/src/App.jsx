@@ -31,7 +31,7 @@ import EnrolledCourses from './components/core/Dashboard/EnrolledCourses';
 import AddCourse from './components/core/Dashboard/AddCourse/AddCourse';
 
 import ViewCourse from './pages/ViewCourse';
-import VideoDetails from './components/core/ViewCourse/VideoDetails';
+import LectureDetails from './components/core/ViewCourse/LectureDetails';
 
 import { ACCOUNT_TYPE } from './utils/constants';
 
@@ -188,7 +188,7 @@ function App() {
           {user?.accountType === ACCOUNT_TYPE.STUDENT && (
             <Route
               path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
-              element={<VideoDetails />}
+              element={<LectureDetails />}
             />
           )}
         </Route>
