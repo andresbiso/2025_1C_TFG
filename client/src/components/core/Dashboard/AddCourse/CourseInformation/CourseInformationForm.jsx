@@ -48,7 +48,7 @@ export default function CourseInformationForm() {
       // console.log("editCourse ", editCourse)
       setValue('courseTitle', course.courseName);
       setValue('courseShortDesc', course.courseDescription);
-      setValue('coursePrice', 0);
+      setValue('coursePrice', course.price);
       setValue('courseTags', course.tag);
       setValue('courseBenefits', course.whatYouWillLearn);
       setValue('courseCategory', course.category);
@@ -200,31 +200,27 @@ export default function CourseInformationForm() {
       </div>
 
       {/* Course Price */}
-      {/* <div className="flex flex-col space-y-2">
+      <div className="flex flex-col space-y-2">
         <label className="text-sm text-richblack-5" htmlFor="coursePrice">
           Precio del curso <sup className="text-pink-200">*</sup>
         </label>
-        <div className="relative">
-          <input
-            id="coursePrice"
-            placeholder="Ingresar precio del curso"
-            {...register('coursePrice', {
-              required: true,
-              valueAsNumber: true,
-              pattern: {
-                value: /^(0|[1-9]\d*)(\.\d+)?$/,
-              },
-            })}
-            className="form-style w-full !pl-12"
-          />
-          <HiOutlineCurrencyRupee className="absolute left-3 top-1/2 inline-block -translate-y-1/2 text-2xl text-richblack-400" />
-        </div>
+
+        {/* Invisible input with fixed value */}
+        <input
+          id="coursePrice"
+          type="number"
+          defaultValue={0} // Always stays 0
+          {...register('coursePrice', { valueAsNumber: true })}
+          className="hidden" // Makes it invisible
+          disabled // Prevents user modification
+        />
+
         {errors.coursePrice && (
           <span className="ml-2 text-xs tracking-wide text-pink-200">
             El precio del curso es requerido.
           </span>
         )}
-      </div> */}
+      </div>
 
       {/* Course Category */}
       <div className="flex flex-col space-y-2 ">
