@@ -1,4 +1,4 @@
-import loginImg from '../assets/images/login.png';
+import loginImg from '../assets/images/login/login_01.png';
 import Template from '../components/core/Auth/Template';
 
 function Login() {

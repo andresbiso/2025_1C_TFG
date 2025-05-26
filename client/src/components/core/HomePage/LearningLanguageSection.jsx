@@ -1,7 +1,7 @@
 import HighlightText from './HighlightText';
-import know_your_progress from '../../../assets/images/Know_your_progress.png';
-import compare_with_others from '../../../assets/images/Compare_with_others.png';
-import plan_your_lesson from '../../../assets/images/Plan_your_lessons.png';
+import image_01 from '../../../assets/images/learning_language/learning_language_01.png';
+import image_02 from '../../../assets/images/learning_language/learning_language_02.png';
+import image_03 from '../../../assets/images/learning_language/learning_language_03.png';
 import CTAButton from '../HomePage/Button';
 
 const LearningLanguageSection = () => {
@@ -19,21 +19,21 @@ const LearningLanguageSection = () => {
           más.
         </div>
 
-        <div className="flex flex-col lg:flex-row items-center justify-center mt-5">
+        <div className="relative flex flex-col lg:flex-row items-center justify-center mt-5 w-[1000px] h-[700px]">
           <img
-            src={know_your_progress}
-            alt="KNowYourProgressImage"
-            className="object-contain lg:-mr-32 "
+            src={image_01}
+            alt="learning language image 1"
+            className="object-contain w-[340px] rotate-[-10deg] -mr-24 z-10"
           />
           <img
-            src={compare_with_others}
-            alt="KNowYourProgressImage"
-            className="object-contain"
+            src={image_02}
+            alt="learning language image 2"
+            className="object-contain w-[340px] rotate-[10deg] -mr-24 z-20"
           />
           <img
-            src={plan_your_lesson}
-            alt="KNowYourProgressImage"
-            className="object-contain lg:-ml-36"
+            src={image_03}
+            alt="learning language image 3"
+            className="object-contain w-[340px] rotate-[-5deg] z-30"
           />
         </div>
 

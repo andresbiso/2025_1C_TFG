@@ -90,7 +90,7 @@ const Home = () => {
 
   return (
     <React.Fragment>
-      {/* background random image */}
+      {/* background cover image */}
       <div>
         <div className="w-full h-[450px] md:h-[650px] absolute top-0 left-0 opacity-[0.3] overflow-hidden object-cover">
           <img
