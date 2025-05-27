@@ -6,6 +6,8 @@ import { setUser } from '../../slices/profileSlice';
 import { apiConnector } from '../apiConnector';
 import { endpoints } from '../apis';
 
+const diceBearUrl = import.meta.env.VITE_DICE_BEAR_URL;
+
 const {
   SENDOTP_API,
   SIGNUP_API,
@@ -111,7 +113,7 @@ export function login(email, password, navigate) {
 
       const userImage = response.data?.user?.image
         ? response.data.user.image
-        : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`;
+        : `${diceBearUrl}/9.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`;
 
       dispatch(setUser({ ...response.data.user, image: userImage }));
       // console.log('User data - ', response.data.user);/

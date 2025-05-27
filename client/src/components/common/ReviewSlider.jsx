@@ -17,6 +17,8 @@ import { FaStar } from 'react-icons/fa';
 import { apiConnector } from '../../services/apiConnector';
 import { ratingsEndpoints } from '../../services/apis';
 
+const diceBearUrl = import.meta.env.VITE_DICE_BEAR_URL;
+
 function ReviewSlider() {
   const [reviews, setReviews] = useState(null);
   const truncateWords = 15;
@@ -73,7 +75,7 @@ function ReviewSlider() {
                       src={
                         review?.user?.image
                           ? review?.user?.image
-                          : `https://api.dicebear.com/5.x/initials/svg?seed=${review?.user?.firstName} ${review?.user?.lastName}`
+                          : `${diceBearUrl}/9.x/initials/svg?seed=${review?.user?.firstName} ${review?.user?.lastName}`
                       }
                       alt=""
                       className="h-9 w-9 rounded-full object-cover"

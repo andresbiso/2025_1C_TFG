@@ -158,6 +158,7 @@ exports.signup = async (req, res) => {
     let approved = '';
     approved === 'Instructor' ? (approved = false) : (approved = true);
 
+    const diceBearUrl = process.env.DICE_BEAR_URL;
     // create entry in DB
     const userData = await User.create({
       firstName,
@@ -168,7 +169,7 @@ exports.signup = async (req, res) => {
       accountType: accountType,
       additionalDetails: profileDetails._id,
       approved: approved,
-      image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
+      image: `${diceBearUrl}/9.x/initials/svg?seed=${firstName} ${lastName}`,
     });
 
     // return success message

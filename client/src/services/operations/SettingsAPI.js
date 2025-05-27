@@ -5,6 +5,8 @@ import { apiConnector } from '../apiConnector';
 import { settingsEndpoints } from '../apis';
 import { logout } from './authAPI';
 
+const diceBearUrl = import.meta.env.VITE_DICE_BEAR_URL;
+
 const {
   UPDATE_DISPLAY_PICTURE_API,
   UPDATE_PROFILE_API,
@@ -65,7 +67,7 @@ export function updateProfile(token, formData) {
       }
       const userImage = response.data?.updatedUserDetails?.image
         ? response.data.updatedUserDetails?.image
-        : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.updatedUserDetails.firstName} ${response.data.updatedUserDetails.lastName}`;
+        : `${diceBearUrl}/9.x/initials/svg?seed=${response.data.updatedUserDetails.firstName} ${response.data.updatedUserDetails.lastName}`;
 
       dispatch(
         setUser({ ...response.data.updatedUserDetails, image: userImage })

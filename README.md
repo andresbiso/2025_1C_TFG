@@ -198,28 +198,28 @@ docker exec -it mongo bash
 2. En un navegador ir a http://localhost:8025 y verificar si está corriendo el mail server.
 
 ```javascript
-const nodemailer = require("nodemailer");
+const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-  host: "localhost",
+  host: 'localhost',
   port: 1025,
   secure: false,
   auth: {
-    user: "", // Mailpit doesn't require auth
-    pass: "",
+    user: '', // Mailpit doesn't require auth
+    pass: '',
   },
 });
 
 const mailOptions = {
-  from: "test@example.com",
-  to: "user@example.com",
-  subject: "Testing MailHog",
-  text: "Hello! This is a test email.",
+  from: 'test@example.com',
+  to: 'user@example.com',
+  subject: 'Testing MailHog',
+  text: 'Hello! This is a test email.',
 };
 
 transporter.sendMail(mailOptions, (err, info) => {
   if (err) console.error(err);
-  else console.log("Email sent:", info);
+  else console.log('Email sent:', info);
 });
 ```
 
@@ -227,6 +227,7 @@ transporter.sendMail(mailOptions, (err, info) => {
 
 - **Client**: [http://localhost:8083](http://localhost:8083)
 - **Server**: [http://localhost:8082](http://localhost:8082)
+- **DiceBear**: [http://localhost:3000](http://localhost:3000)
 - **MongoDB**: `mongodb://localhost:27017/` (Database connection)
 - **Mongo Express**: [http://localhost:8081](http://localhost:8081) (Web UI for MongoDB)
 - **MinIO API**: [http://localhost:9000](http://localhost:9000)
