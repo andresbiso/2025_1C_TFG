@@ -44,10 +44,10 @@ export default function SubSectionModal({
   const [choices, setChoices] = useState([{ text: '' }]);
   const [correctChoice, setCorrectChoice] = useState(null);
 
-  console.log(modalData);
-
   useEffect(() => {
     if (view || edit) {
+      setValue('sectionId', modalData.sectionId);
+      setValue('subSectionId', modalData._id);
       setValue('lectureTitle', modalData.title);
       setValue('lectureDuration', modalData.timeDuration);
       setType(modalData.type);
@@ -61,6 +61,8 @@ export default function SubSectionModal({
         setChoices(modalData.choices);
         setCorrectChoice(modalData.correctChoice);
       }
+    } else if (add) {
+      setValue('sectionId', modalData);
     }
   }, []);
 
@@ -155,8 +157,7 @@ export default function SubSectionModal({
     }
 
     const formData = new FormData();
-    formData.append('sectionId', modalData.sectionId);
-    formData.append('subSectionId', modalData._id);
+    formData.append('sectionId', modalData);
     formData.append('type', type);
     formData.append('title', data.lectureTitle);
     formData.append('timeDuration', data.lectureDuration);
@@ -167,7 +168,7 @@ export default function SubSectionModal({
     } else if (type === 'text') {
       formData.append('text', data.lectureText);
     } else if (type === 'multipleChoice') {
-      formData.append('lectureQuestion', data.lectureQuestion);
+      formData.append('question', data.lectureQuestion);
       formData.append('choices', JSON.stringify(choices));
       formData.append('correctChoice', correctChoice);
     }
@@ -441,7 +442,7 @@ export default function SubSectionModal({
 }
 
 SubSectionModal.propTypes = {
-  modalData: PropTypes.object,
+  modalData: PropTypes.any,
   setModalData: PropTypes.func,
   mode: PropTypes.string,
   add: PropTypes.bool,

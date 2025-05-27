@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { FiUploadCloud } from 'react-icons/fi';
+import { FaCloudUploadAlt } from 'react-icons/fa';
 import 'video-react/dist/video-react.css';
 import { Player } from 'video-react';
 
@@ -90,12 +90,12 @@ export default function Upload({
             onClick={() => inputRef.current.click()}
           >
             <div className="grid aspect-square w-14 place-items-center rounded-full bg-pure-greys-800">
-              <FiUploadCloud className="text-2xl text-yellow-50" />
+              <FaCloudUploadAlt className="text-2xl text-white" />
             </div>
             <p className="mt-2 max-w-[200px] text-center text-sm text-richblack-200">
               Arrastrar y soltar {!video ? 'la imagen' : 'el video'}, o hacer
               click para{' '}
-              <span className="font-semibold text-yellow-50">navegar</span> al
+              <span className="font-semibold text-white">navegar</span> al
               archivo
             </p>
             <ul className="mt-10 flex list-disc justify-between space-x-12 text-center text-xs text-richblack-200">
