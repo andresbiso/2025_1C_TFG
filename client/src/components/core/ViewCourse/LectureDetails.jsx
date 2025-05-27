@@ -75,9 +75,9 @@ const LectureDetails = () => {
     setLoading(false);
   };
 
-  const handleOptionSelect = (option) => {
-    setSelectedOption(option);
-    setIsCorrect(option === lectureData?.correctAnswer);
+  const handleOptionSelect = (optionIndex) => {
+    setSelectedOption(optionIndex);
+    setIsCorrect(optionIndex === lectureData?.correctChoice);
   };
 
   const isFirstLecture = () => {
@@ -244,11 +244,15 @@ const LectureDetails = () => {
           <h1 className="text-3xl font-semibold">{lectureData?.title}</h1>
           <textarea
             className="w-full p-2 mt-2 border border-gray-600 bg-black text-white rounded"
-            placeholder="Escribe aquí..."
+            disabled
+            value={lectureData?.text}
           ></textarea>
-          <button className="absolute bottom-4 right-4 bg-green-500 px-4 py-2 rounded">
-            Marcar como completado
-          </button>
+          <IconBtn
+            disabled={loading}
+            onClick={() => handleLectureCompletion()}
+            text={'Marcar como completado'}
+            customClasses="text-l max-w-max px-4 mx-auto"
+          />
         </div>
       )}
 
@@ -256,43 +260,56 @@ const LectureDetails = () => {
         <div>
           <h1 className="text-3xl font-semibold">{lectureData?.title}</h1>
           <p>{lectureData?.question}</p>
-          {lectureData?.options.map((option, index) => (
-            <button
-              key={index}
-              className={`px-4 py-2 rounded ${
-                selectedOption === option
-                  ? isCorrect
-                    ? 'bg-green-500'
-                    : 'bg-red-500'
-                  : 'bg-gray-500'
-              }`}
-              onClick={() => handleOptionSelect(option)}
-            >
-              {option}
-            </button>
-          ))}
+          <form>
+            {lectureData?.choices.map((choice, index) => (
+              <label
+                key={index}
+                className={`block px-4 py-2 rounded cursor-pointer ${
+                  selectedOption === index
+                    ? isCorrect
+                      ? 'bg-green-200 border-green-500 text-green-800'
+                      : 'bg-red-200 border-red-500 text-red-800'
+                    : 'bg-gray-100 border-gray-400'
+                } border-2`}
+              >
+                <input
+                  type="radio"
+                  name="multipleChoice"
+                  value={index}
+                  checked={selectedOption === index}
+                  onChange={() => handleOptionSelect(index)}
+                  className="mr-2"
+                />
+                {choice.text}
+              </label>
+            ))}
+          </form>
           {isCorrect && (
-            <button
-              className="absolute bottom-4 right-4 bg-green-500 px-4 py-2 rounded"
-              onClick={handleLectureCompletion}
-            >
-              Marcar como completado
-            </button>
+            <IconBtn
+              disabled={loading}
+              onClick={() => handleLectureCompletion()}
+              text={'Marcar como completado'}
+              customClasses="text-l max-w-max px-4 mx-auto"
+            />
           )}
         </div>
       )}
 
       {/* Navigation Buttons */}
       <div className="flex justify-between mt-4">
-        {!isFirstLecture() && (
+        {!isFirstLecture() ? (
           <button className="blackButton" onClick={goToPrevLecture}>
             Anterior
           </button>
+        ) : (
+          <div className="flex-grow" /> // Keeps spacing
         )}
-        {!isLastLecture() && (
+        {!isLastLecture() ? (
           <button className="blackButton" onClick={goToNextLecture}>
             Siguiente
           </button>
+        ) : (
+          <div className="flex-grow" /> // Keeps spacing
         )}
       </div>
     </div>
