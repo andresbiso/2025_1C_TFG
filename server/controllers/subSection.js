@@ -72,7 +72,7 @@ exports.createSubSection = async (req, res) => {
         timeDuration: timeDuration,
         type: type,
         question: question,
-        choices: choices,
+        choices: JSON.parse(choices),
         correctChoice: correctChoice,
       });
     }
@@ -165,7 +165,7 @@ exports.updateSubSection = async (req, res) => {
       }
 
       if (choices) {
-        subSection.choices = choices;
+        subSection.choices = JSON.parse(choices);
       }
 
       if (correctChoice) {
