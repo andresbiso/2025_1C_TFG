@@ -1,3 +1,5 @@
+require('dotenv').config();
+const clientUrl = process.env.CLIENT_URL;
 exports.courseEnrollmentEmail = (courseName, name) => {
   return `<!DOCTYPE html>
     <html>
@@ -66,13 +68,13 @@ exports.courseEnrollmentEmail = (courseName, name) => {
     
     <body>
         <div class="container">
-            <a href="http://localhost:8083/"><img src="http://localhost:8083/logo.svg" width="120" height="60" alt="Logo" /></a>
+            <a href="${clientUrl}/"><img src="${clientUrl}/logo.svg" width="120" height="60" alt="Logo" /></a>
             <div class="message">Confirmación de Registro en el Curso</div>
             <div class="body">
                 <p>Estimado/a ${name},</p>
                 <p>Te has registrado exitosamente en el curso <span class="highlight">"${courseName}"</span>. ¡Estamos emocionados de tenerte como participante!</p>
                 <p>Por favor, inicia sesión en tu panel de aprendizaje para acceder al material del curso y comenzar tu viaje de aprendizaje.</p>
-                <a class="cta" href="http://localhost:8083/dashboard/enrolled-courses">Ir al Panel de Control</a>
+                <a class="cta" href="${clientUrl}/dashboard/enrolled-courses">Ir al Panel de Control</a>
             </div>
             <div class="support">Si tienes alguna pregunta o necesitas asistencia, no dudes en contactarnos en 
             <a href="mailto:info@mailpit.com">mailto:info@mailpit.com</a>. ¡Estamos aquí para ayudarte!</div>

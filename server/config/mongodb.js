@@ -29,16 +29,16 @@ exports.initializeDatabase = async () => {
   try {
     const categories = [
       {
-        name: 'Programming',
-        description: 'Courses related to coding and software development',
+        name: 'Programación',
+        description: 'Cursos relacionados al desarrollo de software',
       },
       {
-        name: 'Design',
-        description: 'Courses focused on UI/UX and graphic design',
+        name: 'Diseño',
+        description: 'Cursos relacionados con UI/UX y diseño gráfico',
       },
       {
-        name: 'Marketing',
-        description: 'Courses about digital marketing and business growth',
+        name: 'Publicidad',
+        description: 'Cursos sobre publicidad digital',
       },
     ];
 

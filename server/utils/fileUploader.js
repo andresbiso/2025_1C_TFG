@@ -4,7 +4,7 @@ const fs = require('fs');
 const client = minioConnect(); // Use the existing MinIO client
 
 // Upload image to MinIO
-exports.uploadImageToMinio = async (filePath, bucket) => {
+exports.uploadFileToMinio = async (filePath, bucket) => {
   if (!filePath || !bucket) {
     console.error(
       'Error uploading file to MinIO. Either filePath or bucket is null or undefined'

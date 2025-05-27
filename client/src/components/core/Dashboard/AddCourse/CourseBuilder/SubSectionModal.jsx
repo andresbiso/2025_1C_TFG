@@ -38,21 +38,25 @@ export default function SubSectionModal({
   const [loading, setLoading] = useState(false);
   const { token } = useSelector((state) => state.auth);
   const { course } = useSelector((state) => state.course);
+  const [type, setType] = useState(mode);
 
   //  Multiple Choice State
   const [choices, setChoices] = useState([{ text: '' }]);
   const [correctChoice, setCorrectChoice] = useState(null);
 
+  console.log(modalData);
+
   useEffect(() => {
     if (view || edit) {
       setValue('lectureTitle', modalData.title);
       setValue('lectureDuration', modalData.timeDuration);
-      if (mode === 'video') {
+      setType(modalData.type);
+      if (type === 'video') {
         setValue('lectureDesc', modalData.description);
         setValue('lectureVideo', modalData.video);
-      } else if (mode === 'text') {
+      } else if (type === 'text') {
         setValue('lectureText', modalData.text);
-      } else if (mode === 'multipleChoice') {
+      } else if (type === 'multipleChoice') {
         setValue('lectureQuestion', modalData.question);
         setChoices(modalData.choices);
         setCorrectChoice(modalData.correctChoice);
@@ -67,21 +71,21 @@ export default function SubSectionModal({
       currentValues.lectureTitle !== modalData.title ||
       currentValues.lectureDuration !== modalData.timeDuration;
     // console.log("changes after editing form values:", currentValues)
-    let modeConditions;
-    if (mode === 'video') {
-      modeConditions =
+    let typeConditions;
+    if (type === 'video') {
+      typeConditions =
         currentValues.lectureDesc !== modalData.description ||
         currentValues.lectureVideo !== modalData.video;
-    } else if (mode === 'text') {
-      modeConditions = currentValues.lectureText !== modalData.text;
-    } else if (mode === 'multipleChoice') {
+    } else if (type === 'text') {
+      typeConditions = currentValues.lectureText !== modalData.text;
+    } else if (type === 'multipleChoice') {
       const currentChoices = JSON.stringify(choices);
-      modeConditions =
+      typeConditions =
         currentValues.lectureQuestion !== modalData.question ||
         currentChoices !== JSON.stringify(modalData.choices) ||
         correctChoice !== modalData.correctChoice;
     }
-    return commonConditions || modeConditions;
+    return commonConditions || typeConditions;
   };
 
   // handle the editing of subsection
@@ -92,24 +96,25 @@ export default function SubSectionModal({
     // console.log("Values After Editing form values:", currentValues)
     formData.append('sectionId', modalData.sectionId);
     formData.append('subSectionId', modalData._id);
+    formData.append('type', type);
     if (currentValues.lectureTitle !== modalData.title) {
       formData.append('title', currentValues.lectureTitle);
     }
     if (currentValues.lectureDuration !== modalData.timeDuration) {
       formData.append('timeDuration', currentValues.lectureDuration);
     }
-    if (mode === 'video') {
+    if (type === 'video') {
       if (currentValues.lectureDesc !== modalData.description) {
         formData.append('description', currentValues.lectureDesc);
       }
       if (currentValues.lectureVideo !== modalData.video) {
         formData.append('video', currentValues.lectureVideo);
       }
-    } else if (mode === 'text') {
+    } else if (type === 'text') {
       if (currentValues.lectureText !== modalData.text) {
         formData.append('text', currentValues.lectureText);
       }
-    } else if (mode === 'multipleChoice') {
+    } else if (type === 'multipleChoice') {
       if (currentValues.lectureQuestion !== modalData.question) {
         formData.append('question', currentValues.lectureQuestion);
       }
@@ -152,15 +157,16 @@ export default function SubSectionModal({
     const formData = new FormData();
     formData.append('sectionId', modalData.sectionId);
     formData.append('subSectionId', modalData._id);
+    formData.append('type', type);
     formData.append('title', data.lectureTitle);
     formData.append('timeDuration', data.lectureDuration);
 
-    if (mode === 'video') {
+    if (type === 'video') {
       formData.append('description', data.lectureDesc);
       formData.append('video', data.lectureVideo);
-    } else if (mode === 'text') {
+    } else if (type === 'text') {
       formData.append('text', data.lectureText);
-    } else if (mode === 'multipleChoice') {
+    } else if (type === 'multipleChoice') {
       formData.append('lectureQuestion', data.lectureQuestion);
       formData.append('choices', JSON.stringify(choices));
       formData.append('correctChoice', correctChoice);
@@ -197,13 +203,13 @@ export default function SubSectionModal({
     }
   };
 
-  const modeLabels = {
+  const typeLabels = {
     video: 'video',
     text: 'texto',
     multipleChoice: 'pregunta',
   };
 
-  const modeLabel = modeLabels[mode] || '';
+  const typeLabel = typeLabels[type] || '';
 
   return (
     <div className="fixed inset-0 z-[1000] !mt-0 grid h-screen w-screen place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm">
@@ -212,7 +218,7 @@ export default function SubSectionModal({
         <div className="flex items-center justify-between rounded-t-lg bg-richblack-700 p-5">
           <p className="text-xl font-semibold text-richblack-5">
             {view && 'Viendo'} {add && 'Agregando'} {edit && 'Editando'} Lección
-            - Modo {modeLabel}
+            - Modo {typeLabel}
           </p>
           <button onClick={() => (!loading ? setModalData(null) : {})}>
             <RxCross2 className="text-2xl text-richblack-5" />
@@ -242,8 +248,8 @@ export default function SubSectionModal({
             )}
           </div>
 
-          {/* Mode-Based Input Fields */}
-          {mode === 'video' && (
+          {/* Type-Based Input Fields */}
+          {type === 'video' && (
             <>
               {/* Lecture Video Upload */}
               <Upload
@@ -281,7 +287,7 @@ export default function SubSectionModal({
             </>
           )}
 
-          {mode === 'text' && (
+          {type === 'text' && (
             <>
               {/* Lecture text */}
               <div className="flex flex-col space-y-2">
@@ -308,7 +314,7 @@ export default function SubSectionModal({
             </>
           )}
 
-          {mode === 'multipleChoice' && (
+          {type === 'multipleChoice' && (
             <div className="flex flex-col space-y-4">
               {/* Question Input */}
               <input

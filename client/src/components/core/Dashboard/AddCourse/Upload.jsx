@@ -62,7 +62,6 @@ export default function Upload({
         className={`${isDragActive ? 'bg-richblack-600' : 'bg-richblack-700'}
          flex min-h-[250px] cursor-pointer items-center justify-center rounded-md border-2 border-dotted border-richblack-500`}
         {...getRootProps()}
-        onClick={() => inputRef.current.click()} // Enable click upload
       >
         <input {...getInputProps()} ref={inputRef} />
 
@@ -86,7 +85,10 @@ export default function Upload({
             )}
           </div>
         ) : (
-          <div className="flex w-full flex-col items-center p-6">
+          <div
+            className="flex w-full flex-col items-center p-6"
+            onClick={() => inputRef.current.click()}
+          >
             <div className="grid aspect-square w-14 place-items-center rounded-full bg-pure-greys-800">
               <FiUploadCloud className="text-2xl text-yellow-50" />
             </div>
@@ -114,7 +116,7 @@ export default function Upload({
               setSelectedFile(null);
               setValue(name, null);
 
-              // ✅ Reset file input field for future uploads
+              // Reset file input field for future uploads
               if (inputRef.current) {
                 inputRef.current.value = '';
               }

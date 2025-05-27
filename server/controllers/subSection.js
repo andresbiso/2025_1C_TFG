@@ -1,44 +1,87 @@
 const Section = require('../models/section');
 const SubSection = require('../models/subSection');
-const { uploadImageToMinio } = require('../utils/imageUploader');
+const { uploadFileToMinio } = require('../utils/fileUploader');
 
 // ================ create SubSection ================
 exports.createSubSection = async (req, res) => {
   try {
-    // extract data
-    const { title, description, sectionId, timeDuration } = req.body;
-
-    // extract video file
-    const videoFile = req.files.video;
-    // console.log('videoFile ', videoFile)
-
-    // validation
-    if (!title || !description || !videoFile || !sectionId || !timeDuration) {
+    const { type, sectionId, title, timeDuration } = req.body;
+    if (!type || !sectionId || !title || !timeDuration) {
       return res.status(400).json({
         success: false,
         message: 'All fields are required',
       });
     }
 
-    // upload video to minio
-    const videoFileDetails = await uploadImageToMinio(
-      videoFile,
-      process.env.MINIO_DEFAULT_BUCKET
-    );
+    console.log(req.body);
 
-    // create entry in DB
-    const SubSectionDetails = await SubSection.create({
-      title,
-      timeDuration: timeDuration,
-      description,
-      videoUrl: videoFileDetails.secure_url,
-    });
+    let subSectionDetails;
+    if (type === 'video') {
+      const { description } = req.body;
+
+      if (!description || !req.files.video) {
+        return res.status(400).json({
+          success: false,
+          message: 'All fields are required',
+        });
+      }
+      const videoFile = req.files.video;
+      // upload video to minio
+      const videoFileDetails = await uploadFileToMinio(
+        videoFile,
+        process.env.MINIO_DEFAULT_BUCKET
+      );
+      // create entry in DB
+      subSectionDetails = await SubSection.create({
+        title: title,
+        timeDuration: timeDuration,
+        type: type,
+        description: description,
+        video: videoFileDetails.secure_url,
+      });
+    } else if (type === 'text') {
+      const { text } = req.body;
+
+      if (!text) {
+        return res.status(400).json({
+          success: false,
+          message: 'All fields are required',
+        });
+      }
+
+      // create entry in DB
+      subSectionDetails = await SubSection.create({
+        title: title,
+        timeDuration: timeDuration,
+        type: type,
+        text: text,
+      });
+    } else if (type === 'multipleChoice') {
+      const { question, choices, correctChoice } = req.body;
+
+      if (!question || !choices || !correctChoice) {
+        return res.status(400).json({
+          success: false,
+          message: 'All fields are required',
+        });
+      }
+
+      // create entry in DB
+      subSectionDetails = await SubSection.create({
+        title: title,
+        timeDuration: timeDuration,
+        type: type,
+        question: question,
+        choices: choices,
+        correctChoice: correctChoice,
+      });
+    }
 
     // link subsection id to section
     // Update the corresponding section with the newly created sub-section
     const updatedSection = await Section.findByIdAndUpdate(
       { _id: sectionId },
-      { $push: { subSection: SubSectionDetails._id } },
+      { $push: { subSection: subSectionDetails._id } },
       { new: true }
     ).populate('subSection');
 
@@ -62,8 +105,7 @@ exports.createSubSection = async (req, res) => {
 // ================ Update SubSection ================
 exports.updateSubSection = async (req, res) => {
   try {
-    const { sectionId, subSectionId, title, description, timeDuration } =
-      req.body;
+    const { subSectionId } = req.body;
 
     // validation
     if (!subSectionId) {
@@ -83,27 +125,52 @@ exports.updateSubSection = async (req, res) => {
       });
     }
 
-    // add data
+    const { sectionId, type, title, timeDuration } = req.body;
+
     if (title) {
       subSection.title = title;
-    }
-
-    if (description) {
-      subSection.description = description;
     }
 
     if (timeDuration) {
       subSection.timeDuration = timeDuration;
     }
 
-    // upload video to minio
-    if (req.files && req.files.videoFile !== undefined) {
-      const video = req.files.videoFile;
-      const uploadDetails = await uploadImageToMinio(
-        video,
-        process.env.MINIO_DEFAULT_BUCKET
-      );
-      subSection.videoUrl = uploadDetails.secure_url;
+    let subSectionDetails;
+    if (type === 'video') {
+      const { description } = req.body;
+
+      if (description) {
+        subSection.description = description;
+      }
+
+      if (req.files && req.files.video !== undefined) {
+        const video = req.files.video;
+        const uploadDetails = await uploadFileToMinio(
+          video,
+          process.env.MINIO_DEFAULT_BUCKET
+        );
+        subSection.video = uploadDetails.secure_url;
+      }
+    } else if (type === 'text') {
+      const { text } = req.body;
+
+      if (text) {
+        subSection.text = text;
+      }
+    } else if (type === 'multipleChoice') {
+      const { question, choices, correctChoice } = req.body;
+
+      if (question) {
+        subSection.question = question;
+      }
+
+      if (choices) {
+        subSection.choices = choices;
+      }
+
+      if (correctChoice) {
+        subSection.correctChoice = correctChoice;
+      }
     }
 
     // save data to DB
@@ -157,8 +224,8 @@ exports.deleteSubSection = async (req, res) => {
       'subSection'
     );
 
-    // In frontned we have to take care - when subsection is deleted we are sending ,
-    // only section data not full course details as we do in others
+    // When subsection is deleted we are sending
+    // only section data and not full course details as we do in others
 
     // success response
     return res.json({

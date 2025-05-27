@@ -253,7 +253,7 @@ export default function CourseInformationForm() {
 
       {/* Course Tags */}
       <ChipInput
-        label="Tags"
+        label="Etiquetas"
         name="courseTags"
         placeholder="Ingresar etiquetas y presionar Entrar (enter) o Coma (,)"
         register={register}

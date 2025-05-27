@@ -138,15 +138,15 @@ const LectureDetails = () => {
         {!courseViewSidebar && <HiMenuAlt1 size={33} />}
       </div>
 
-      {/* Render Content Based on Mode */}
-      {lectureData?.mode === 'video' && (
+      {/* Render Content Based on type */}
+      {lectureData?.type === 'video' && (
         <Player
           ref={playerRef}
           aspectRatio="16:9"
           playsInline
           autoPlay
           onEnded={() => setVideoEnded(true)}
-          src={lectureData?.videoUrl}
+          src={lectureData?.video}
         >
           <BigPlayButton position="center" />
           {videoEnded && (
@@ -167,7 +167,7 @@ const LectureDetails = () => {
         </Player>
       )}
 
-      {lectureData?.mode === 'text' && (
+      {lectureData?.type === 'text' && (
         <div>
           <h1 className="text-3xl font-semibold">{lectureData?.title}</h1>
           <textarea
@@ -180,7 +180,7 @@ const LectureDetails = () => {
         </div>
       )}
 
-      {lectureData?.mode === 'multipleChoice' && (
+      {lectureData?.type === 'multipleChoice' && (
         <div>
           <h1 className="text-3xl font-semibold">{lectureData?.title}</h1>
           <p>{lectureData?.question}</p>

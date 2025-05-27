@@ -6,9 +6,9 @@ const SubSection = require('../models/subSection');
 const CourseProgress = require('../models/courseProgress');
 
 const {
-  uploadImageToMinio,
+  uploadFileToMinio,
   deleteResourceFromMinio,
-} = require('../utils/imageUploader');
+} = require('../utils/fileUploader');
 const { convertMinutesToDuration } = require('../utils/secToDuration');
 require('dotenv').config();
 
@@ -72,7 +72,7 @@ exports.createCourse = async (req, res) => {
     }
 
     // upload thumbnail to minio
-    const thumbnailDetails = await uploadImageToMinio(
+    const thumbnailDetails = await uploadFileToMinio(
       thumbnail,
       process.env.MINIO_DEFAULT_BUCKET
     );
@@ -193,7 +193,7 @@ exports.getCourseDetails = async (req, res) => {
         path: 'courseContent',
         populate: {
           path: 'subSection',
-          select: '-videoUrl',
+          select: '-video',
         },
       })
       .exec();
@@ -307,8 +307,8 @@ exports.getFullCourseDetails = async (req, res) => {
       data: {
         courseDetails,
         totalDuration,
-        completedVideos: courseProgressCount?.completedVideos
-          ? courseProgressCount?.completedVideos
+        completedLectures: courseProgressCount?.completedLectures
+          ? courseProgressCount?.completedLectures
           : [],
       },
     });
@@ -335,7 +335,7 @@ exports.editCourse = async (req, res) => {
     if (req.files) {
       // console.log("thumbnail update")
       const thumbnail = req.files.thumbnailImage;
-      const thumbnailImage = await uploadImageToMinio(
+      const thumbnailImage = await uploadFileToMinio(
         thumbnail,
         process.env.MINIO_DEFAULT_BUCKET
       );
@@ -458,7 +458,7 @@ exports.deleteCourse = async (req, res) => {
           const subSection = await SubSection.findById(subSectionId);
           if (subSection) {
             await deleteResourceFromMinio(
-              subSection.videoUrl,
+              subSection.video,
               process.env.MINIO_DEFAULT_BUCKET
             ); // delete course videos From minio
           }

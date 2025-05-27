@@ -1,3 +1,5 @@
+require('dotenv').config();
+const clientUrl = process.env.CLIENT_URL;
 exports.passwordUpdated = (email, name) => {
   return `<!DOCTYPE html>
     <html>
@@ -55,7 +57,7 @@ exports.passwordUpdated = (email, name) => {
     
     <body>
         <div class="container">
-            <a href="http://localhost:8083/"><img src="http://localhost:8083/logo.svg" width="120" height="60" alt="Logo" /></a>
+            <a href="${clientUrl}/"><img src="${clientUrl}/logo.svg" width="120" height="60" alt="Logo" /></a>
             <div class="message">Confirmación de Actualización de Contraseña</div>
             <div class="body">
                 <p>Hola ${name},</p>

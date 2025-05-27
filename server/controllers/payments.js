@@ -84,7 +84,7 @@ const enrollStudents = async (courses, userId, res) => {
       const courseProgress = await CourseProgress.create({
         courseID: courseId,
         userId: userId,
-        completedVideos: [],
+        completedLectures: [],
       });
 
       // Find the student and add the course to their list of enrolled courses

@@ -4,9 +4,9 @@ const CourseProgress = require('../models/courseProgress');
 const Course = require('../models/course');
 
 const {
-  uploadImageToMinio,
+  uploadFileToMinio,
   deleteResourceFromMinio,
-} = require('../utils/imageUploader');
+} = require('../utils/fileUploader');
 const { convertMinutesToDuration } = require('../utils/secToDuration');
 require('dotenv').config();
 // ================ update Profile ================
@@ -164,7 +164,7 @@ exports.updateUserProfileImage = async (req, res) => {
     // console.log('profileImage = ', profileImage)
 
     // upload imga eto minio
-    const image = await uploadImageToMinio(
+    const image = await uploadFileToMinio(
       profileImage,
       process.env.MINIO_DEFAULT_BUCKET
     );
@@ -239,7 +239,7 @@ exports.getEnrolledCourses = async (req, res) => {
         userId: userId,
       });
 
-      courseProgressCount = courseProgressCount?.completedVideos.length;
+      courseProgressCount = courseProgressCount?.completedLectures.length;
 
       if (SubsectionLength === 0) {
         userDetails.courses[i].progressPercentage = 100;

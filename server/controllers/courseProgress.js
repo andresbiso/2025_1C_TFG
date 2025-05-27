@@ -29,12 +29,12 @@ exports.updateCourseProgress = async (req, res) => {
       });
     } else {
       // If course progress exists, check if the subsection is already completed
-      if (courseProgress.completedVideos.includes(subsectionId)) {
+      if (courseProgress.completedLectures.includes(subsectionId)) {
         return res.status(400).json({ error: 'Subsection already completed' });
       }
 
-      // Push the subsection into the completedVideos array
-      courseProgress.completedVideos.push(subsectionId);
+      // Push the subsection into the completedLectures array
+      courseProgress.completedLectures.push(subsectionId);
     }
 
     // Save the updated course progress
@@ -82,7 +82,7 @@ exports.updateCourseProgress = async (req, res) => {
 //     })
 
 //     let progressPercentage =
-//       (courseProgress.completedVideos.length / lectures) * 100
+//       (courseProgress.completedLectures.length / lectures) * 100
 
 //     // To make it up to 2 decimal point
 //     const multiplier = Math.pow(10, 2)

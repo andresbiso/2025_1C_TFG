@@ -2,6 +2,9 @@ const User = require('../models/user');
 const mailSender = require('../utils/mailSender');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
+require('dotenv').config();
+
+const clientUrl = process.env.CLIENT_URL;
 
 // ================ resetPasswordToken ================
 exports.resetPasswordToken = async (req, res) => {
@@ -30,7 +33,7 @@ exports.resetPasswordToken = async (req, res) => {
     ); // by marking true, it will return updated user
 
     // create url
-    const url = `http://localhost:8083/update-password/${token}`;
+    const url = `${clientUrl}/update-password/${token}`;
 
     // send email containing url
     await mailSender(
