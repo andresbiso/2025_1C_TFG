@@ -9,13 +9,13 @@ import { fetchCourseCategories } from './../../services/operations/courseDetails
 import ProfileDropDown from '../core/Auth/ProfileDropDown';
 import MobileProfileDropDown from '../core/Auth/MobileProfileDropDown';
 
-import { AiOutlineShoppingCart } from 'react-icons/ai';
+// import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
 const Navbar = () => {
   const { token } = useSelector((state) => state.auth);
-  const { user } = useSelector((state) => state.profile);
-  const { totalItems } = useSelector((state) => state.cart);
+  // const { user } = useSelector((state) => state.profile);
+  // const { totalItems } = useSelector((state) => state.cart);
   const location = useLocation();
 
   const [subLinks, setSubLinks] = useState([]);
@@ -134,7 +134,7 @@ const Navbar = () => {
 
         {/* Login/SignUp/Dashboard */}
         <div className="flex gap-x-4 items-center">
-          {user && user.accountType !== 'Instructor' && (
+          {/* {user && user.accountType !== 'Instructor' && (
             <Link to="/dashboard/cart" className="relative">
               <AiOutlineShoppingCart className="text-[2.35rem] text-richblack-5 hover:bg-richblack-700 rounded-full p-2 duration-200" />
               {totalItems > 0 && (
@@ -143,7 +143,7 @@ const Navbar = () => {
                 </span>
               )}
             </Link>
-          )}
+          )} */}
           {token === null && (
             <>
               <Link to="/login">

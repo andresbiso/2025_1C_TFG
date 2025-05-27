@@ -16,7 +16,7 @@ import { buyCourse } from '../services/operations/studentFeaturesAPI';
 
 import GetAvgRating from '../utils/avgRating';
 import { ACCOUNT_TYPE } from './../utils/constants';
-import { addToCart } from '../slices/cartSlice';
+// import { addToCart } from '../slices/cartSlice';
 
 import { PiKeyReturnBold } from 'react-icons/pi';
 import { MdOutlineVerified } from 'react-icons/md';
@@ -152,24 +152,24 @@ function CourseDetails() {
   };
 
   // Add to cart Course handler
-  const handleAddToCart = () => {
-    if (user && user?.accountType === ACCOUNT_TYPE.INSTRUCTOR) {
-      toast.error('Sos un instructor. No podés anotarte a un curso.');
-      return;
-    }
-    if (token) {
-      dispatch(addToCart(response?.data.courseDetails));
-      return;
-    }
-    setConfirmationModal({
-      text1: 'No has iniciado sesión!',
-      text2: 'Por favor, ingresa para agregar el curso al carrito.',
-      btn1Text: 'Ingresar',
-      btn2Text: 'Cancelar',
-      btn1Handler: () => navigate('/login'),
-      btn2Handler: () => setConfirmationModal(null),
-    });
-  };
+  // const handleAddToCart = () => {
+  //   if (user && user?.accountType === ACCOUNT_TYPE.INSTRUCTOR) {
+  //     toast.error('Sos un instructor. No podés anotarte a un curso.');
+  //     return;
+  //   }
+  //   if (token) {
+  //     dispatch(addToCart(response?.data.courseDetails));
+  //     return;
+  //   }
+  //   setConfirmationModal({
+  //     text1: 'No has iniciado sesión!',
+  //     text2: 'Por favor, ingresa para agregar el curso al carrito.',
+  //     btn1Text: 'Ingresar',
+  //     btn2Text: 'Cancelar',
+  //     btn1Handler: () => navigate('/login'),
+  //     btn2Handler: () => setConfirmationModal(null),
+  //   });
+  // };
 
   return (
     <>
@@ -240,17 +240,21 @@ function CourseDetails() {
               <button className="yellowButton" onClick={handleBuyCourse}>
                 Anotarte ahora
               </button>
-              <button onClick={handleAddToCart} className="blackButton">
+              {/* <button onClick={handleAddToCart} className="blackButton">
                 Agregar al carrito
-              </button>
+              </button> */}
             </div>
           </div>
 
           {/* Floating Courses Card */}
           <div className="right-[1.5rem] top-[60px] mx-auto hidden lg:block lg:absolute min-h-[600px] w-1/3 max-w-[410px] translate-y-24 md:translate-y-0">
-            <CourseDetailsCard
+            {/* <CourseDetailsCard
               course={response?.data?.courseDetails}
               setConfirmationModal={setConfirmationModal}
+              handleBuyCourse={handleBuyCourse}
+            /> */}
+            <CourseDetailsCard
+              course={response?.data?.courseDetails}
               handleBuyCourse={handleBuyCourse}
             />
           </div>

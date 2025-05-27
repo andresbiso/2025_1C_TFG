@@ -1,21 +1,22 @@
 import copy from 'copy-to-clipboard';
 import PropTypes from 'prop-types';
 import { toast } from 'react-hot-toast';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { BsFillCaretRightFill } from 'react-icons/bs';
 import { FaShareSquare } from 'react-icons/fa';
 
-import { addToCart } from '../../../slices/cartSlice';
-import { ACCOUNT_TYPE } from '../../../utils/constants';
+// import { addToCart } from '../../../slices/cartSlice';
+// import { ACCOUNT_TYPE } from '../../../utils/constants';
 import Img from './../../common/Img';
 
-function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
+function CourseDetailsCard({ course, handleBuyCourse }) {
   const { user } = useSelector((state) => state.profile);
-  const { token } = useSelector((state) => state.auth);
+  // const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const {
     thumbnail: ThumbnailImage,
@@ -28,24 +29,24 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
     toast.success('Enlace copiado al porta papeles');
   };
 
-  const handleAddToCart = () => {
-    if (user && user?.accountType === ACCOUNT_TYPE.INSTRUCTOR) {
-      toast.error('Sos un instructor. No podés anotarte a un curso.');
-      return;
-    }
-    if (token) {
-      dispatch(addToCart(course));
-      return;
-    }
-    setConfirmationModal({
-      text1: 'No has iniciado sesión!',
-      text2: 'Por favor, inicia sesión para agregar al carrito',
-      btn1Text: 'Iniciar Sesión',
-      btn2Text: 'Cancelar',
-      btn1Handler: () => navigate('/login'),
-      btn2Handler: () => setConfirmationModal(null),
-    });
-  };
+  // const handleAddToCart = () => {
+  //   if (user && user?.accountType === ACCOUNT_TYPE.INSTRUCTOR) {
+  //     toast.error('Sos un instructor. No podés anotarte a un curso.');
+  //     return;
+  //   }
+  //   if (token) {
+  //     dispatch(addToCart(course));
+  //     return;
+  //   }
+  //   setConfirmationModal({
+  //     text1: 'No has iniciado sesión!',
+  //     text2: 'Por favor, inicia sesión para agregar al carrito',
+  //     btn1Text: 'Iniciar Sesión',
+  //     btn2Text: 'Cancelar',
+  //     btn1Handler: () => navigate('/login'),
+  //     btn2Handler: () => setConfirmationModal(null),
+  //   });
+  // };
 
   // console.log("Student already enrolled ", course?.studentsEnroled, user?._id)
 
@@ -78,14 +79,14 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
                 ? 'Ir al curso'
                 : 'Anotarse al curso'}
             </button>
-            {(!user || !course?.studentsEnrolled.includes(user?._id)) && (
+            {/* {(!user || !course?.studentsEnrolled.includes(user?._id)) && (
               <button
                 onClick={handleAddToCart}
                 className="blackButton outline-none"
               >
                 Agregar al carrito
               </button>
-            )}
+            )} */}
           </div>
 
           {/* <p className="pb-3 pt-6 text-center text-sm text-richblack-25">
