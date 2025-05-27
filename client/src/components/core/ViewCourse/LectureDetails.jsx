@@ -63,6 +63,13 @@ const LectureDetails = () => {
     })();
   }, [courseSectionData, courseId, sectionId, subSectionId]);
 
+  useEffect(() => {
+    if (completedLectures && completedLectures.includes(subSectionId)) {
+      setSelectedOption(lectureData?.correctChoice); // Marca la opción correcta por defecto
+      setIsCorrect(true); // Indica que es correcta
+    }
+  }, [lectureData, completedLectures, subSectionId]);
+
   const handleLectureCompletion = async () => {
     setLoading(true);
     const res = await markLectureAsComplete(
@@ -194,14 +201,14 @@ const LectureDetails = () => {
                   {!completedLectures.includes(subSectionId) && (
                     <IconBtn
                       disabled={loading}
-                      onClick={() => handleLectureCompletion()}
+                      onclick={() => handleLectureCompletion()}
                       text={!loading ? 'Marcar como completado' : 'Cargando...'}
                       customClasses="text-xl max-w-max px-4 mx-auto"
                     />
                   )}
                   <IconBtn
                     disabled={loading}
-                    onClick={() => {
+                    onclick={() => {
                       if (playerRef?.current) {
                         playerRef?.current?.seek(0);
                         setVideoEnded(false);
@@ -247,12 +254,14 @@ const LectureDetails = () => {
             disabled
             value={lectureData?.text}
           ></textarea>
-          <IconBtn
-            disabled={loading}
-            onClick={() => handleLectureCompletion()}
-            text={'Marcar como completado'}
-            customClasses="text-l max-w-max px-4 mx-auto"
-          />
+          {!completedLectures.includes(subSectionId) && (
+            <IconBtn
+              disabled={loading}
+              onclick={() => handleLectureCompletion()}
+              text={!loading ? 'Marcar como completado' : 'Cargando...'}
+              customClasses="text-l max-w-max px-4 mx-auto"
+            />
+          )}
         </div>
       )}
 
@@ -264,7 +273,7 @@ const LectureDetails = () => {
             {lectureData?.choices.map((choice, index) => (
               <label
                 key={index}
-                className={`block px-4 py-2 rounded cursor-pointer ${
+                className={`flex items-center gap-2 block px-4 py-2 rounded cursor-pointer ${
                   selectedOption === index
                     ? isCorrect
                       ? 'bg-green-200 border-green-500 text-green-800'
@@ -278,17 +287,33 @@ const LectureDetails = () => {
                   value={index}
                   checked={selectedOption === index}
                   onChange={() => handleOptionSelect(index)}
-                  className="mr-2"
+                  disabled={isCorrect}
+                  className="cursor-pointer"
                 />
                 {choice.text}
+                {selectedOption === index &&
+                  (isCorrect ? (
+                    <span className="text-green-600">✅</span>
+                  ) : (
+                    <span className="text-red-600">❌</span>
+                  ))}
               </label>
             ))}
           </form>
-          {isCorrect && (
+          {selectedOption !== null && (
+            <p
+              className={`mt-4 font-semibold ${
+                isCorrect ? 'text-green-600' : 'text-red-600'
+              }`}
+            >
+              {isCorrect ? '¡Correcto! 🎉' : 'Incorrecto, intenta de nuevo. ❌'}
+            </p>
+          )}
+          {isCorrect && !completedLectures.includes(subSectionId) && (
             <IconBtn
               disabled={loading}
-              onClick={() => handleLectureCompletion()}
-              text={'Marcar como completado'}
+              onclick={() => handleLectureCompletion()}
+              text={!loading ? 'Marcar como completado' : 'Cargando...'}
               customClasses="text-l max-w-max px-4 mx-auto"
             />
           )}
