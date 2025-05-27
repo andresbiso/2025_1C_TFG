@@ -13,8 +13,6 @@ exports.createSubSection = async (req, res) => {
       });
     }
 
-    console.log(req.body);
-
     let subSectionDetails;
     if (type === 'video') {
       const { description } = req.body;
