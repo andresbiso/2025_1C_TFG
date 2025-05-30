@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 import { updateProfile } from '../../../../services/operations/SettingsAPI';
 import IconBtn from '../../../common/IconBtn';
@@ -54,7 +55,17 @@ export default function EditProfile() {
 
     // Merge integrations data into request payload
     data.integrations = editableIntegrations;
-    console.log(data);
+
+    // Check for required Chat ID if Telegram is enabled
+    if (
+      data.integrations?.telegram?.enabled &&
+      (!data.integrations?.telegram?.chatId ||
+        data.integrations?.telegram?.chatId.length < 3 ||
+        !/^\d+$/.test(data.integrations?.telegram?.chatId))
+    ) {
+      toast.error('Integración Telegram: El Chat ID es obligatorio.');
+      return;
+    }
 
     try {
       dispatch(updateProfile(token, data));
@@ -305,7 +316,11 @@ export default function EditProfile() {
                       onChange={(e) =>
                         handleIntegrationChange(name, 'chatId', e.target.value)
                       }
-                      className="w-full p-2 mt-1 bg-richblack-700 text-richblack-200 rounded-md border border-richblack-600"
+                      className={`w-full p-2 mt-1 rounded-md border border-richblack-600 ${
+                        errors.chatId
+                          ? 'border-red-500'
+                          : 'bg-richblack-700 text-richblack-200'
+                      }`}
                     />
                     <p className="text-xs text-richblack-400 mt-2">
                       Necesitás una cuenta de Telegram. Para obtener tu Chat ID,
@@ -320,6 +335,17 @@ export default function EditProfile() {
                       </a>
                       .
                     </p>
+
+                    {/* Error Message for Chat ID Validation */}
+                    {data.enabled &&
+                      (!data.chatId ||
+                        data.chatId.length < 3 ||
+                        !/^\d+$/.test(data.chatId)) && (
+                        <p className="text-sm text-yellow-500 mt-1">
+                          *El Chat ID es obligatorio y debe contener solo
+                          números con al menos 3 caracteres.
+                        </p>
+                      )}
                   </div>
 
                   {/* Checkbox to Enable Notification Settings */}
