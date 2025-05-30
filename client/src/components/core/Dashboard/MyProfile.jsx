@@ -126,7 +126,7 @@ export default function MyProfile() {
             </div>
             <div>
               <p className="mb-2 text-sm text-richblack-600">
-                Número de teléfono
+                Número de contacto
               </p>
               <p className="text-sm font-semibold text-richblack-5">
                 {user?.additionalDetails?.contactNumber ??
@@ -138,12 +138,102 @@ export default function MyProfile() {
                 Fecha de nacimiento
               </p>
               <p className="text-sm font-semibold text-richblack-5">
-                {formattedDate(user?.additionalDetails?.dateOfBirth) ??
-                  'Agregar fecha de nacimiento'}
+                {user?.additionalDetails?.dateOfBirth
+                  ? formattedDate(user?.additionalDetails?.dateOfBirth)
+                  : 'Agregar fecha de nacimiento'}
               </p>
             </div>
           </div>
         </div>
+      </div>
+      {/* Display Integrations Details */}
+      <div className="my-10 flex flex-col gap-y-10 rounded-2xl border-[1px] border-richblack-700 bg-richblack-800 p-8 px-7 sm:px-12">
+        <div className="flex w-full items-center justify-between">
+          <p className="text-lg font-semibold text-richblack-5">
+            Integraciones
+          </p>
+          <IconBtn
+            text="Editar"
+            onclick={() => {
+              navigate('/dashboard/settings');
+            }}
+          >
+            <RiEditBoxLine />
+          </IconBtn>
+        </div>
+
+        {user?.additionalDetails?.integrations ? (
+          Object.entries(user.additionalDetails.integrations).map(
+            ([name, data]) => (
+              <div
+                key={name}
+                className="mt-4 p-4 border rounded-lg bg-richblack-700"
+              >
+                <p className="text-sm font-semibold text-richblack-5">
+                  {name.charAt(0).toUpperCase() + name.slice(1)}
+                </p>
+                <p className="text-sm font-medium text-richblack-400">
+                  Estado: {data?.enabled ? 'Habilitado' : 'Deshabilitado'}
+                </p>
+
+                {data?.enabled && (
+                  <>
+                    {/* Telegram Integration */}
+                    {name === 'telegram' && (
+                      <>
+                        <div className="mt-2">
+                          <label className="text-sm text-richblack-5">
+                            Chat ID:
+                          </label>
+                          <input
+                            type="text"
+                            value={data.chatId || ''}
+                            disabled
+                            className="w-full p-2 mt-1 bg-richblack-800 text-richblack-200 rounded-lg border border-richblack-600 cursor-not-allowed"
+                          />
+                        </div>
+                        <div className="mt-2">
+                          {data.notifications?.receiveAllNewCourses ? (
+                            <div className="flex items-center gap-x-2">
+                              <input
+                                type="checkbox"
+                                checked
+                                disabled
+                                className="cursor-not-allowed"
+                              />
+                              <label className="text-sm text-richblack-5">
+                                Recibir todos los cursos nuevos
+                              </label>
+                            </div>
+                          ) : (
+                            <div>
+                              <label className="text-sm text-richblack-5">
+                                Límite de duración del curso:
+                              </label>
+                              <input
+                                type="number"
+                                value={
+                                  data.notifications?.courseLengthThreshold ??
+                                  ''
+                                }
+                                disabled
+                                className="w-full p-2 mt-1 bg-richblack-800 text-richblack-200 rounded-lg border border-richblack-600 cursor-not-allowed"
+                              />
+                            </div>
+                          )}
+                        </div>
+                      </>
+                    )}
+                  </>
+                )}
+              </div>
+            )
+          )
+        ) : (
+          <p className="text-richblack-400 text-sm font-medium">
+            No hay integraciones configuradas aún.
+          </p>
+        )}
       </div>
     </>
   );

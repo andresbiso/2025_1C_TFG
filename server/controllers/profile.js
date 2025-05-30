@@ -12,53 +12,94 @@ require('dotenv').config();
 // ================ update Profile ================
 exports.updateProfile = async (req, res) => {
   try {
-    // extract data
-    const {
-      gender = '',
-      dateOfBirth = '',
-      about = '',
-      contactNumber = '',
-      firstName,
-      lastName,
-    } = req.body;
-
-    // extract userId
+    // Extract userId
     const userId = req.user.id;
 
-    // find profile
+    // Find user and profile details
     const userDetails = await User.findById(userId);
     const profileId = userDetails.additionalDetails;
     const profileDetails = await Profile.findById(profileId);
 
-    // console.log('User profileDetails -> ', profileDetails);
+    // Extract data from request body
+    const {
+      firstName,
+      lastName,
+      gender,
+      dateOfBirth,
+      about,
+      contactNumber,
+      email,
+      integrations,
+    } = req.body;
 
-    // Update the profile fields
-    userDetails.firstName = firstName;
-    userDetails.lastName = lastName;
+    // Update user details only if new values are provided
+    if (firstName !== undefined) userDetails.firstName = firstName;
+    if (lastName !== undefined) userDetails.lastName = lastName;
+    if (email !== undefined) userDetails.email = email;
     await userDetails.save();
 
-    profileDetails.gender = gender;
-    profileDetails.dateOfBirth = dateOfBirth;
-    profileDetails.about = about;
-    profileDetails.contactNumber = contactNumber;
+    // Update profile details only if new values are provided
+    if (gender !== undefined) profileDetails.gender = gender;
+    if (dateOfBirth !== undefined) profileDetails.dateOfBirth = dateOfBirth;
+    if (about !== undefined) profileDetails.about = about;
+    if (contactNumber !== undefined)
+      profileDetails.contactNumber = contactNumber;
 
-    // save data to DB
+    console.log(req.body);
+    // Update integrations
+    if (integrations) {
+      Object.entries(integrations).forEach(
+        ([integrationName, integrationData]) => {
+          // Special handling for Telegram integration (extra fields)
+          if (integrationName === 'telegram') {
+            console.log(integrationData.notifications);
+            if (integrationData.enabled !== undefined) {
+              profileDetails.integrations[integrationName].enabled =
+                integrationData.enabled;
+            }
+            if (integrationData.enabled) {
+              if (integrationData.chatId !== undefined) {
+                profileDetails.integrations.telegram.chatId =
+                  integrationData.chatId;
+              }
+              if (integrationData.notifications) {
+                if (
+                  integrationData.notifications.courseLengthThreshold !==
+                  undefined
+                ) {
+                  profileDetails.integrations.telegram.notifications.courseLengthThreshold =
+                    integrationData.notifications.courseLengthThreshold;
+                }
+                if (
+                  integrationData.notifications.receiveAllNewCourses !==
+                  undefined
+                ) {
+                  profileDetails.integrations.telegram.notifications.receiveAllNewCourses =
+                    integrationData.notifications.receiveAllNewCourses;
+                }
+              }
+            }
+          }
+        }
+      );
+    }
+
+    // Save profile updates
     await profileDetails.save();
 
+    // Fetch updated user details including populated profile
     const updatedUserDetails = await User.findById(userId).populate({
       path: 'additionalDetails',
     });
-    // console.log('updatedUserDetails -> ', updatedUserDetails);
 
-    // return response
+    // Return response
     res.status(200).json({
       success: true,
       updatedUserDetails,
       message: 'Profile updated successfully',
     });
   } catch (error) {
-    console.log('Error while updating profile');
-    console.log(error);
+    console.error('Error while updating profile:', error);
     res.status(500).json({
       success: false,
       error: error.message,
