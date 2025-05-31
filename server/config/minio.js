@@ -16,6 +16,7 @@ exports.minioConnect = () => {
     return minioClient;
   } catch (error) {
     console.error('MinIO connection error:', error);
+    throw new Error('MinIO connection error:', error);
   }
 };
 
@@ -33,5 +34,6 @@ exports.createBucket = async (bucketName) => {
     }
   } catch (error) {
     console.error(`Error checking/creating bucket: ${error.message}`);
+    throw new Error(`Error checking/creating bucket: ${error.message}`);
   }
 };

@@ -70,3 +70,8 @@ export const settingsEndpoints = {
   CHANGE_PASSWORD_API: BASE_URL + '/auth/changepassword',
   DELETE_PROFILE_API: BASE_URL + '/profile/deleteProfile',
 };
+
+// INTEGRATIONS ENDPOINTS
+export const integrationEndpoints = {
+  TELEGRAM_SEND_MESSAGE_API: BASE_URL + '/integration/telegram/sendMessage',
+};

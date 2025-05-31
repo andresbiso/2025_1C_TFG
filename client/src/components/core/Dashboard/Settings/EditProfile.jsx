@@ -376,12 +376,10 @@ export default function EditProfile() {
                         </label>
                         <input
                           type="number"
-                          value={
-                            data.notifications?.courseLengthThreshold ?? 10
-                          } // ✅ Default value set to 10
+                          value={data.notifications?.courseLengthThreshold ?? 1}
                           onChange={(e) => {
                             const value = Number(e.target.value);
-                            if (value >= 10 && value <= 30) {
+                            if (value >= 1 && value <= 300) {
                               handleIntegrationChange(
                                 name,
                                 'notifications.courseLengthThreshold',
@@ -401,10 +399,11 @@ export default function EditProfile() {
 
                         {/* Error Message */}
                         {data.notifications?.courseLengthThreshold &&
-                          (data.notifications?.courseLengthThreshold < 10 ||
-                            data.notifications?.courseLengthThreshold > 30) && (
+                          (data.notifications?.courseLengthThreshold < 1 ||
+                            data.notifications?.courseLengthThreshold >
+                              300) && (
                             <p className="text-sm text-red-500 mt-1">
-                              El límite debe estar entre 10 y 30.
+                              El límite debe estar entre 1 y 300 minutos.
                             </p>
                           )}
                       </div>

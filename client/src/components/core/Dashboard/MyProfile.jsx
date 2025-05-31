@@ -6,8 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import { formattedDate } from '../../../utils/dateFormatter';
 import IconBtn from '../../common/IconBtn';
 import Img from './../../common/Img';
+import { telegramSendMessage } from '../../../services/operations/integrationAPI';
 
 export default function MyProfile() {
+  const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
   const navigate = useNavigate();
 
@@ -15,6 +17,14 @@ export default function MyProfile() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleTelegramTestClick = async () => {
+    const data = {
+      integration_data: user.additionalDetails.integrations.telegram,
+      message: 'Este es un mensaje de prueba.',
+    };
+    await telegramSendMessage(data, token);
+  };
 
   return (
     <>
@@ -222,6 +232,12 @@ export default function MyProfile() {
                             </div>
                           )}
                         </div>
+                        <button
+                          className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                          onClick={() => handleTelegramTestClick()}
+                        >
+                          Enviar mensaje de prueba
+                        </button>
                       </>
                     )}
                   </>
