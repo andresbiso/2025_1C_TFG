@@ -101,7 +101,7 @@ brew install --cask mongodb-compass
 
 - Bot: Python
 - Bot Server: Python + Flask
-- Client: App React + Typescript
+- Client: App React
 - Server: App Node.js + Express
 
 > [!NOTE]
