@@ -161,3 +161,4 @@ lerna-debug.log*
 mailpit.*
 .env
 *.drawio.dtmp
+*.drawio.bkp

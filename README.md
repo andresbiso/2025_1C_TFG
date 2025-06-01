@@ -17,6 +17,10 @@
 
 - Repositorio que contiene la implementación de la materia Trabajo Final de Grado de la Universidad de Palermo.
 
+> [!NOTE]
+>
+> - El paper de esta implementación se encuentra en el siguiente repositorio de código: https://github.com/andresbiso/2025_1C_TFG_PAPER
+
 # :hammer: Aplicaciones Utilizadas <a name = "applications"></a>
 
 > [!NOTE]  
