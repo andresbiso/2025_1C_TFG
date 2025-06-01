@@ -18,14 +18,20 @@
 - Repositorio que contiene la implementación de la materia Trabajo Final de Grado de la Universidad de Palermo.
 
 > [!NOTE]
->
-> - El paper de esta implementación se encuentra en el siguiente repositorio de código: https://github.com/andresbiso/2025_1C_TFG_PAPER
+> El paper de esta implementación se encuentra en el siguiente repositorio de código: https://github.com/andresbiso/2025_1C_TFG_PAPER
+
+## Arquitectura Propuesta
+
+<p align="center">
+  <img src="docs/diagrama_arquitectura.png?raw=true" width="350" title="diagrama de arquitectura">
+</p>
 
 # :hammer: Aplicaciones Utilizadas <a name = "applications"></a>
 
-> [!NOTE]  
-> La implementación fue desarrollada en macOS Sequoia 15 con arquitectura intel (x64).
-> Tecnologías utilizadas: .NET 9 y React.
+> [!NOTE]
+>
+> - La implementación fue desarrollada en macOS Sequoia 15 con arquitectura intel (x64).
+> - Tecnologías utilizadas: NodeJs, Python y React.
 
 ## macOS
 
@@ -93,8 +99,16 @@ brew install --cask mongodb-compass
 
 ## Sobre cada app
 
-- Client: App React + Typescript creada con https://vite.dev/guide/
+- Bot: Python
+- Bot Server: Python + Flask
+- Client: App React + Typescript
 - Server: App Nodejs + Express
+
+> [!NOTE]
+>
+> - Servicios: DiceBear, MongoDB, Mongo Express, MinIO (API + WebUI), Mailpit (SMTP + WebUI).
+> - Estos servicios, el bot y el bot server fueron configurados para ser ejecutados dentro de containers de docker.
+> - El client fue generado con la guía: https://vite.dev/guide/
 
 ## Visual Studio Code Extensions
 
