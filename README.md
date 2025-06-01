@@ -31,7 +31,7 @@
 > [!NOTE]
 >
 > - La implementación fue desarrollada en macOS Sequoia 15 con arquitectura intel (x64).
-> - Tecnologías utilizadas: NodeJs, Python y React.
+> - Tecnologías utilizadas: Node.js, Python y React.
 
 ## macOS
 
@@ -94,7 +94,7 @@ brew install --cask mongodb-compass
 
 6. `mongodb://root:example@localhost:27017/`
 
-> ![NOTE]
+> [!NOTE]
 > 27017 es el puerto por defecto de mongo
 
 ## Sobre cada app
@@ -102,7 +102,7 @@ brew install --cask mongodb-compass
 - Bot: Python
 - Bot Server: Python + Flask
 - Client: App React + Typescript
-- Server: App Nodejs + Express
+- Server: App Node.js + Express
 
 > [!NOTE]
 >
@@ -128,8 +128,8 @@ brew install --cask mongodb-compass
 npm install
 ```
 
-> ![NOTE]
-> Recomiendo utilizar la versión de npm que viene incluído en la versión de nodejs LTS para instalar los paquetes que se encuentran en el archivo package.json.
+> [!NOTE]
+> Recomiendo utilizar la versión de npm que viene incluído con Node.js LTS para instalar los paquetes que se encuentran en el package.json.
 
 2. Levantar los servicios con docker compose.
 
@@ -147,7 +147,7 @@ npm run start
 
 ## ¿Cómo usar docker compose?
 
-> ![NOTE]
+> [!NOTE]
 > Ejecutar estos comandos en el directorio que contiene docker-compose.yml.
 
 Levantar todos los servicios:
