@@ -191,7 +191,7 @@ export default function CourseInformationForm() {
           id="courseShortDesc"
           placeholder="Ingresar descripción breve del curso"
           {...register('courseShortDesc', { required: true })}
-          className="form-style resize-x-none min-h-[130px] w-full ] "
+          className="form-style resize-x-none min-h-[130px] w-full"
         />
         {errors.courseShortDesc && (
           <span className="ml-2 text-xs tracking-wide text-pink-200">

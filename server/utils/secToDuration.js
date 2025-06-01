@@ -9,7 +9,7 @@ function convertSecondsToDuration(totalSeconds) {
   const seconds = Math.floor((totalSeconds % 3600) % 60);
 
   if (hours > 0) {
-    return `${hours}h ${minutes}m ${seconds}s`;
+    return `${hours}h ${minutes}min ${seconds}s`;
   } else if (minutes > 0) {
     return `${minutes}m ${seconds}s`;
   } else {
@@ -20,16 +20,16 @@ function convertSecondsToDuration(totalSeconds) {
 // Helper function to convert total minutes to duration format
 function convertMinutesToDuration(totalMinutes) {
   if (isNaN(totalMinutes) || totalMinutes < 0) {
-    return '0m';
+    return '0min';
   }
 
   const hours = Math.floor(totalMinutes / 60);
   const minutes = totalMinutes % 60;
 
   if (hours > 0) {
-    return `${hours}h ${minutes}m`;
+    return `${hours}h ${minutes}min`;
   } else {
-    return `${minutes}m`;
+    return `${minutes}min`;
   }
 }
 

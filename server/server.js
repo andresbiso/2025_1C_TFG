@@ -16,7 +16,7 @@ const userRoutes = require('./routes/user');
 const profileRoutes = require('./routes/profile');
 const paymentRoutes = require('./routes/payments');
 const courseRoutes = require('./routes/course');
-const integrationRoutes = require('./routes/integration');
+const integrationRoutes = require('./integrations/routes/integrations');
 
 // middleware
 app.use(express.json()); // to parse json body

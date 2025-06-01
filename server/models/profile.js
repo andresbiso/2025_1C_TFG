@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const telegramIntegrationSchema = require('./integrations/telegramIntegration');
+const telegramIntegrationSchema = require('../integrations/models/telegramIntegration');
 
 const profileSchema = new mongoose.Schema({
   gender: { type: String },

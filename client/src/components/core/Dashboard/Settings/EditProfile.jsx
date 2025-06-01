@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 
 import { updateProfile } from '../../../../services/operations/SettingsAPI';
 import IconBtn from '../../../common/IconBtn';
+import { ACCOUNT_TYPE } from '../../../../utils/constants';
 
 const genders = ['Masculino', 'Femenino', 'Otro'];
 const botUrl = import.meta.env.VITE_BOT_URL;
@@ -274,173 +275,183 @@ export default function EditProfile() {
           </div>
         </div>
 
-        {/* Editable Integrations */}
-        <div className="my-10 flex flex-col gap-y-6 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-6 sm:px-12">
-          <h2 className="text-lg font-semibold text-richblack-5">
-            Integraciones
-          </h2>
+        {/* Editable Integrations (Oly for students) */}
+        {user.accountType === ACCOUNT_TYPE.STUDENT && (
+          <div className="my-10 flex flex-col gap-y-6 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-6 sm:px-12">
+            <h2 className="text-lg font-semibold text-richblack-5">
+              Integraciones
+            </h2>
 
-          {Object.entries(editableIntegrations).map(([name, data]) => (
-            <div
-              key={name}
-              className="mt-4 p-4 border rounded-lg bg-richblack-700"
-            >
-              <p className="text-sm font-semibold text-richblack-5">
-                {name.charAt(0).toUpperCase() + name.slice(1)}
-              </p>
-
-              {/* Checkbox to Enable Integration */}
-              <div className="flex items-center gap-x-2 mt-2">
-                <input
-                  type="checkbox"
-                  checked={data?.enabled || false}
-                  onChange={(e) =>
-                    handleIntegrationChange(name, 'enabled', e.target.checked)
-                  }
-                  className="cursor-pointer accent-richblack-600"
-                />
-                <label className="text-sm text-richblack-5">
-                  Habilitar integración{' '}
+            {Object.entries(editableIntegrations).map(([name, data]) => (
+              <div
+                key={name}
+                className="mt-4 p-4 border rounded-lg bg-richblack-700"
+              >
+                <p className="text-sm font-semibold text-richblack-5">
                   {name.charAt(0).toUpperCase() + name.slice(1)}
-                </label>
-              </div>
+                </p>
 
-              {data?.enabled && name === 'telegram' && (
-                <>
-                  {/* Chat ID Field with Instructions */}
-                  <div className="mt-4 p-4 bg-richblack-800 rounded-md border border-richblack-700">
-                    <label className="text-sm text-richblack-5">Chat ID:</label>
-                    <input
-                      type="text"
-                      value={data.chatId || ''}
-                      onChange={(e) =>
-                        handleIntegrationChange(name, 'chatId', e.target.value)
-                      }
-                      className={`w-full p-2 mt-1 rounded-md border border-richblack-600 ${
-                        errors.chatId
-                          ? 'border-red-500'
-                          : 'bg-richblack-700 text-richblack-200'
-                      }`}
-                    />
-                    <p className="text-xs text-richblack-400 mt-2">
-                      Necesitás una cuenta de Telegram. Para obtener tu Chat ID,
-                      visita{' '}
-                      <a
-                        href={botUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-400 hover:underline"
-                      >
-                        este bot
-                      </a>
-                      .
-                    </p>
+                {/* Checkbox to Enable Integration */}
+                <div className="flex items-center gap-x-2 mt-2">
+                  <input
+                    type="checkbox"
+                    checked={data?.enabled || false}
+                    onChange={(e) =>
+                      handleIntegrationChange(name, 'enabled', e.target.checked)
+                    }
+                    className="cursor-pointer accent-richblack-600"
+                  />
+                  <label className="text-sm text-richblack-5">
+                    Habilitar integración{' '}
+                    {name.charAt(0).toUpperCase() + name.slice(1)}
+                  </label>
+                </div>
 
-                    {/* Error Message for Chat ID Validation */}
-                    {data.enabled &&
-                      (!data.chatId ||
-                        data.chatId.length < 3 ||
-                        !/^\d+$/.test(data.chatId)) && (
-                        <p className="text-sm text-yellow-500 mt-1">
-                          *El Chat ID es obligatorio y debe contener solo
-                          números con al menos 3 caracteres.
-                        </p>
-                      )}
-                  </div>
-
-                  {/* Checkbox to Enable Notification Settings */}
-                  <div className="flex items-center gap-x-2 mt-4">
-                    <input
-                      type="checkbox"
-                      checked={data.notifications?.enabled || false}
-                      onChange={(e) =>
-                        handleIntegrationChange(
-                          name,
-                          'notifications.enabled',
-                          e.target.checked
-                        )
-                      }
-                      className="cursor-pointer accent-richblack-600"
-                    />
-                    <label className="text-sm text-richblack-5">
-                      Habilitar notificaciones
-                    </label>
-                  </div>
-
-                  {/* Notification Settings Section (Styled) */}
-                  {data.notifications?.enabled && (
+                {data?.enabled && name === 'telegram' && (
+                  <>
+                    {/* Chat ID Field with Instructions */}
                     <div className="mt-4 p-4 bg-richblack-800 rounded-md border border-richblack-700">
-                      <div className="mt-2">
-                        <label className="text-sm text-richblack-5">
-                          Límite de duración del curso (en minutos):
-                        </label>
-                        <input
-                          type="number"
-                          value={data.notifications?.courseLengthThreshold ?? 1}
-                          onChange={(e) => {
-                            const value = Number(e.target.value);
-                            if (value >= 1 && value <= 300) {
-                              handleIntegrationChange(
-                                name,
-                                'notifications.courseLengthThreshold',
-                                value
-                              );
-                            }
-                          }}
-                          min={10}
-                          max={30}
-                          readOnly={data.notifications?.receiveAllNewCourses}
-                          className={`w-full p-2 mt-1 rounded-md border border-richblack-600 ${
-                            data.notifications?.receiveAllNewCourses
-                              ? 'bg-richblack-600 cursor-not-allowed text-richblack-400'
-                              : 'bg-richblack-700 text-richblack-200'
-                          }`}
-                        />
+                      <label className="text-sm text-richblack-5">
+                        Chat ID:
+                      </label>
+                      <input
+                        type="text"
+                        value={data.chatId || ''}
+                        onChange={(e) =>
+                          handleIntegrationChange(
+                            name,
+                            'chatId',
+                            e.target.value
+                          )
+                        }
+                        className={`w-full p-2 mt-1 rounded-md border border-richblack-600 ${
+                          errors.chatId
+                            ? 'border-red-500'
+                            : 'bg-richblack-700 text-richblack-200'
+                        }`}
+                      />
+                      <p className="text-xs text-richblack-400 mt-2">
+                        Necesitás una cuenta de Telegram. Para obtener tu Chat
+                        ID, visita{' '}
+                        <a
+                          href={botUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-400 hover:underline"
+                        >
+                          este bot
+                        </a>
+                        .
+                      </p>
 
-                        {/* Error Message */}
-                        {data.notifications?.courseLengthThreshold &&
-                          (data.notifications?.courseLengthThreshold < 1 ||
-                            data.notifications?.courseLengthThreshold >
-                              300) && (
-                            <p className="text-sm text-red-500 mt-1">
-                              El límite debe estar entre 1 y 300 minutos.
-                            </p>
-                          )}
-                      </div>
-
-                      <div className="flex items-center gap-x-2">
-                        <input
-                          type="checkbox"
-                          checked={
-                            data.notifications?.receiveAllNewCourses || false
-                          }
-                          onChange={(e) => {
-                            handleIntegrationChange(
-                              name,
-                              'notifications.receiveAllNewCourses',
-                              e.target.checked
-                            );
-                            if (e.target.checked) {
-                              handleIntegrationChange(
-                                name,
-                                'notifications.courseLengthThreshold',
-                                ''
-                              );
-                            }
-                          }}
-                          className="cursor-pointer accent-richblack-600"
-                        />
-                        <label className="text-sm text-richblack-5">
-                          Recibir todos los cursos nuevos
-                        </label>
-                      </div>
+                      {/* Error Message for Chat ID Validation */}
+                      {data.enabled &&
+                        (!data.chatId ||
+                          data.chatId.length < 3 ||
+                          !/^\d+$/.test(data.chatId)) && (
+                          <p className="text-sm text-yellow-500 mt-1">
+                            *El Chat ID es obligatorio y debe contener solo
+                            números con al menos 3 caracteres.
+                          </p>
+                        )}
                     </div>
-                  )}
-                </>
-              )}
-            </div>
-          ))}
-        </div>
+
+                    {/* Checkbox to Enable Notification Settings */}
+                    <div className="flex items-center gap-x-2 mt-4">
+                      <input
+                        type="checkbox"
+                        checked={data.notifications?.enabled || false}
+                        onChange={(e) =>
+                          handleIntegrationChange(
+                            name,
+                            'notifications.enabled',
+                            e.target.checked
+                          )
+                        }
+                        className="cursor-pointer accent-richblack-600"
+                      />
+                      <label className="text-sm text-richblack-5">
+                        Habilitar notificaciones
+                      </label>
+                    </div>
+
+                    {/* Notification Settings Section (Styled) */}
+                    {data.notifications?.enabled && (
+                      <div className="mt-4 p-4 bg-richblack-800 rounded-md border border-richblack-700">
+                        <div className="mt-2">
+                          <label className="text-sm text-richblack-5">
+                            Límite de duración del curso (en minutos):
+                          </label>
+                          <input
+                            type="number"
+                            value={
+                              data.notifications?.courseLengthThreshold ?? 1
+                            }
+                            onChange={(e) => {
+                              const value = Number(e.target.value);
+                              if (value >= 1 && value <= 300) {
+                                handleIntegrationChange(
+                                  name,
+                                  'notifications.courseLengthThreshold',
+                                  value
+                                );
+                              }
+                            }}
+                            min={10}
+                            max={30}
+                            readOnly={data.notifications?.receiveAllNewCourses}
+                            className={`w-full p-2 mt-1 rounded-md border border-richblack-600 ${
+                              data.notifications?.receiveAllNewCourses
+                                ? 'bg-richblack-600 cursor-not-allowed text-richblack-400'
+                                : 'bg-richblack-700 text-richblack-200'
+                            }`}
+                          />
+
+                          {/* Error Message */}
+                          {data.notifications?.courseLengthThreshold &&
+                            (data.notifications?.courseLengthThreshold < 1 ||
+                              data.notifications?.courseLengthThreshold >
+                                300) && (
+                              <p className="text-sm text-red-500 mt-1">
+                                El límite debe estar entre 1 y 300 minutos.
+                              </p>
+                            )}
+                        </div>
+
+                        <div className="flex items-center gap-x-2">
+                          <input
+                            type="checkbox"
+                            checked={
+                              data.notifications?.receiveAllNewCourses || false
+                            }
+                            onChange={(e) => {
+                              handleIntegrationChange(
+                                name,
+                                'notifications.receiveAllNewCourses',
+                                e.target.checked
+                              );
+                              if (e.target.checked) {
+                                handleIntegrationChange(
+                                  name,
+                                  'notifications.courseLengthThreshold',
+                                  ''
+                                );
+                              }
+                            }}
+                            className="cursor-pointer accent-richblack-600"
+                          />
+                          <label className="text-sm text-richblack-5">
+                            Recibir todos los cursos nuevos
+                          </label>
+                        </div>
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
 
         <div className="flex justify-end gap-2">
           <button

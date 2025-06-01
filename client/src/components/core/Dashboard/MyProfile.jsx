@@ -7,6 +7,7 @@ import { formattedDate } from '../../../utils/dateFormatter';
 import IconBtn from '../../common/IconBtn';
 import Img from './../../common/Img';
 import { telegramSendMessage } from '../../../services/operations/integrationAPI';
+import { ACCOUNT_TYPE } from '../../../utils/constants';
 
 export default function MyProfile() {
   const { token } = useSelector((state) => state.auth);
@@ -156,101 +157,103 @@ export default function MyProfile() {
           </div>
         </div>
       </div>
-      {/* Display Integrations Details */}
-      <div className="my-10 flex flex-col gap-y-10 rounded-2xl border-[1px] border-richblack-700 bg-richblack-800 p-8 px-7 sm:px-12">
-        <div className="flex w-full items-center justify-between">
-          <p className="text-lg font-semibold text-richblack-5">
-            Integraciones
-          </p>
-          <IconBtn
-            text="Editar"
-            onclick={() => {
-              navigate('/dashboard/settings');
-            }}
-          >
-            <RiEditBoxLine />
-          </IconBtn>
-        </div>
+      {/* Display Integrations Details (Only for students) */}
+      {user.accountType === ACCOUNT_TYPE.STUDENT && (
+        <div className="my-10 flex flex-col gap-y-10 rounded-2xl border-[1px] border-richblack-700 bg-richblack-800 p-8 px-7 sm:px-12">
+          <div className="flex w-full items-center justify-between">
+            <p className="text-lg font-semibold text-richblack-5">
+              Integraciones
+            </p>
+            <IconBtn
+              text="Editar"
+              onclick={() => {
+                navigate('/dashboard/settings');
+              }}
+            >
+              <RiEditBoxLine />
+            </IconBtn>
+          </div>
 
-        {user?.additionalDetails?.integrations ? (
-          Object.entries(user.additionalDetails.integrations).map(
-            ([name, data]) => (
-              <div
-                key={name}
-                className="mt-4 p-4 border rounded-lg bg-richblack-700"
-              >
-                <p className="text-sm font-semibold text-richblack-5">
-                  {name.charAt(0).toUpperCase() + name.slice(1)}
-                </p>
-                <p className="text-sm font-medium text-richblack-400">
-                  Estado: {data?.enabled ? 'Habilitado' : 'Deshabilitado'}
-                </p>
+          {user?.additionalDetails?.integrations ? (
+            Object.entries(user.additionalDetails.integrations).map(
+              ([name, data]) => (
+                <div
+                  key={name}
+                  className="mt-4 p-4 border rounded-lg bg-richblack-700"
+                >
+                  <p className="text-sm font-semibold text-richblack-5">
+                    {name.charAt(0).toUpperCase() + name.slice(1)}
+                  </p>
+                  <p className="text-sm font-medium text-richblack-400">
+                    Estado: {data?.enabled ? 'Habilitado' : 'Deshabilitado'}
+                  </p>
 
-                {data?.enabled && (
-                  <>
-                    {/* Telegram Integration */}
-                    {name === 'telegram' && (
-                      <>
-                        <div className="mt-2">
-                          <label className="text-sm text-richblack-5">
-                            Chat ID:
-                          </label>
-                          <input
-                            type="text"
-                            value={data.chatId || ''}
-                            disabled
-                            className="w-full p-2 mt-1 bg-richblack-800 text-richblack-200 rounded-lg border border-richblack-600 cursor-not-allowed"
-                          />
-                        </div>
-                        <div className="mt-2">
-                          {data.notifications?.receiveAllNewCourses ? (
-                            <div className="flex items-center gap-x-2">
-                              <input
-                                type="checkbox"
-                                checked
-                                disabled
-                                className="cursor-not-allowed"
-                              />
-                              <label className="text-sm text-richblack-5">
-                                Recibir todos los cursos nuevos
-                              </label>
-                            </div>
-                          ) : (
-                            <div>
-                              <label className="text-sm text-richblack-5">
-                                Límite de duración del curso:
-                              </label>
-                              <input
-                                type="number"
-                                value={
-                                  data.notifications?.courseLengthThreshold ??
-                                  ''
-                                }
-                                disabled
-                                className="w-full p-2 mt-1 bg-richblack-800 text-richblack-200 rounded-lg border border-richblack-600 cursor-not-allowed"
-                              />
-                            </div>
-                          )}
-                        </div>
-                        <button
-                          className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-                          onClick={() => handleTelegramTestClick()}
-                        >
-                          Enviar mensaje de prueba
-                        </button>
-                      </>
-                    )}
-                  </>
-                )}
-              </div>
+                  {data?.enabled && (
+                    <>
+                      {/* Telegram Integration */}
+                      {name === 'telegram' && (
+                        <>
+                          <div className="mt-2">
+                            <label className="text-sm text-richblack-5">
+                              Chat ID:
+                            </label>
+                            <input
+                              type="text"
+                              value={data.chatId || ''}
+                              disabled
+                              className="w-full p-2 mt-1 bg-richblack-800 text-richblack-200 rounded-lg border border-richblack-600 cursor-not-allowed"
+                            />
+                          </div>
+                          <div className="mt-2">
+                            {data.notifications?.receiveAllNewCourses ? (
+                              <div className="flex items-center gap-x-2">
+                                <input
+                                  type="checkbox"
+                                  checked
+                                  disabled
+                                  className="cursor-not-allowed"
+                                />
+                                <label className="text-sm text-richblack-5">
+                                  Recibir todos los cursos nuevos
+                                </label>
+                              </div>
+                            ) : (
+                              <div>
+                                <label className="text-sm text-richblack-5">
+                                  Límite de duración del curso:
+                                </label>
+                                <input
+                                  type="number"
+                                  value={
+                                    data.notifications?.courseLengthThreshold ??
+                                    ''
+                                  }
+                                  disabled
+                                  className="w-full p-2 mt-1 bg-richblack-800 text-richblack-200 rounded-lg border border-richblack-600 cursor-not-allowed"
+                                />
+                              </div>
+                            )}
+                          </div>
+                          <button
+                            className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                            onClick={() => handleTelegramTestClick()}
+                          >
+                            Enviar mensaje de prueba
+                          </button>
+                        </>
+                      )}
+                    </>
+                  )}
+                </div>
+              )
             )
-          )
-        ) : (
-          <p className="text-richblack-400 text-sm font-medium">
-            No hay integraciones configuradas aún.
-          </p>
-        )}
-      </div>
+          ) : (
+            <p className="text-richblack-400 text-sm font-medium">
+              No hay integraciones configuradas aún.
+            </p>
+          )}
+        </div>
+      )}
     </>
   );
 }

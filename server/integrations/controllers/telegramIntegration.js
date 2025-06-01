@@ -1,4 +1,6 @@
-const { sendMessageToTelegramBotServer } = require('../utils/telegramUtils');
+const {
+  sendMessageToTelegramBotServer,
+} = require('../utils/telegramIntegrationUtils');
 require('dotenv').config();
 
 // ================ Send Message to Bot Server ================

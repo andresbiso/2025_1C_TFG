@@ -10,6 +10,9 @@ const {
   deleteResourceFromMinio,
 } = require('../utils/fileUploader');
 const { convertMinutesToDuration } = require('../utils/secToDuration');
+const {
+  sendNotifications,
+} = require('../integrations/utils/integrationNotificationUtils');
 require('dotenv').config();
 
 // ================ create new course ================
@@ -356,7 +359,7 @@ exports.editCourse = async (req, res) => {
     // updatedAt
     course.updatedAt = Date.now();
 
-    //   save data
+    // save data
     await course.save();
 
     const updatedCourse = await Course.findOne({
@@ -377,6 +380,9 @@ exports.editCourse = async (req, res) => {
         },
       })
       .exec();
+
+    // send new course notifications
+    await sendNotifications(updatedCourse);
 
     // success response
     res.status(200).json({
