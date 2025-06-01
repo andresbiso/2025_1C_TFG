@@ -246,9 +246,6 @@ const Home = () => {
               codeColor={'text-white'}
               codeblock={`
                 import React from "react";
-                import CTAButton from "./Button";
-                import TypeAnimation from "react-type";
-                import { FaArrowRight } from "react-icons/fa";
 
                 const Home = () => {
                     return (
