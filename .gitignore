@@ -160,3 +160,4 @@ lerna-debug.log*
 # Custom
 mailpit.*
 .env
+*.drawio.dtmp
