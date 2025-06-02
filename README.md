@@ -22,9 +22,14 @@
 
 ## Arquitectura Propuesta
 
-<p align="center">
-  <img src="docs/diagrama_arquitectura/diagrama_arquitectura.png?raw=true" width="350" title="diagrama de arquitectura">
-</p>
+<figure style="text-align: center;">
+    <a href="docs/diagrama_arquitectura/diagrama_arquitectura.png?raw=true" target="_blank">
+        <img src="docs/diagrama_arquitectura/diagrama_arquitectura.png" width="350" title="presentación tfg - vista previa">
+        <figcaption>
+            <strong>Ver diagrama</strong>
+        </figcaption>
+    </a>
+</figure>
 
 # :hammer: Aplicaciones Utilizadas <a name = "applications"></a>
 
