@@ -25,11 +25,11 @@
 <p align="center">
   <figure style="text-align: center;">
     <a href="docs/diagrama_arquitectura/diagrama_arquitectura.png?raw=true" target="_blank">
-        <img src="docs/diagrama_arquitectura/diagrama_arquitectura.png" width="350" title="presentación tfg - vista previa">
-        <figcaption>
-          <strong>Ver diagrama</strong>
-        </figcaption>
+        <img src="docs/diagrama_arquitectura/diagrama_arquitectura.png" width="350" title="Diagrama de Arquitectura">
     </a>
+    <figcaption>
+      <strong><a href="docs/diagrama_arquitectura/diagrama_arquitectura.png?raw=true" target="_blank">Ver diagrama</a></strong>
+    </figcaption>
   </figure>
 </p>
 
