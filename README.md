@@ -26,6 +26,7 @@
   <a href="docs/diagrama_arquitectura/diagrama_arquitectura.png?raw=true" target="_blank">
       <img src="docs/diagrama_arquitectura/diagrama_arquitectura.png" width="350" title="Diagrama de Arquitectura">
   </a>
+  <br>
   <strong><a href="docs/diagrama_arquitectura/diagrama_arquitectura.png?raw=true" target="_blank">Ver diagrama</a></strong>
 </p>
 
