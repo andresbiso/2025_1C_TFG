@@ -23,7 +23,7 @@
 ## Arquitectura Propuesta
 
 <p align="center">
-  <img src="docs/diagrama_arquitectura.png?raw=true" width="350" title="diagrama de arquitectura">
+  <img src="docs/diagrama_arquitectura/diagrama_arquitectura.png?raw=true" width="350" title="diagrama de arquitectura">
 </p>
 
 # :hammer: Aplicaciones Utilizadas <a name = "applications"></a>
