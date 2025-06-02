@@ -23,11 +23,9 @@
 ## Arquitectura Propuesta
 
 <p align="center">
-  <a href="docs/diagrama_arquitectura/diagrama_arquitectura.png?raw=true" target="_blank">
-      <img src="docs/diagrama_arquitectura/diagrama_arquitectura.png" width="350" title="Diagrama de Arquitectura">
-  </a>
+  <img src="docs/diagrama_arquitectura/diagrama_arquitectura.png?raw=true" width="350" title="Diagrama de Arquitectura">
   <br>
-  <strong><a href="docs/diagrama_arquitectura/diagrama_arquitectura.png?raw=true" target="_blank">Ver diagrama</a></strong>
+  <strong><a href="docs/diagrama_arquitectura/diagrama_arquitectura.png?raw=true">Ver diagrama</a></strong>
 </p>
 
 # :hammer: Aplicaciones Utilizadas <a name = "applications"></a>
