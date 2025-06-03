@@ -51,12 +51,12 @@ export default function SubSectionModal({
       setValue('lectureTitle', modalData.title);
       setValue('lectureDuration', modalData.timeDuration);
       setType(modalData.type);
-      if (type === 'video') {
+      if (modalData.type === 'video') {
         setValue('lectureDesc', modalData.description);
         setValue('lectureVideo', modalData.video);
-      } else if (type === 'text') {
+      } else if (modalData.type === 'text') {
         setValue('lectureText', modalData.text);
-      } else if (type === 'multipleChoice') {
+      } else if (modalData.type === 'multipleChoice') {
         setValue('lectureQuestion', modalData.question);
         setChoices(modalData.choices);
         setCorrectChoice(modalData.correctChoice);

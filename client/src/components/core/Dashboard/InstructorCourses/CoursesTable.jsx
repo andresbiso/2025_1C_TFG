@@ -174,7 +174,7 @@ export default function CoursesTable({
                     onClick={() => {
                       navigate(`/courses/${course._id}`);
                     }}
-                    title="Edit"
+                    title="View"
                     className="px-2 transition-all duration-200 hover:scale-110 hover:text-blue-300"
                   >
                     <FaRegEye size={20} />
