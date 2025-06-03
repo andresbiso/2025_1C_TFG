@@ -67,6 +67,9 @@ const LectureDetails = () => {
     if (completedLectures && completedLectures.includes(subSectionId)) {
       setSelectedOption(lectureData?.correctChoice); // Marca la opción correcta por defecto
       setIsCorrect(true); // Indica que es correcta
+    } else {
+      setSelectedOption(null);
+      setIsCorrect(false);
     }
   }, [lectureData, completedLectures, subSectionId]);
 
@@ -287,7 +290,9 @@ const LectureDetails = () => {
                   value={index}
                   checked={selectedOption === index}
                   onChange={() => handleOptionSelect(index)}
-                  disabled={isCorrect}
+                  disabled={
+                    isCorrect && completedLectures.includes(subSectionId)
+                  }
                   className="cursor-pointer"
                 />
                 {choice.text}

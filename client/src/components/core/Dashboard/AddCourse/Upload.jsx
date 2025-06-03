@@ -45,12 +45,12 @@ export default function Upload({
   };
 
   useEffect(() => {
-    register(name, { required: true });
-  }, [name, register]);
+    register(name, { required: !editData && !viewData });
+  }, [name, register, editData, viewData]);
 
   useEffect(() => {
-    setValue(name, selectedFile);
-  }, [name, selectedFile, setValue]);
+    setValue(name, selectedFile || editData || viewData);
+  }, [name, selectedFile, editData, viewData, setValue]);
 
   return (
     <div className="flex flex-col space-y-2">
@@ -128,7 +128,7 @@ export default function Upload({
         </div>
       )}
 
-      {errors[name] && (
+      {errors[name] && !editData && !viewData && (
         <span className="ml-2 text-xs tracking-wide text-pink-200">
           {label} es requerido/a
         </span>
