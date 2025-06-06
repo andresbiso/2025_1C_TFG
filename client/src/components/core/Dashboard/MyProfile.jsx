@@ -204,36 +204,46 @@ export default function MyProfile() {
                               className="w-full p-2 mt-1 bg-richblack-800 text-richblack-200 rounded-lg border border-richblack-600 cursor-not-allowed"
                             />
                           </div>
-                          <div className="mt-2">
-                            {data.notifications?.receiveAllNewCourses ? (
-                              <div className="flex items-center gap-x-2">
-                                <input
-                                  type="checkbox"
-                                  checked
-                                  disabled
-                                  className="cursor-not-allowed"
-                                />
-                                <label className="text-sm text-richblack-5">
-                                  Recibir todos los cursos nuevos
-                                </label>
-                              </div>
-                            ) : (
-                              <div>
-                                <label className="text-sm text-richblack-5">
-                                  Límite de duración del curso:
-                                </label>
-                                <input
-                                  type="number"
-                                  value={
-                                    data.notifications?.courseLengthThreshold ??
-                                    ''
-                                  }
-                                  disabled
-                                  className="w-full p-2 mt-1 bg-richblack-800 text-richblack-200 rounded-lg border border-richblack-600 cursor-not-allowed"
-                                />
-                              </div>
-                            )}
+                          <div className="flex items-center gap-x-2 mt-4">
+                            <label className="text-sm text-richblack-5">
+                              Notificaciones{' '}
+                              {data.notifications?.enabled
+                                ? 'habilitadas'
+                                : 'deshabilitadas'}
+                            </label>
                           </div>
+                          {data?.enabled.notifications?.enabled && (
+                            <div className="mt-2">
+                              {data.notifications?.receiveAllNewCourses ? (
+                                <div className="flex items-center gap-x-2">
+                                  <input
+                                    type="checkbox"
+                                    checked
+                                    disabled
+                                    className="cursor-not-allowed"
+                                  />
+                                  <label className="text-sm text-richblack-5">
+                                    Recibir todos los cursos nuevos
+                                  </label>
+                                </div>
+                              ) : (
+                                <div>
+                                  <label className="text-sm text-richblack-5">
+                                    Límite de duración del curso:
+                                  </label>
+                                  <input
+                                    type="number"
+                                    value={
+                                      data.notifications
+                                        ?.courseLengthThreshold ?? ''
+                                    }
+                                    disabled
+                                    className="w-full p-2 mt-1 bg-richblack-800 text-richblack-200 rounded-lg border border-richblack-600 cursor-not-allowed"
+                                  />
+                                </div>
+                              )}
+                            </div>
+                          )}
                           <button
                             className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
                             onClick={() => handleTelegramTestClick()}

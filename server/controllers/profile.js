@@ -63,6 +63,10 @@ exports.updateProfile = async (req, res) => {
                   integrationData.chatId;
               }
               if (integrationData.notifications) {
+                if (integrationData.notifications.enabled !== undefined) {
+                  profileDetails.integrations.telegram.notifications.enabled =
+                    integrationData.notifications.enabled;
+                }
                 if (
                   integrationData.notifications.courseLengthThreshold !==
                   undefined
